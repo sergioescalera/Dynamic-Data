@@ -23,7 +23,7 @@ namespace DynamicData.App
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles();
+            app.UseDefaultFiles().UseStaticFiles();
         }
     }
 }

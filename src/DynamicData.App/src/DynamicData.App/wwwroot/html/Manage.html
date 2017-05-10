@@ -14,7 +14,7 @@
         </div>
 
         <span ng-show="!vm.Types.length">
-            <a href="#!/type">Create your first entity</a>
+            <md-button ng-click="vm.Add()">Create your first entity</md-button>
         </span>
 
         <pre class="debug" ng-bind="vm | json" ng-show="vm.Settings.IsDebugEnabled"></pre>

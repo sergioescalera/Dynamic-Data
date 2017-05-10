@@ -63,6 +63,13 @@
                 .sort((t1: Core.IEntityType, t2: Core.IEntityType) => t1.Name > t2.Name ? 1 : t1.Name < t2.Name ? -1 : 0);
         }
 
+        Add(): void {
+
+            Core.Trace.Message(`${templatesViewModelName}.Add`);
+
+            this._location.url(Config.Routes.typeCreate());
+        }
+
         SelectType(type: Core.IEntityType): void {
 
             this.SelectedType = !type ? null : type;

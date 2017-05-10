@@ -2111,6 +2111,10 @@ var DynamicData;
                     .GetAll()
                     .sort(function (t1, t2) { return t1.Name > t2.Name ? 1 : t1.Name < t2.Name ? -1 : 0; });
             };
+            TemplatesViewModel.prototype.Add = function () {
+                DynamicData.Core.Trace.Message(ViewModels.templatesViewModelName + ".Add");
+                this._location.url(DynamicData.Config.Routes.typeCreate());
+            };
             TemplatesViewModel.prototype.SelectType = function (type) {
                 this.SelectedType = !type ? null : type;
                 this.LoadSelectedType();
