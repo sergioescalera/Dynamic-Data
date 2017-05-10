@@ -1,0 +1,26 @@
+﻿<article class="entity">
+    <md-content class="md-padding">
+
+        <md-card>
+
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline" ng-bind="vm.EntityType.DisplayName"></span>
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-card-content>
+                <form name="EntityForm" novalidate>
+                    <div layout="column">
+                        <editor ng-repeat="attribute in vm.EntityType.Attributes"
+                                attribute="attribute"
+                                value="vm.Model[attribute.Name]"></editor>
+                    </div>                    
+                </form>
+            </md-card-content>
+
+        </md-card>
+
+    </md-content>
+    <pre class="debug" ng-bind="vm.Model | json" ng-show="vm.Settings.IsDebugEnabled"></pre>
+</article>

@@ -1,0 +1,24 @@
+﻿<div class="field-editor" layout="column">
+    <md-checkbox md-no-ink class="md-primary"
+                 ng-if="vm.RenderAsToggleSwitch"
+                 ng-model="vm.Checked">
+        {{ vm.DisplayName }}
+    </md-checkbox>
+    <md-input-container ng-if="vm.RenderAsInputText">
+        <label>{{ vm.DisplayName }}</label>
+        <input type="{{ vm.InputType }}" ng-model="vm.Text" />
+    </md-input-container>
+    <md-input-container ng-if="vm.RenderAsTextArea">
+        <label>{{ vm.DisplayName }}</label>
+        <textarea ng-model="vm.Text"></textarea>
+    </md-input-container>    
+    <!--<span ng-if="vm.RenderAsDatePicker || vm.RenderAsTimePicker">
+        <label ng-bind="vm.DisplayName" class="field-editor-label"></label>
+        <br />
+    </span>
+    <win-date-picker ng-if="vm.RenderAsDatePicker"
+                     current="vm.Date"></win-date-picker>
+    <br ng-if="vm.RenderAsDatePicker || vm.RenderAsTimePicker" />
+    <win-time-picker ng-if="vm.RenderAsTimePicker"
+                     current="vm.Time"></win-time-picker>-->
+</div>

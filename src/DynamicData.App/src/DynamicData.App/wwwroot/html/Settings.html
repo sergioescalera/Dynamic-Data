@@ -1,0 +1,37 @@
+﻿<section class="settings">
+    <md-content class="md-padding">
+
+        <form name="SettingsForm">
+
+            <fieldset class="standard">
+                <legend>Settings</legend>
+                <div layout="column">
+                    <md-checkbox md-no-ink class="md-primary" ng-disabled="true">
+                        Auto-save enabled (coming soon)
+                    </md-checkbox>
+                    <md-checkbox md-no-ink class="md-primary" ng-disabled="true">
+                        Cloud storage enabled (coming soon)
+                    </md-checkbox>
+                    <md-checkbox md-no-ink class="md-primary"
+                                 ng-model="vm.Settings.IsSampleDataInstalled"
+                                 ng-disabled="vm.Settings.IsSampleDataInstalled">
+                        Install sample data
+                    </md-checkbox>
+                    <md-checkbox md-no-ink class="md-primary"
+                                 ng-model="vm.Settings.IsTraceEnabled">
+                        Enable tracing
+                    </md-checkbox>
+                    <md-checkbox md-no-ink class="md-primary"
+                                 ng-model="vm.Settings.IsDebugEnabled">
+                        Enable debug mode
+                    </md-checkbox>
+                </div>
+            </fieldset>
+        </form>
+
+        <pre class="debug"
+             ng-bind="vm.Settings | json"
+             ng-show="vm.Settings.IsDebugEnabled"></pre>
+
+    </md-content>        
+</section>

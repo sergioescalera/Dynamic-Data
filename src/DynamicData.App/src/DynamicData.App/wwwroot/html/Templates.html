@@ -1,0 +1,38 @@
+﻿<section class="templates">
+    <md-content class="md-padding">
+
+        <h3>Manage templates</h3>
+
+        <div class="md-margin">
+            <md-button class="md-raised"
+                       aria-label="{{ type.DisplayName }}"
+                       ng-repeat="type in vm.Types"
+                       ng-click="vm.SelectType(type)"
+                       ng-class="{ 'md-primary': vm.SelectedType === type }">
+                <span ng-bind="type.DisplayName"></span>
+            </md-button>
+        </div>
+
+        <span ng-show="!vm.Types.length">
+            <a href="#!/type">Create your first entity</a>
+        </span>
+
+        <form class="template-editor" ng-hide="!vm.SelectedType">
+            <fieldset layout="row">
+                <legend>Quick View Template</legend>
+                <md-input-container>
+                    <textarea ng-model="vm.QuickViewTemplate" layout-align="start stretch"
+                              spellcheck="false" aria-label="Quick View Template"></textarea>
+                </md-input-container>
+            </fieldset>
+            <fieldset layout="row">
+                <legend>Edit Template</legend>
+                <md-input-container>
+                    <textarea ng-model="vm.EditTemplate" layout-align="start stretch"
+                              spellcheck="false" aria-label="Edit Template"></textarea>
+                </md-input-container>
+            </fieldset>            
+        </form>
+
+    </md-content>
+</section>

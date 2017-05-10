@@ -1,0 +1,16 @@
+[
+  {
+    "outputFileName": "wwwroot/scripts/app-bundle.js",
+    "inputFiles": [
+      "Scripts/Constants.js",
+      "Scripts/Resources/*.js",
+      "Scripts/Config.js",
+      "Scripts/Core/*.js",
+      "Scripts/Data/*.js",
+      "Scripts/ViewModels/*.js",
+      "Scripts/Directives/*.js",
+      "Scripts/Controllers/*.js"
+    ],
+    "sourceMap": false
+  }
+]

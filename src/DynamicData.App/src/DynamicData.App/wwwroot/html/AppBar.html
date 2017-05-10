@@ -1,0 +1,41 @@
+﻿<div class="app-bar" ng-controller="DynamicData.UI.Controllers.AppBarController">
+    <md-content>
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Home" ng-click="goTo('home')">
+                    <md-icon>home</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Settings" ng-click="goTo('settings')">
+                    <md-icon>settings</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Profile" ng-click="goTo('profile')">
+                    <md-icon>person</md-icon>
+                </md-button> 
+                <md-button class="md-icon-button" aria-label="Edit" ng-click="goTo('manage')">
+                    <md-icon>mode_edit</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Templates" ng-click="goTo('templates')">
+                    <md-icon>content_copy</md-icon>
+                </md-button>
+                
+                <span flex></span>
+
+                <md-button class="md-icon-button" aria-label="Add" ng-disabled="status.IsNewDisabled" ng-click="fire('add')">
+                    <md-icon>add</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Refresh" ng-disabled="status.IsRefreshDisabled" ng-click="fire('refresh')">
+                    <md-icon>refresh</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Delete" ng-disabled="status.IsDeleteDisabled" ng-click="fire('delete')">
+                    <md-icon>delete</md-icon>
+                </md-button>                
+                <md-button class="md-icon-button" aria-label="Save" ng-disabled="status.IsSaveDisabled" ng-click="fire('save')">
+                    <md-icon>save</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Cancel" ng-disabled="status.IsCancelDisabled" ng-click="fire('cancel')">
+                    <md-icon>clear</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+    </md-content>
+</div>
