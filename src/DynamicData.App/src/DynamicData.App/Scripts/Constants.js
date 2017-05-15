@@ -96,6 +96,7 @@ var DynamicData;
             Directives.namespace = DynamicData.UI.namespace + ".Directives";
             Directives.entityQuickViewFormName = Directives.namespace + ".EntityQuickViewForm";
             Directives.fieldEditorName = Directives.namespace + ".FieldEditor";
+            Directives.timePickerName = Directives.namespace + ".TimePicker";
             Directives.typeQuickViewFormName = Directives.namespace + ".TypeQuickViewForm";
         })(Directives = UI.Directives || (UI.Directives = {}));
     })(UI = DynamicData.UI || (DynamicData.UI = {}));

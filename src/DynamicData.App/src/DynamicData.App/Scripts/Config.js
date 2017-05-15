@@ -62,8 +62,9 @@ var DynamicData;
             "ngMessages",
             "ngSanitize"
         ]);
-        module.config(function init($routeProvider /*ng.route.IRouteProvider*/) {
+        function init($routeProvider, $compileProvider) {
             DynamicData.Core.Trace.Message(Config.namespace + ".init");
+            $compileProvider.preAssignBindingsEnabled(true);
             $routeProvider
                 .when(Routes.home(), {
                 controller: DynamicData.UI.Controllers.dashboardControllerName,
@@ -108,6 +109,7 @@ var DynamicData;
                 .otherwise({
                 redirectTo: Routes.home
             });
-        });
+        }
+        module.config(init);
     })(Config = DynamicData.Config || (DynamicData.Config = {}));
 })(DynamicData || (DynamicData = {}));

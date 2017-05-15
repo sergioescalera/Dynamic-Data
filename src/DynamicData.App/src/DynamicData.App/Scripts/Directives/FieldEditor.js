@@ -14,7 +14,7 @@ var DynamicData;
                 return FieldEditor;
             }());
             angular.module(DynamicData.Config.appName)
-                .directive("editor", function () {
+                .directive("ddEditor", function () {
                 return {
                     restrict: "E",
                     controller: FieldEditor,

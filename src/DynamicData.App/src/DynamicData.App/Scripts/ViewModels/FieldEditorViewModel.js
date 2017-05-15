@@ -119,8 +119,8 @@ var DynamicData;
                 if (this.RenderAsDatePicker && !moment(newValue).isSame(this.Date)) {
                     this.Date = newValue;
                 }
-                if (this.RenderAsTimePicker && !moment(newValue).isSame(this.Time)) {
-                    this.Time = newValue;
+                if (this.RenderAsTimePicker && moment(newValue).format("HH:mm") !== this.Time) {
+                    this.Time = moment(newValue).format("HH:mm");
                 }
             };
             FieldEditorViewModel.prototype.UpdateValue = function (newValue, oldValue) {
@@ -152,11 +152,12 @@ var DynamicData;
                 if (newValue === oldValue) {
                     return;
                 }
+                var time = moment(moment().format("MM/DD/YYYY") + " " + (newValue || "00:00"), "MM/DD/YYYY HH:mm");
                 if (this.RenderAsDatePicker && this.RenderAsTimePicker) {
-                    this._scope.value = this.CombineDateAndTime(this._scope.value, newValue);
+                    this._scope.value = this.CombineDateAndTime(this._scope.value, time.toDate());
                 }
                 else if (this.RenderAsTimePicker) {
-                    this._scope.value = newValue;
+                    this._scope.value = time.toDate();
                 }
             };
             FieldEditorViewModel.prototype.CombineDateAndTime = function (date, time) {

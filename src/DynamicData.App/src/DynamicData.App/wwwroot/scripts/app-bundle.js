@@ -96,6 +96,7 @@ var DynamicData;
             Directives.namespace = DynamicData.UI.namespace + ".Directives";
             Directives.entityQuickViewFormName = Directives.namespace + ".EntityQuickViewForm";
             Directives.fieldEditorName = Directives.namespace + ".FieldEditor";
+            Directives.timePickerName = Directives.namespace + ".TimePicker";
             Directives.typeQuickViewFormName = Directives.namespace + ".TypeQuickViewForm";
         })(Directives = UI.Directives || (UI.Directives = {}));
     })(UI = DynamicData.UI || (DynamicData.UI = {}));
@@ -186,8 +187,9 @@ var DynamicData;
             "ngMessages",
             "ngSanitize"
         ]);
-        module.config(function init($routeProvider /*ng.route.IRouteProvider*/) {
+        function init($routeProvider, $compileProvider) {
             DynamicData.Core.Trace.Message(Config.namespace + ".init");
+            $compileProvider.preAssignBindingsEnabled(true);
             $routeProvider
                 .when(Routes.home(), {
                 controller: DynamicData.UI.Controllers.dashboardControllerName,
@@ -232,7 +234,8 @@ var DynamicData;
                 .otherwise({
                 redirectTo: Routes.home
             });
-        });
+        }
+        module.config(init);
     })(Config = DynamicData.Config || (DynamicData.Config = {}));
 })(DynamicData || (DynamicData = {}));
 
@@ -340,6 +343,7 @@ var DynamicData;
             AttributeTypeCode[AttributeTypeCode["Url"] = 10] = "Url";
             AttributeTypeCode[AttributeTypeCode["Currency"] = 11] = "Currency";
             AttributeTypeCode[AttributeTypeCode["Time"] = 12] = "Time";
+            AttributeTypeCode[AttributeTypeCode["Enum"] = 13] = "Enum";
         })(Core.AttributeTypeCode || (Core.AttributeTypeCode = {}));
         var AttributeTypeCode = Core.AttributeTypeCode;
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
@@ -1937,8 +1941,8 @@ var DynamicData;
                 if (this.RenderAsDatePicker && !moment(newValue).isSame(this.Date)) {
                     this.Date = newValue;
                 }
-                if (this.RenderAsTimePicker && !moment(newValue).isSame(this.Time)) {
-                    this.Time = newValue;
+                if (this.RenderAsTimePicker && moment(newValue).format("HH:mm") !== this.Time) {
+                    this.Time = moment(newValue).format("HH:mm");
                 }
             };
             FieldEditorViewModel.prototype.UpdateValue = function (newValue, oldValue) {
@@ -1970,11 +1974,12 @@ var DynamicData;
                 if (newValue === oldValue) {
                     return;
                 }
+                var time = moment(moment().format("MM/DD/YYYY") + " " + (newValue || "00:00"), "MM/DD/YYYY HH:mm");
                 if (this.RenderAsDatePicker && this.RenderAsTimePicker) {
-                    this._scope.value = this.CombineDateAndTime(this._scope.value, newValue);
+                    this._scope.value = this.CombineDateAndTime(this._scope.value, time.toDate());
                 }
                 else if (this.RenderAsTimePicker) {
-                    this._scope.value = newValue;
+                    this._scope.value = time.toDate();
                 }
             };
             FieldEditorViewModel.prototype.CombineDateAndTime = function (date, time) {
@@ -2244,6 +2249,28 @@ var DynamicData;
 
 var DynamicData;
 (function (DynamicData) {
+    var ViewModels;
+    (function (ViewModels) {
+        "use strict";
+        var TimePickerViewModel = (function () {
+            function TimePickerViewModel(scope) {
+                this.Options = [];
+                var multiplier = 4;
+                var count = 24 * multiplier;
+                for (var i = 0; i < count; i++) {
+                    var min = i * 60 / multiplier;
+                    var m = moment("01/01/2000", "MM/DD/YYYY").add({ minutes: min });
+                    this.Options.push(m.format("HH:mm"));
+                }
+            }
+            return TimePickerViewModel;
+        }());
+        ViewModels.TimePickerViewModel = TimePickerViewModel;
+    })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
     var UI;
     (function (UI) {
         var Directives;
@@ -2326,7 +2353,7 @@ var DynamicData;
                 return FieldEditor;
             }());
             angular.module(DynamicData.Config.appName)
-                .directive("editor", function () {
+                .directive("ddEditor", function () {
                 return {
                     restrict: "E",
                     controller: FieldEditor,
@@ -2334,6 +2361,58 @@ var DynamicData;
                     scope: {
                         attribute: "=",
                         value: "="
+                    }
+                };
+            });
+        })(Directives = UI.Directives || (UI.Directives = {}));
+    })(UI = DynamicData.UI || (DynamicData.UI = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var UI;
+    (function (UI) {
+        var Directives;
+        (function (Directives) {
+            "use strict";
+        })(Directives = UI.Directives || (UI.Directives = {}));
+    })(UI = DynamicData.UI || (DynamicData.UI = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var UI;
+    (function (UI) {
+        var Directives;
+        (function (Directives) {
+            "use strict";
+        })(Directives = UI.Directives || (UI.Directives = {}));
+    })(UI = DynamicData.UI || (DynamicData.UI = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var UI;
+    (function (UI) {
+        var Directives;
+        (function (Directives) {
+            "use strict";
+            var TimePicker = (function () {
+                function TimePicker(scope) {
+                    DynamicData.Core.Trace.Message(Directives.timePickerName + ".constructor");
+                    scope.vm = new DynamicData.ViewModels.TimePickerViewModel(scope);
+                }
+                TimePicker.$inject = ["$scope"];
+                return TimePicker;
+            }());
+            angular.module(DynamicData.Config.appName)
+                .directive("ddTimepicker", function () {
+                return {
+                    restrict: "E",
+                    controller: TimePicker,
+                    templateUrl: "html/TimePicker.html",
+                    scope: {
+                        value: "=ngModel"
                     }
                 };
             });

@@ -2,12 +2,6 @@
 
     "use strict";
 
-    export interface IFieldEditorScope extends ng.IScope {
-        attribute: Core.AttributeType;
-        value?: any;
-        vm: ViewModels.FieldEditorViewModel;
-    }
-
     class FieldEditor {
 
         static $inject = ["$scope"];
@@ -21,7 +15,7 @@
     }
 
     angular.module(Config.appName)
-        .directive("editor", () => {
+        .directive("ddEditor", () => {
 
             return <ng.IDirective>{
                 restrict: "E",

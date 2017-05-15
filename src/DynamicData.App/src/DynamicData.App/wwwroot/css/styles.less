@@ -1,5 +1,5 @@
 ﻿.noscript {
-  text-align: center;
+    text-align: center;
 }
 
 .debug {
@@ -17,6 +17,7 @@
 .entity-view-container,
 .type-view-container {
     position: relative;
+
     .entity-select,
     .type-select {
         position: absolute;
@@ -30,17 +31,41 @@
     .entity-name {
         font-size: 1.1em;
     }
+
     .attribute-list {
         .attribute {
             font-size: .9em;
             margin: 5px 0;
+
             .label {
                 color: #000;
                 margin: 0 5px 0 0;
             }
+
             .value {
                 color: #666;
             }
         }
+    }
+}
+
+.timepicker-label {
+    left: 63px !important;
+}
+
+dd-timepicker {
+    margin-right: -18px;
+    padding-right: 18px;
+    vertical-align: middle;
+    md-select {
+        display: inline-block;
+        margin: 0 0 0 12px;
+        vertical-align: middle;
+    }
+    .md-button.md-icon-button {
+        display: block;
+        float: left;
+        margin: -2px 6px 0 6px;
+        vertical-align: middle;
     }
 }

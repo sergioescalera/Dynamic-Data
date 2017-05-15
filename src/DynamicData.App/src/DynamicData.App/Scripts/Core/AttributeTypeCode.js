@@ -16,6 +16,7 @@ var DynamicData;
             AttributeTypeCode[AttributeTypeCode["Url"] = 10] = "Url";
             AttributeTypeCode[AttributeTypeCode["Currency"] = 11] = "Currency";
             AttributeTypeCode[AttributeTypeCode["Time"] = 12] = "Time";
+            AttributeTypeCode[AttributeTypeCode["Enum"] = 13] = "Enum";
         })(Core.AttributeTypeCode || (Core.AttributeTypeCode = {}));
         var AttributeTypeCode = Core.AttributeTypeCode;
     })(Core = DynamicData.Core || (DynamicData.Core = {}));

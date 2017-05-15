@@ -86,5 +86,6 @@ module DynamicData.UI.Directives {
     export var namespace: string = `${DynamicData.UI.namespace}.Directives`;
     export var entityQuickViewFormName: string = `${namespace}.EntityQuickViewForm`;
     export var fieldEditorName: string = `${namespace}.FieldEditor`;
+    export var timePickerName: string = `${namespace}.TimePicker`;
     export var typeQuickViewFormName: string = `${namespace}.TypeQuickViewForm`;
 }

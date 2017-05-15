@@ -10,11 +10,11 @@
             </md-card-title>
 
             <md-card-content>
-                <form name="EntityForm" novalidate>
+                <form name="EntityForm">
                     <div layout="column">
-                        <editor ng-repeat="attribute in vm.EntityType.Attributes"
-                                attribute="attribute"
-                                value="vm.Model[attribute.Name]"></editor>
+                        <dd-editor ng-repeat="attribute in vm.EntityType.Attributes"
+                                   attribute="attribute"
+                                   value="vm.Model[attribute.Name]"></dd-editor>
                     </div>                    
                 </form>
             </md-card-content>

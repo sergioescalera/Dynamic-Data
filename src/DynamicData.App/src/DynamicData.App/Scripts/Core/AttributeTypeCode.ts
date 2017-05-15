@@ -15,5 +15,6 @@
         Url = 10,
         Currency = 11,
         Time = 12,
+        Enum
     }
 }

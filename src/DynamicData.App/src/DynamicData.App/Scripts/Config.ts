@@ -84,9 +84,11 @@
         "ngSanitize"
     ]);
 
-    module.config(function init($routeProvider: any/*ng.route.IRouteProvider*/): void {
+    function init($routeProvider: any, $compileProvider: any): void {
 
         Core.Trace.Message(`${namespace}.init`);
+
+        $compileProvider.preAssignBindingsEnabled(true);
 
         $routeProvider
             .when(Routes.home(), {
@@ -132,5 +134,7 @@
             .otherwise({
                 redirectTo: Routes.home
             });
-    });
+    }
+
+    module.config(init);
 }
