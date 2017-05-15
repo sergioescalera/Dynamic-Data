@@ -2,12 +2,6 @@
 
     "use strict";
 
-    export interface IAttributeType {
-        Name: string;
-        DisplayName: string;
-        TypeCode: AttributeTypeCode;
-    }
-
     export class AttributeType implements IAttributeType {
 
         private _name: string;
@@ -58,37 +52,5 @@
 
             return AttributeTypeCode[this._typeCode];
         }
-    }
-
-    export class AttributeTypeSerialization {
-
-        static FromPOCO(poco: any): IAttributeType {
-
-            return new AttributeType(poco.Name, poco.DisplayName, poco.TypeCode);
-        }
-
-        static ToPOCO(attribute: IAttributeType): any {
-
-            return {
-                Name: attribute.Name,
-                DisplayName: attribute.DisplayName,
-                TypeCode: attribute.TypeCode
-            };
-        }
-    }
-
-    export enum AttributeTypeCode {
-        Boolean = 1,
-        Date = 2,
-        DateTime = 3,
-        Decimal = 4,
-        Email = 5,
-        Int = 6,
-        Phone = 7,
-        String = 8,
-        Text = 9,
-        Url = 10,
-        Currency = 11,
-        Time = 12,
     }
 }

@@ -11,7 +11,7 @@ var DynamicData;
                 if (value === undefined || value === null) {
                     throw new Error(DynamicData.Resources.Strings.RequiredFieldMessageFormat(label));
                 }
-                if (validateEmptyString && typeof value === "string" && value === "") {
+                if (validateEmptyString && value === "") {
                     throw new Error(DynamicData.Resources.Strings.RequiredFieldMessageFormat(label));
                 }
             };

@@ -10,7 +10,7 @@
                 throw new Error(Resources.Strings.RequiredFieldMessageFormat(label));
             }
 
-            if (validateEmptyString && typeof value === "string" && value === "") {
+            if (validateEmptyString && value === "") {
                 throw new Error(Resources.Strings.RequiredFieldMessageFormat(label));
             }
         }

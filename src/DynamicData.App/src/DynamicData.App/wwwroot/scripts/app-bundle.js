@@ -311,7 +311,7 @@ var DynamicData;
             });
             Object.defineProperty(AttributeType.prototype, "TypeCodeName", {
                 get: function () {
-                    return AttributeTypeCode[this._typeCode];
+                    return Core.AttributeTypeCode[this._typeCode];
                 },
                 enumerable: true,
                 configurable: true
@@ -319,22 +319,14 @@ var DynamicData;
             return AttributeType;
         }());
         Core.AttributeType = AttributeType;
-        var AttributeTypeSerialization = (function () {
-            function AttributeTypeSerialization() {
-            }
-            AttributeTypeSerialization.FromPOCO = function (poco) {
-                return new AttributeType(poco.Name, poco.DisplayName, poco.TypeCode);
-            };
-            AttributeTypeSerialization.ToPOCO = function (attribute) {
-                return {
-                    Name: attribute.Name,
-                    DisplayName: attribute.DisplayName,
-                    TypeCode: attribute.TypeCode
-                };
-            };
-            return AttributeTypeSerialization;
-        }());
-        Core.AttributeTypeSerialization = AttributeTypeSerialization;
+    })(Core = DynamicData.Core || (DynamicData.Core = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var Core;
+    (function (Core) {
+        "use strict";
         (function (AttributeTypeCode) {
             AttributeTypeCode[AttributeTypeCode["Boolean"] = 1] = "Boolean";
             AttributeTypeCode[AttributeTypeCode["Date"] = 2] = "Date";
@@ -358,12 +350,34 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
+        var AttributeTypeSerialization = (function () {
+            function AttributeTypeSerialization() {
+            }
+            AttributeTypeSerialization.FromPOCO = function (poco) {
+                return new Core.AttributeType(poco.Name, poco.DisplayName, poco.TypeCode);
+            };
+            AttributeTypeSerialization.ToPOCO = function (attribute) {
+                return {
+                    Name: attribute.Name,
+                    DisplayName: attribute.DisplayName,
+                    TypeCode: attribute.TypeCode
+                };
+            };
+            return AttributeTypeSerialization;
+        }());
+        Core.AttributeTypeSerialization = AttributeTypeSerialization;
+    })(Core = DynamicData.Core || (DynamicData.Core = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var Core;
+    (function (Core) {
+        "use strict";
         var Entity = (function () {
             function Entity(type, id) {
                 if (id === void 0) { id = null; }
-                if (!type) {
-                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("type"));
-                }
+                Core.Validation.EnsureRequired(type, "type");
                 this._type = type;
                 this._fields = {};
                 this.Id = id;
@@ -401,11 +415,19 @@ var DynamicData;
             return Entity;
         }());
         Core.Entity = Entity;
+    })(Core = DynamicData.Core || (DynamicData.Core = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var Core;
+    (function (Core) {
+        "use strict";
         var EntitySerialization = (function () {
             function EntitySerialization() {
             }
             EntitySerialization.FromPOCO = function (type, id, poco) {
-                var entity = new Entity(type, id);
+                var entity = new Core.Entity(type, id);
                 var keys = Object.keys(poco);
                 keys.forEach(function (key) {
                     var attribute = entity.Type.GetAttribute(key);
@@ -562,6 +584,14 @@ var DynamicData;
             return EntityType;
         }());
         Core.EntityType = EntityType;
+    })(Core = DynamicData.Core || (DynamicData.Core = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var Core;
+    (function (Core) {
+        "use strict";
         var EntityTypeSerialization = (function () {
             function EntityTypeSerialization() {
             }
@@ -575,7 +605,7 @@ var DynamicData;
                 };
             };
             EntityTypeSerialization.FromPOCO = function (poco) {
-                var type = new EntityType(poco.Name, poco.DisplayName, poco.DisplayPluralName);
+                var type = new Core.EntityType(poco.Name, poco.DisplayName, poco.DisplayPluralName);
                 type.Icon = poco._icon;
                 for (var i = 0; i < poco.Attributes.length; i++) {
                     try {
@@ -591,6 +621,38 @@ var DynamicData;
             return EntityTypeSerialization;
         }());
         Core.EntityTypeSerialization = EntityTypeSerialization;
+    })(Core = DynamicData.Core || (DynamicData.Core = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var Core;
+    (function (Core) {
+        "use strict";
+    })(Core = DynamicData.Core || (DynamicData.Core = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var Core;
+    (function (Core) {
+        "use strict";
+    })(Core = DynamicData.Core || (DynamicData.Core = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var Core;
+    (function (Core) {
+        "use strict";
+    })(Core = DynamicData.Core || (DynamicData.Core = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var Core;
+    (function (Core) {
+        "use strict";
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
 
@@ -695,7 +757,7 @@ var DynamicData;
                 if (value === undefined || value === null) {
                     throw new Error(DynamicData.Resources.Strings.RequiredFieldMessageFormat(label));
                 }
-                if (validateEmptyString && typeof value === "string" && value === "") {
+                if (validateEmptyString && value === "") {
                     throw new Error(DynamicData.Resources.Strings.RequiredFieldMessageFormat(label));
                 }
             };
