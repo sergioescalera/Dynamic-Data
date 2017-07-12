@@ -4,13 +4,13 @@
 
     class FieldEditor {
 
-        static $inject = ["$scope"];
+        static $inject = ["$scope", Data.enumRepositoryName];
 
-        constructor(scope: IFieldEditorScope) {
+        constructor(scope: IFieldEditorScope, enumRepository: Data.IEnumRepository) {
 
             Core.Trace.Message(`${fieldEditorName}.constructor`);
 
-            scope.vm = new ViewModels.FieldEditorViewModel(scope);
+            scope.vm = new ViewModels.FieldEditorViewModel(scope, enumRepository);
         }
     }
 

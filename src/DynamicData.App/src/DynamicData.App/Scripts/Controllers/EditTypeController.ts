@@ -18,6 +18,7 @@
             "$routeParams",
             "$location",
             "$mdToast",
+            "$mdDialog",
             Core.appBarStatusName,
             Data.entityTypeRepositoryName
         ];
@@ -27,6 +28,7 @@
             routeParams: IEditTypeRouteParamsService,
             location: ng.ILocationService,
             mdToast: ng.material.IToastService,
+            mdDialog: ng.material.IDialogService,
             appBarStatus: Core.IAppBarStatus,
             repository: Data.IEntityTypeRepository) {
 
@@ -34,7 +36,14 @@
 
             var type: string = routeParams.entityType;
 
-            scope.vm = new ViewModels.EditTypeViewModel(scope, location, mdToast, appBarStatus, repository, type);
+            scope.vm = new ViewModels.EditTypeViewModel(
+                scope,
+                location,
+                mdToast,
+                mdDialog,
+                appBarStatus,
+                repository,
+                type);
         }
     }
 

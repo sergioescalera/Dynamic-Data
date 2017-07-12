@@ -30,6 +30,7 @@ var DynamicData;
         Data.entityRepositoryName = Data.namespace + ".EntityRepository";
         Data.entityTypeRepositoryName = Data.namespace + ".EntityTypeRepository";
         Data.entityTypeSettingsRepositoryName = Data.namespace + ".EntityTypeSettingsRepository";
+        Data.enumRepositoryName = Data.namespace + ".EnumRepository";
         Data.templateRepositoryName = Data.namespace + ".TemplateRepository";
         Data.sampleDataName = Data.namespace + ".SampleData";
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
@@ -274,10 +275,11 @@ var DynamicData;
     (function (Core) {
         "use strict";
         var AttributeType = (function () {
-            function AttributeType(name, displayName, typeCode) {
+            function AttributeType(name, displayName, typeCode, enumName) {
                 this.Name = name;
                 this.DisplayName = displayName;
                 this.TypeCode = typeCode;
+                this.EnumName = enumName;
             }
             Object.defineProperty(AttributeType.prototype, "Name", {
                 get: function () {
@@ -308,6 +310,16 @@ var DynamicData;
                 set: function (value) {
                     Core.Validation.EnsureRequired(value, "TypeCode");
                     this._typeCode = value;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(AttributeType.prototype, "EnumName", {
+                get: function () {
+                    return this._enumName;
+                },
+                set: function (value) {
+                    this._enumName = value;
                 },
                 enumerable: true,
                 configurable: true
@@ -358,13 +370,14 @@ var DynamicData;
             function AttributeTypeSerialization() {
             }
             AttributeTypeSerialization.FromPOCO = function (poco) {
-                return new Core.AttributeType(poco.Name, poco.DisplayName, poco.TypeCode);
+                return new Core.AttributeType(poco.Name, poco.DisplayName, poco.TypeCode, poco.EnumName || null);
             };
             AttributeTypeSerialization.ToPOCO = function (attribute) {
                 return {
                     Name: attribute.Name,
                     DisplayName: attribute.DisplayName,
-                    TypeCode: attribute.TypeCode
+                    TypeCode: attribute.TypeCode,
+                    EnumName: attribute.EnumName
                 };
             };
             return AttributeTypeSerialization;
@@ -467,6 +480,7 @@ var DynamicData;
                     case Core.AttributeTypeCode.String:
                     case Core.AttributeTypeCode.Text:
                     case Core.AttributeTypeCode.Url:
+                    case Core.AttributeTypeCode.Enum:
                         if (angular.isString(value)) {
                             return value;
                         }
@@ -625,6 +639,14 @@ var DynamicData;
             return EntityTypeSerialization;
         }());
         Core.EntityTypeSerialization = EntityTypeSerialization;
+    })(Core = DynamicData.Core || (DynamicData.Core = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var Core;
+    (function (Core) {
+        "use strict";
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
 
@@ -1043,6 +1065,46 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
+        var EnumRepository = (function () {
+            function EnumRepository() {
+            }
+            EnumRepository.prototype.GetAll = function () {
+                return Data.storage.Enums;
+            };
+            EnumRepository.prototype.GetByName = function (name) {
+                var enums = this.GetAll();
+                var filtered = enums.filter(function (t) { return t.Name === name; });
+                return filtered.length ? filtered[0] : null;
+            };
+            EnumRepository.prototype.Save = function (name, displayName, values) {
+                var enums = this.GetAll();
+                var filtered = enums.filter(function (t) { return t.Name === name; });
+                if (filtered.length > 0) {
+                    filtered[0].DisplayName = displayName;
+                    filtered[0].Name = name;
+                    filtered[0].Values = values;
+                }
+                else {
+                    enums.push({
+                        DisplayName: displayName,
+                        Name: name,
+                        Values: values,
+                    });
+                }
+                Data.storage.Enums = enums;
+            };
+            return EnumRepository;
+        }());
+        angular.module(DynamicData.Config.appName)
+            .factory(Data.enumRepositoryName, function () { return new EnumRepository(); });
+    })(Data = DynamicData.Data || (DynamicData.Data = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var Data;
+    (function (Data) {
+        "use strict";
         var SampleData = (function () {
             function SampleData(entityTypeRepository, templateRepository) {
                 if (!entityTypeRepository) {
@@ -1135,6 +1197,7 @@ var DynamicData;
                 this._typesKey = "types";
                 this._templateKey = "template_";
                 this._entitiesKey = "data_";
+                this._enumsKey = "enums";
                 this._typeSettingsKey = "type_settings_";
             }
             Object.defineProperty(Storage.prototype, "Settings", {
@@ -1166,6 +1229,18 @@ var DynamicData;
                 },
                 set: function (value) {
                     this.setObject(this._typesKey, value.map(function (t) { return DynamicData.Core.EntityTypeSerialization.ToPOCO(t); }));
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Storage.prototype, "Enums", {
+                // enumerations
+                get: function () {
+                    var array = this.getObject(this._enumsKey) || [];
+                    return array;
+                },
+                set: function (value) {
+                    this.setObject(this._enumsKey, value);
                 },
                 enumerable: true,
                 configurable: true
@@ -1553,6 +1628,55 @@ var DynamicData;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
 
+var DynamicData;
+(function (DynamicData) {
+    var ViewModels;
+    (function (ViewModels) {
+        "use strict";
+        var EditEnumViewModel = (function () {
+            function EditEnumViewModel(scope, mdDialog, enumRepository, name) {
+                if (!scope) {
+                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
+                }
+                if (!mdDialog) {
+                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("mdDialog"));
+                }
+                if (!enumRepository) {
+                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("enumRepository"));
+                }
+                this._mdDialog = mdDialog;
+                this._enumRepository = enumRepository;
+                this.Enums = enumRepository.GetAll();
+                this.Item = this.Enums.filter(function (o) { return o.Name === name; })[0] || null;
+                scope.$watch("vm.Item", this.LoadEnum.bind(this));
+            }
+            EditEnumViewModel.prototype.Ok = function () {
+                if (!this.Text) {
+                    return;
+                }
+                this._enumRepository.Save(this.Text, this.DisplayName, this.Options);
+                this._mdDialog.hide(this.Text);
+            };
+            EditEnumViewModel.prototype.Cancel = function () {
+                this._mdDialog.cancel();
+            };
+            EditEnumViewModel.prototype.LoadEnum = function () {
+                if (!this.Item) {
+                    this.DisplayName = "";
+                    this.Options = [];
+                    this.Text = "";
+                }
+                else {
+                    this.DisplayName = this.Item.DisplayName;
+                    this.Options = this.Item.Values;
+                }
+            };
+            return EditEnumViewModel;
+        }());
+        ViewModels.EditEnumViewModel = EditEnumViewModel;
+    })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
+})(DynamicData || (DynamicData = {}));
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -1565,7 +1689,7 @@ var DynamicData;
         "use strict";
         var EditTypeViewModel = (function (_super) {
             __extends(EditTypeViewModel, _super);
-            function EditTypeViewModel(scope, location, mdToast, appBarStatus, entityTypeRepository, entityTypeName) {
+            function EditTypeViewModel(scope, location, mdToast, mdDialog, appBarStatus, entityTypeRepository, entityTypeName) {
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -1574,6 +1698,9 @@ var DynamicData;
                 }
                 if (!mdToast) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("mdToast"));
+                }
+                if (!mdDialog) {
+                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("mdDialog"));
                 }
                 if (!appBarStatus) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("appBarStatus"));
@@ -1585,6 +1712,7 @@ var DynamicData;
                 this._scope = scope;
                 this._location = location;
                 this._mdToast = mdToast;
+                this._mdDialog = mdDialog;
                 this._appBarStatus = appBarStatus;
                 this._entityTypeRepository = entityTypeRepository;
                 this._entityTypeName = entityTypeName;
@@ -1603,6 +1731,7 @@ var DynamicData;
                                     TypeCode: DynamicData.Core.AttributeTypeCode.String
                                 }]
                         } : DynamicData.Core.EntityTypeSerialization.ToPOCO(this.EntityType);
+                        this._model.Attributes.forEach(function (a) { return a.Options = []; });
                     }
                     return this._model;
                 },
@@ -1614,29 +1743,18 @@ var DynamicData;
                 this.IsNew = !this._entityTypeName;
                 this.EntityType = this.IsNew ? null : this._entityTypeRepository.GetByName(this._entityTypeName);
                 this.SelectedAttributes = {};
-                this.ValidationDialogIsHidden = true;
                 if (!this.IsNew && !this.EntityType) {
                     this._location.url(DynamicData.Config.Routes.manage());
                     return;
                 }
                 this._appBarStatus.Detail();
-                this.TypeCodeOptions = [
-                    DynamicData.Core.AttributeTypeCode.Boolean,
-                    DynamicData.Core.AttributeTypeCode.Date,
-                    DynamicData.Core.AttributeTypeCode.DateTime,
-                    DynamicData.Core.AttributeTypeCode.Decimal,
-                    DynamicData.Core.AttributeTypeCode.Email,
-                    DynamicData.Core.AttributeTypeCode.Int,
-                    DynamicData.Core.AttributeTypeCode.Phone,
-                    DynamicData.Core.AttributeTypeCode.String,
-                    DynamicData.Core.AttributeTypeCode.Text,
-                    DynamicData.Core.AttributeTypeCode.Url,
-                    DynamicData.Core.AttributeTypeCode.Currency,
-                    DynamicData.Core.AttributeTypeCode.Time
-                ].map(function (value) {
+                this.TypeCodeOptions = Object
+                    .keys(DynamicData.Core.AttributeTypeCode)
+                    .filter(function (key) { return isNaN(parseInt(key)); })
+                    .map(function (key) {
                     return {
-                        name: DynamicData.Core.AttributeTypeCode[value],
-                        value: value
+                        name: key,
+                        value: DynamicData.Core.AttributeTypeCode[key]
                     };
                 });
                 if (this._scope.TypeForm && this._scope.TypeForm.$dirty) {
@@ -1700,6 +1818,23 @@ var DynamicData;
             EditTypeViewModel.prototype.Refresh = function () {
                 DynamicData.Core.Trace.Message(ViewModels.editTypeViewModelName + ".Refresh");
                 this.Init();
+            };
+            EditTypeViewModel.prototype.EditEnum = function (attribute) {
+                var options = {
+                    controller: DynamicData.UI.Controllers.EditEnumController,
+                    templateUrl: "html/EditEnum.html",
+                    parent: angular.element(document.body),
+                    resolve: {
+                        name: function () { return attribute.EnumName; }
+                    }
+                };
+                this._mdDialog.show(options)
+                    .then(function (name) {
+                    debugger;
+                    attribute.EnumName = name;
+                }, function () {
+                    console.log("Edit Enum was canceled.");
+                });
             };
             EditTypeViewModel.prototype.SetFormDirty = function () {
                 var _this = this;
@@ -1832,18 +1967,24 @@ var DynamicData;
         "use strict";
         var FieldEditorViewModel = (function (_super) {
             __extends(FieldEditorViewModel, _super);
-            function FieldEditorViewModel(scope) {
+            function FieldEditorViewModel(scope, enumRepository) {
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
+                if (!enumRepository) {
+                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("enumRepository"));
+                }
                 _super.call(this);
                 this._scope = scope;
+                if (this.RenderAsOptionSet) {
+                    var enumeration = enumRepository.GetByName(this._scope.attribute.EnumName);
+                    this.Values = enumeration ? enumeration.Values : [];
+                }
                 scope.$watch("value", this.UpdateUI.bind(this));
                 scope.$watch("vm.Checked", this.UpdateValue.bind(this));
                 scope.$watch("vm.Text", this.UpdateValue.bind(this));
                 scope.$watch("vm.Date", this.UpdateDateValue.bind(this));
                 scope.$watch("vm.Time", this.UpdateTimeValue.bind(this));
-                scope.$watch("vm.Value", this.UpdateValue.bind(this));
             }
             Object.defineProperty(FieldEditorViewModel.prototype, "RenderAsInputText", {
                 get: function () {
@@ -1894,6 +2035,13 @@ var DynamicData;
                 enumerable: true,
                 configurable: true
             });
+            Object.defineProperty(FieldEditorViewModel.prototype, "RenderAsOptionSet", {
+                get: function () {
+                    return this._scope.attribute.TypeCode === DynamicData.Core.AttributeTypeCode.Enum;
+                },
+                enumerable: true,
+                configurable: true
+            });
             Object.defineProperty(FieldEditorViewModel.prototype, "DisplayName", {
                 get: function () {
                     return this._scope.attribute.DisplayName;
@@ -1935,6 +2083,9 @@ var DynamicData;
                 if (this.RenderAsTextArea && newValue !== this.Text) {
                     this.Text = newValue;
                 }
+                if (this.RenderAsOptionSet && newValue !== this.Text) {
+                    this.Text = newValue;
+                }
                 if (this.RenderAsToggleSwitch && newValue !== this.Checked) {
                     this.Checked = !!newValue;
                 }
@@ -1949,14 +2100,11 @@ var DynamicData;
                 if (newValue === oldValue) {
                     return;
                 }
-                if (this.RenderAsInputText) {
-                    this._scope.value = newValue;
-                }
-                else if (this.RenderAsTextArea) {
-                    this._scope.value = newValue;
-                }
-                else if (this.RenderAsToggleSwitch) {
+                if (this.RenderAsToggleSwitch) {
                     this._scope.value = !!newValue;
+                }
+                else {
+                    this._scope.value = newValue;
                 }
             };
             FieldEditorViewModel.prototype.UpdateDateValue = function (newValue, oldValue) {
@@ -2345,11 +2493,11 @@ var DynamicData;
         (function (Directives) {
             "use strict";
             var FieldEditor = (function () {
-                function FieldEditor(scope) {
+                function FieldEditor(scope, enumRepository) {
                     DynamicData.Core.Trace.Message(Directives.fieldEditorName + ".constructor");
-                    scope.vm = new DynamicData.ViewModels.FieldEditorViewModel(scope);
+                    scope.vm = new DynamicData.ViewModels.FieldEditorViewModel(scope, enumRepository);
                 }
-                FieldEditor.$inject = ["$scope"];
+                FieldEditor.$inject = ["$scope", DynamicData.Data.enumRepositoryName];
                 return FieldEditor;
             }());
             angular.module(DynamicData.Config.appName)
@@ -2578,17 +2726,42 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
+            var EditEnumController = (function () {
+                function EditEnumController(scope, mdDialog, enumRepository, name) {
+                    scope.vm = new DynamicData.ViewModels.EditEnumViewModel(scope, mdDialog, enumRepository, name);
+                }
+                EditEnumController.$inject = [
+                    "$scope",
+                    "$mdDialog",
+                    DynamicData.Data.enumRepositoryName,
+                    "name"
+                ];
+                return EditEnumController;
+            }());
+            Controllers.EditEnumController = EditEnumController;
+        })(Controllers = UI.Controllers || (UI.Controllers = {}));
+    })(UI = DynamicData.UI || (DynamicData.UI = {}));
+})(DynamicData || (DynamicData = {}));
+
+var DynamicData;
+(function (DynamicData) {
+    var UI;
+    (function (UI) {
+        var Controllers;
+        (function (Controllers) {
+            "use strict";
             var EditTypeController = (function () {
-                function EditTypeController(scope, routeParams, location, mdToast, appBarStatus, repository) {
+                function EditTypeController(scope, routeParams, location, mdToast, mdDialog, appBarStatus, repository) {
                     DynamicData.Core.Trace.Message(Controllers.editTypeControllerName + ".constructor");
                     var type = routeParams.entityType;
-                    scope.vm = new DynamicData.ViewModels.EditTypeViewModel(scope, location, mdToast, appBarStatus, repository, type);
+                    scope.vm = new DynamicData.ViewModels.EditTypeViewModel(scope, location, mdToast, mdDialog, appBarStatus, repository, type);
                 }
                 EditTypeController.$inject = [
                     "$scope",
                     "$routeParams",
                     "$location",
                     "$mdToast",
+                    "$mdDialog",
                     DynamicData.Core.appBarStatusName,
                     DynamicData.Data.entityTypeRepositoryName
                 ];

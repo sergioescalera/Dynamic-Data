@@ -10,7 +10,7 @@ var DynamicData;
         "use strict";
         var EditTypeViewModel = (function (_super) {
             __extends(EditTypeViewModel, _super);
-            function EditTypeViewModel(scope, location, mdToast, appBarStatus, entityTypeRepository, entityTypeName) {
+            function EditTypeViewModel(scope, location, mdToast, mdDialog, appBarStatus, entityTypeRepository, entityTypeName) {
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -19,6 +19,9 @@ var DynamicData;
                 }
                 if (!mdToast) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("mdToast"));
+                }
+                if (!mdDialog) {
+                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("mdDialog"));
                 }
                 if (!appBarStatus) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("appBarStatus"));
@@ -30,6 +33,7 @@ var DynamicData;
                 this._scope = scope;
                 this._location = location;
                 this._mdToast = mdToast;
+                this._mdDialog = mdDialog;
                 this._appBarStatus = appBarStatus;
                 this._entityTypeRepository = entityTypeRepository;
                 this._entityTypeName = entityTypeName;
@@ -48,6 +52,7 @@ var DynamicData;
                                     TypeCode: DynamicData.Core.AttributeTypeCode.String
                                 }]
                         } : DynamicData.Core.EntityTypeSerialization.ToPOCO(this.EntityType);
+                        this._model.Attributes.forEach(function (a) { return a.Options = []; });
                     }
                     return this._model;
                 },
@@ -59,29 +64,18 @@ var DynamicData;
                 this.IsNew = !this._entityTypeName;
                 this.EntityType = this.IsNew ? null : this._entityTypeRepository.GetByName(this._entityTypeName);
                 this.SelectedAttributes = {};
-                this.ValidationDialogIsHidden = true;
                 if (!this.IsNew && !this.EntityType) {
                     this._location.url(DynamicData.Config.Routes.manage());
                     return;
                 }
                 this._appBarStatus.Detail();
-                this.TypeCodeOptions = [
-                    DynamicData.Core.AttributeTypeCode.Boolean,
-                    DynamicData.Core.AttributeTypeCode.Date,
-                    DynamicData.Core.AttributeTypeCode.DateTime,
-                    DynamicData.Core.AttributeTypeCode.Decimal,
-                    DynamicData.Core.AttributeTypeCode.Email,
-                    DynamicData.Core.AttributeTypeCode.Int,
-                    DynamicData.Core.AttributeTypeCode.Phone,
-                    DynamicData.Core.AttributeTypeCode.String,
-                    DynamicData.Core.AttributeTypeCode.Text,
-                    DynamicData.Core.AttributeTypeCode.Url,
-                    DynamicData.Core.AttributeTypeCode.Currency,
-                    DynamicData.Core.AttributeTypeCode.Time
-                ].map(function (value) {
+                this.TypeCodeOptions = Object
+                    .keys(DynamicData.Core.AttributeTypeCode)
+                    .filter(function (key) { return isNaN(parseInt(key)); })
+                    .map(function (key) {
                     return {
-                        name: DynamicData.Core.AttributeTypeCode[value],
-                        value: value
+                        name: key,
+                        value: DynamicData.Core.AttributeTypeCode[key]
                     };
                 });
                 if (this._scope.TypeForm && this._scope.TypeForm.$dirty) {
@@ -145,6 +139,23 @@ var DynamicData;
             EditTypeViewModel.prototype.Refresh = function () {
                 DynamicData.Core.Trace.Message(ViewModels.editTypeViewModelName + ".Refresh");
                 this.Init();
+            };
+            EditTypeViewModel.prototype.EditEnum = function (attribute) {
+                var options = {
+                    controller: DynamicData.UI.Controllers.EditEnumController,
+                    templateUrl: "html/EditEnum.html",
+                    parent: angular.element(document.body),
+                    resolve: {
+                        name: function () { return attribute.EnumName; }
+                    }
+                };
+                this._mdDialog.show(options)
+                    .then(function (name) {
+                    debugger;
+                    attribute.EnumName = name;
+                }, function () {
+                    console.log("Edit Enum was canceled.");
+                });
             };
             EditTypeViewModel.prototype.SetFormDirty = function () {
                 var _this = this;

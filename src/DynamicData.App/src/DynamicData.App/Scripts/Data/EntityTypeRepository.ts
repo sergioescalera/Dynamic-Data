@@ -23,7 +23,7 @@
 
             var types: Core.IEntityType[] = this.GetAll();
 
-            var filtered: Core.IEntityType[] = types.filter((t: Core.EntityType) => t.Name === entityTypeName);
+            var filtered: Core.IEntityType[] = types.filter((t: Core.IEntityType) => t.Name === entityTypeName);
 
             return filtered.length ? filtered[0] : null;
         }
@@ -41,7 +41,7 @@
 
                 var type: Core.IEntityType = types[i];
 
-                if (storedTypes.filter((t: Core.EntityType) => t.Name === type.Name).length > 0) {
+                if (storedTypes.filter((t: Core.IEntityType) => t.Name === type.Name).length > 0) {
 
                     Core.Trace.Warning(Resources.Strings.DuplicatedEntityTypeMessageFormat(type.Name));
 
@@ -107,7 +107,7 @@
 
             var types: Core.IEntityType[] = this.GetAll();
 
-            var filtered: Core.IEntityType[] = types.filter((t: Core.EntityType) => t.Name === type.Name);
+            var filtered: Core.IEntityType[] = types.filter((t: Core.IEntityType) => t.Name === type.Name);
 
             if (filtered.length > 0) {
 
@@ -131,7 +131,7 @@
 
             var types: Core.IEntityType[] = this.GetAll();
 
-            var filtered: Core.IEntityType[] = types.filter((t: Core.EntityType) => t.Name === type.Name);
+            var filtered: Core.IEntityType[] = types.filter((t: Core.IEntityType) => t.Name === type.Name);
 
             if (filtered.length === 0) {
 

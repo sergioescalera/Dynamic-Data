@@ -9,6 +9,7 @@ var DynamicData;
                 this._typesKey = "types";
                 this._templateKey = "template_";
                 this._entitiesKey = "data_";
+                this._enumsKey = "enums";
                 this._typeSettingsKey = "type_settings_";
             }
             Object.defineProperty(Storage.prototype, "Settings", {
@@ -40,6 +41,18 @@ var DynamicData;
                 },
                 set: function (value) {
                     this.setObject(this._typesKey, value.map(function (t) { return DynamicData.Core.EntityTypeSerialization.ToPOCO(t); }));
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Storage.prototype, "Enums", {
+                // enumerations
+                get: function () {
+                    var array = this.getObject(this._enumsKey) || [];
+                    return array;
+                },
+                set: function (value) {
+                    this.setObject(this._enumsKey, value);
                 },
                 enumerable: true,
                 configurable: true

@@ -4,10 +4,11 @@ var DynamicData;
     (function (Core) {
         "use strict";
         var AttributeType = (function () {
-            function AttributeType(name, displayName, typeCode) {
+            function AttributeType(name, displayName, typeCode, enumName) {
                 this.Name = name;
                 this.DisplayName = displayName;
                 this.TypeCode = typeCode;
+                this.EnumName = enumName;
             }
             Object.defineProperty(AttributeType.prototype, "Name", {
                 get: function () {
@@ -38,6 +39,16 @@ var DynamicData;
                 set: function (value) {
                     Core.Validation.EnsureRequired(value, "TypeCode");
                     this._typeCode = value;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(AttributeType.prototype, "EnumName", {
+                get: function () {
+                    return this._enumName;
+                },
+                set: function (value) {
+                    this._enumName = value;
                 },
                 enumerable: true,
                 configurable: true

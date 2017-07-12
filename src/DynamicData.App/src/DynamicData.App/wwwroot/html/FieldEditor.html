@@ -12,6 +12,12 @@
         <label ng-bind="vm.DisplayName"></label>
         <textarea ng-model="vm.Text"></textarea>
     </md-input-container>
+    <md-input-container ng-if="vm.RenderAsOptionSet">
+        <label ng-bind="vm.DisplayName"></label>
+        <md-select ng-model="vm.Text">
+            <md-option ng-repeat="value in vm.Values" ng-value="value">{{value}}</md-option>
+        </md-select>
+    </md-input-container>
     <div layout="row">
         <md-input-container ng-if="vm.RenderAsDatePicker">
             <label ng-bind="vm.DisplayName"></label>

@@ -7,12 +7,14 @@
         private _name: string;
         private _displayName: string;
         private _typeCode: AttributeTypeCode;
+        private _enumName: string;
 
-        constructor(name: string, displayName: string, typeCode: AttributeTypeCode) {
+        constructor(name: string, displayName: string, typeCode: AttributeTypeCode, enumName?: string) {
 
             this.Name = name;
             this.DisplayName = displayName;
             this.TypeCode = typeCode;
+            this.EnumName = enumName;
         }
 
         get Name(): string {
@@ -46,6 +48,15 @@
             Validation.EnsureRequired(value, "TypeCode");
 
             this._typeCode = value;
+        }
+
+        get EnumName(): string {
+
+            return this._enumName;
+        }
+        set EnumName(value: string) {
+
+            this._enumName = value;
         }
 
         get TypeCodeName(): string {

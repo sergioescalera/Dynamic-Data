@@ -8,6 +8,8 @@
 
         Types: Core.IEntityType[];
 
+        Enums: Core.IEnum[];
+
         GetEntities(type: Core.IEntityType): Core.IEntity[];
         SetEntities(type: Core.IEntityType, value: Core.IEntity[]): void;
         DeleteEntities(typeName: string): void;
@@ -27,6 +29,7 @@
         private _typesKey = "types";
         private _templateKey = "template_";
         private _entitiesKey = "data_";
+        private _enumsKey = "enums";
         private _typeSettingsKey = "type_settings_";
 
         // settings
@@ -69,6 +72,20 @@
         set Types(value: Core.IEntityType[]) {
 
             this.setObject(this._typesKey, value.map((t: Core.IEntityType) => Core.EntityTypeSerialization.ToPOCO(t)));
+        }
+
+        // enumerations
+
+        get Enums(): Core.IEnum[] {
+
+            var array: Core.IEnum[] = this.getObject(this._enumsKey) || [];
+
+            return array;
+        }
+
+        set Enums(value: Core.IEnum[]) {
+
+            this.setObject(this._enumsKey, value);
         }
 
         // entities

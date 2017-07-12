@@ -8,25 +8,34 @@
         Text: string;
         Date: Date;
         Time: string;
-
+        Values: string[];
+        
         _scope: UI.Directives.IFieldEditorScope;
 
-        constructor(scope: UI.Directives.IFieldEditorScope) {
+        constructor(scope: UI.Directives.IFieldEditorScope, enumRepository: Data.IEnumRepository) {
 
             if (!scope) {
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("scope"));
+            }
+
+            if (!enumRepository) {
+                throw new Error(Resources.Strings.RequiredArgumentMessageFormat("enumRepository"));
             }
 
             super();
 
             this._scope = scope;
 
+            if (this.RenderAsOptionSet) {
+                var enumeration = enumRepository.GetByName(this._scope.attribute.EnumName);
+                this.Values = enumeration ? enumeration.Values : [];
+            }
+
             scope.$watch("value", this.UpdateUI.bind(this));
             scope.$watch("vm.Checked", this.UpdateValue.bind(this));
             scope.$watch("vm.Text", this.UpdateValue.bind(this));
             scope.$watch("vm.Date", this.UpdateDateValue.bind(this));
             scope.$watch("vm.Time", this.UpdateTimeValue.bind(this));
-            scope.$watch("vm.Value", this.UpdateValue.bind(this));
         }
 
         get RenderAsInputText(): boolean {
@@ -66,6 +75,11 @@
                 Core.AttributeTypeCode.DateTime,
                 Core.AttributeTypeCode.Time
             ].indexOf(this._scope.attribute.TypeCode) >= 0;
+        }
+
+        get RenderAsOptionSet(): boolean {
+
+            return this._scope.attribute.TypeCode === Core.AttributeTypeCode.Enum;
         }
 
         get DisplayName(): string {
@@ -110,6 +124,11 @@
                 this.Text = newValue;
             }
 
+            if (this.RenderAsOptionSet && newValue !== this.Text) {
+
+                this.Text = newValue;
+            }
+
             if (this.RenderAsToggleSwitch && newValue !== this.Checked) {
 
                 this.Checked = !!newValue;
@@ -132,17 +151,13 @@
                 return;
             }
 
-            if (this.RenderAsInputText) {
-
-                this._scope.value = newValue;
-
-            } else if (this.RenderAsTextArea) {
-
-                this._scope.value = newValue;
-
-            } else if (this.RenderAsToggleSwitch) {
+            if (this.RenderAsToggleSwitch) {
 
                 this._scope.value = !!newValue;
+
+            } else {
+
+                this._scope.value = newValue;
             }
         }
 

@@ -2,10 +2,9 @@
 
     "use strict";
 
-    export interface IAttributeType {
+    export interface IEnum {
         Name: string;
         DisplayName: string;
-        TypeCode: AttributeTypeCode;
-        EnumName?: string;
+        Values: string[];
     }
 }

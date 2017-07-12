@@ -6,11 +6,11 @@ var DynamicData;
         (function (Directives) {
             "use strict";
             var FieldEditor = (function () {
-                function FieldEditor(scope) {
+                function FieldEditor(scope, enumRepository) {
                     DynamicData.Core.Trace.Message(Directives.fieldEditorName + ".constructor");
-                    scope.vm = new DynamicData.ViewModels.FieldEditorViewModel(scope);
+                    scope.vm = new DynamicData.ViewModels.FieldEditorViewModel(scope, enumRepository);
                 }
-                FieldEditor.$inject = ["$scope"];
+                FieldEditor.$inject = ["$scope", DynamicData.Data.enumRepositoryName];
                 return FieldEditor;
             }());
             angular.module(DynamicData.Config.appName)

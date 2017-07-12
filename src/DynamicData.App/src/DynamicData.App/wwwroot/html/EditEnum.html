@@ -1,0 +1,42 @@
+﻿<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span>Edit Enum</span>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.Cancel()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="md-padding">
+        <div class="md-padding" layout="column">
+            <md-autocomplete md-selected-item="vm.Item"
+                             md-input-name="EnumName"
+                             md-search-text="vm.Text"
+                             md-items="item in vm.Enums"
+                             md-item-text="item.Name"
+                             md-min-length="1"
+                             md-floating-label="Name">
+                <md-item-template>
+                    <span md-highlight-text="vm.Text">{{item.Name}}</span>
+                </md-item-template>
+            </md-autocomplete>
+            <md-input-container>
+                <input type="text"
+                       name="EnumDisplayName"
+                       ng-model="vm.DisplayName"
+                       placeholder="Display Name"
+                       aria-label="Display Name" />
+            </md-input-container>
+            <md-chips ng-model="vm.Options"
+                      name="EnumOptions"
+                      placeholder="+Values">
+            </md-chips>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button ng-click="vm.Ok()"
+                   class="md-primary">Ok</md-button>
+        <md-button ng-click="vm.Cancel()">Cancel</md-button>
+    </md-dialog-actions>
+</md-dialog>

@@ -30,6 +30,7 @@ var DynamicData;
         Data.entityRepositoryName = Data.namespace + ".EntityRepository";
         Data.entityTypeRepositoryName = Data.namespace + ".EntityTypeRepository";
         Data.entityTypeSettingsRepositoryName = Data.namespace + ".EntityTypeSettingsRepository";
+        Data.enumRepositoryName = Data.namespace + ".EnumRepository";
         Data.templateRepositoryName = Data.namespace + ".TemplateRepository";
         Data.sampleDataName = Data.namespace + ".SampleData";
     })(Data = DynamicData.Data || (DynamicData.Data = {}));

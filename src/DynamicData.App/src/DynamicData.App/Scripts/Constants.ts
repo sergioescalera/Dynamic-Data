@@ -30,6 +30,7 @@ module DynamicData.Data {
     export var entityRepositoryName: string = `${namespace}.EntityRepository`;
     export var entityTypeRepositoryName: string = `${namespace}.EntityTypeRepository`;
     export var entityTypeSettingsRepositoryName: string = `${namespace}.EntityTypeSettingsRepository`;
+    export var enumRepositoryName: string = `${namespace}.EnumRepository`;
     export var templateRepositoryName: string = `${namespace}.TemplateRepository`;
     export var sampleDataName: string = `${namespace}.SampleData`;
 }

@@ -10,18 +10,24 @@ var DynamicData;
         "use strict";
         var FieldEditorViewModel = (function (_super) {
             __extends(FieldEditorViewModel, _super);
-            function FieldEditorViewModel(scope) {
+            function FieldEditorViewModel(scope, enumRepository) {
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
+                if (!enumRepository) {
+                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("enumRepository"));
+                }
                 _super.call(this);
                 this._scope = scope;
+                if (this.RenderAsOptionSet) {
+                    var enumeration = enumRepository.GetByName(this._scope.attribute.EnumName);
+                    this.Values = enumeration ? enumeration.Values : [];
+                }
                 scope.$watch("value", this.UpdateUI.bind(this));
                 scope.$watch("vm.Checked", this.UpdateValue.bind(this));
                 scope.$watch("vm.Text", this.UpdateValue.bind(this));
                 scope.$watch("vm.Date", this.UpdateDateValue.bind(this));
                 scope.$watch("vm.Time", this.UpdateTimeValue.bind(this));
-                scope.$watch("vm.Value", this.UpdateValue.bind(this));
             }
             Object.defineProperty(FieldEditorViewModel.prototype, "RenderAsInputText", {
                 get: function () {
@@ -72,6 +78,13 @@ var DynamicData;
                 enumerable: true,
                 configurable: true
             });
+            Object.defineProperty(FieldEditorViewModel.prototype, "RenderAsOptionSet", {
+                get: function () {
+                    return this._scope.attribute.TypeCode === DynamicData.Core.AttributeTypeCode.Enum;
+                },
+                enumerable: true,
+                configurable: true
+            });
             Object.defineProperty(FieldEditorViewModel.prototype, "DisplayName", {
                 get: function () {
                     return this._scope.attribute.DisplayName;
@@ -113,6 +126,9 @@ var DynamicData;
                 if (this.RenderAsTextArea && newValue !== this.Text) {
                     this.Text = newValue;
                 }
+                if (this.RenderAsOptionSet && newValue !== this.Text) {
+                    this.Text = newValue;
+                }
                 if (this.RenderAsToggleSwitch && newValue !== this.Checked) {
                     this.Checked = !!newValue;
                 }
@@ -127,14 +143,11 @@ var DynamicData;
                 if (newValue === oldValue) {
                     return;
                 }
-                if (this.RenderAsInputText) {
-                    this._scope.value = newValue;
-                }
-                else if (this.RenderAsTextArea) {
-                    this._scope.value = newValue;
-                }
-                else if (this.RenderAsToggleSwitch) {
+                if (this.RenderAsToggleSwitch) {
                     this._scope.value = !!newValue;
+                }
+                else {
+                    this._scope.value = newValue;
                 }
             };
             FieldEditorViewModel.prototype.UpdateDateValue = function (newValue, oldValue) {

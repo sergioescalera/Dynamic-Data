@@ -50,6 +50,7 @@
                 case AttributeTypeCode.String:
                 case AttributeTypeCode.Text:
                 case AttributeTypeCode.Url:
+                case AttributeTypeCode.Enum:
                     if (angular.isString(value)) {
                         return value;
                     }

@@ -8,6 +8,7 @@
         private _scope: UI.Controllers.IEditTypeScope;
         private _location: ng.ILocationService;
         private _mdToast: ng.material.IToastService;
+        private _mdDialog: ng.material.IDialogService;
         private _appBarStatus: Core.IAppBarStatus;
         private _entityTypeName: string;
         private _model: any;
@@ -28,6 +29,8 @@
                         TypeCode: Core.AttributeTypeCode.String
                     }]
                 } : Core.EntityTypeSerialization.ToPOCO(this.EntityType);
+
+                this._model.Attributes.forEach((a: any) => a.Options = []);
             }
 
             return this._model;
@@ -37,6 +40,7 @@
             scope: UI.Controllers.IEditTypeScope,
             location: ng.ILocationService,
             mdToast: ng.material.IToastService,
+            mdDialog: ng.material.IDialogService,
             appBarStatus: Core.IAppBarStatus,
             entityTypeRepository: Data.IEntityTypeRepository,
             entityTypeName: string) {
@@ -53,6 +57,10 @@
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("mdToast"));
             }
 
+            if (!mdDialog) {
+                throw new Error(Resources.Strings.RequiredArgumentMessageFormat("mdDialog"));
+            }
+
             if (!appBarStatus) {
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("appBarStatus"));
             }
@@ -66,6 +74,7 @@
             this._scope = scope;
             this._location = location;
             this._mdToast = mdToast;
+            this._mdDialog = mdDialog;
             this._appBarStatus = appBarStatus;
             this._entityTypeRepository = entityTypeRepository;
             this._entityTypeName = entityTypeName;
@@ -85,7 +94,6 @@
             this.IsNew = !this._entityTypeName;
             this.EntityType = this.IsNew ? null : this._entityTypeRepository.GetByName(this._entityTypeName);
             this.SelectedAttributes = {};
-            this.ValidationDialogIsHidden = true;
 
             if (!this.IsNew && !this.EntityType) {
 
@@ -95,25 +103,15 @@
 
             this._appBarStatus.Detail();
 
-            this.TypeCodeOptions = [
-                Core.AttributeTypeCode.Boolean,
-                Core.AttributeTypeCode.Date,
-                Core.AttributeTypeCode.DateTime,
-                Core.AttributeTypeCode.Decimal,
-                Core.AttributeTypeCode.Email,
-                Core.AttributeTypeCode.Int,
-                Core.AttributeTypeCode.Phone,
-                Core.AttributeTypeCode.String,
-                Core.AttributeTypeCode.Text,
-                Core.AttributeTypeCode.Url,
-                Core.AttributeTypeCode.Currency,
-                Core.AttributeTypeCode.Time
-            ].map((value: number) => {
-                return {
-                    name: Core.AttributeTypeCode[value],
-                    value: value
-                };
-            });
+            this.TypeCodeOptions = Object
+                .keys(Core.AttributeTypeCode)
+                .filter((key: string) => isNaN(parseInt(key)))
+                .map((key: string) => {
+                    return {
+                        name: key,
+                        value: Core.AttributeTypeCode[key]
+                    };
+                });
 
             if (this._scope.TypeForm && this._scope.TypeForm.$dirty) {
 
@@ -213,6 +211,26 @@
             Core.Trace.Message(`${editTypeViewModelName}.Refresh`);
 
             this.Init();
+        }
+
+        EditEnum(attribute: Core.IAttributeType): void {
+
+            var options: ng.material.IDialogOptions = {
+                controller: UI.Controllers.EditEnumController,
+                templateUrl: "html/EditEnum.html",
+                parent: angular.element(document.body),
+                resolve: {
+                    name: () => attribute.EnumName
+                }
+            };
+
+            this._mdDialog.show(options)
+                .then((name) => {
+                    debugger;
+                    attribute.EnumName = name;
+                }, () => {
+                    console.log("Edit Enum was canceled.");
+                });
         }
 
         private SetFormDirty(): void {

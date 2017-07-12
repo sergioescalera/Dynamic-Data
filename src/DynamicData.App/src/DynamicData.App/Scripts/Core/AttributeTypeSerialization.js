@@ -7,13 +7,14 @@ var DynamicData;
             function AttributeTypeSerialization() {
             }
             AttributeTypeSerialization.FromPOCO = function (poco) {
-                return new Core.AttributeType(poco.Name, poco.DisplayName, poco.TypeCode);
+                return new Core.AttributeType(poco.Name, poco.DisplayName, poco.TypeCode, poco.EnumName || null);
             };
             AttributeTypeSerialization.ToPOCO = function (attribute) {
                 return {
                     Name: attribute.Name,
                     DisplayName: attribute.DisplayName,
-                    TypeCode: attribute.TypeCode
+                    TypeCode: attribute.TypeCode,
+                    EnumName: attribute.EnumName
                 };
             };
             return AttributeTypeSerialization;

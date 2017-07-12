@@ -43,6 +43,7 @@ var DynamicData;
                     case Core.AttributeTypeCode.String:
                     case Core.AttributeTypeCode.Text:
                     case Core.AttributeTypeCode.Url:
+                    case Core.AttributeTypeCode.Enum:
                         if (angular.isString(value)) {
                             return value;
                         }

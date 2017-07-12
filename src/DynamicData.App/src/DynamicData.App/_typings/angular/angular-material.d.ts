@@ -91,7 +91,7 @@ declare namespace angular.material {
         controller?: string | Function;
         locals?: { [index: string]: any };
         bindToController?: boolean; // default: false
-        resolve?: { [index: string]: angular.IPromise<any> }
+        resolve?: { [index: string]: any }
         controllerAs?: string;
         parent?: string | Element | JQuery; // default: root node
         onShowing?: Function;

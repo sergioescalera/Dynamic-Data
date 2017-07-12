@@ -115,7 +115,7 @@
         }
 
         Save(): void {
-
+            
             Core.Trace.Message(`${entityViewModelName}.Save`);
 
             angular.copy(this.Model, this.Entity.Fields);
