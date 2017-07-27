@@ -16,7 +16,7 @@ var DynamicData;
             AppBarStatus.prototype.Master = function () {
                 this.IsNewDisabled = false;
                 this.IsRefreshDisabled = false;
-                this.IsDeleteDisabled = false;
+                this.IsDeleteDisabled = true;
                 this.IsSaveDisabled = true;
                 this.IsCancelDisabled = true;
             };

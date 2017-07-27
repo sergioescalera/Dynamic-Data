@@ -9,7 +9,8 @@
 
             <md-checkbox class="md-secondary type-select"                         
                          ng-model="vm.Selected[type.Name]"
-                         aria-label="Select Type"></md-checkbox>
+                         aria-label="Select Type"
+                         ng-change="vm.EnableDeletion()"></md-checkbox>
 
         </div>
 

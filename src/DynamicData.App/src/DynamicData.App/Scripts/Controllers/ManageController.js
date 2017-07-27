@@ -8,7 +8,7 @@ var DynamicData;
             var ManageController = (function () {
                 function ManageController(scope, location, mdDialog, appBarStatus, repository) {
                     DynamicData.Core.Trace.Message(Controllers.manageControllerName + ".constructor");
-                    scope.vm = new DynamicData.ViewModels.ManageViewModel(scope, location, mdDialog, repository);
+                    scope.vm = new DynamicData.ViewModels.ManageViewModel(scope, location, mdDialog, appBarStatus, repository);
                     appBarStatus.Master();
                 }
                 ManageController.$inject = [
