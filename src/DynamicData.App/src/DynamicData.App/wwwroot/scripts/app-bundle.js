@@ -2295,7 +2295,7 @@ var DynamicData;
         "use strict";
         var TemplatesViewModel = (function (_super) {
             __extends(TemplatesViewModel, _super);
-            function TemplatesViewModel(scope, location, mdDialog, entityTypeRepository, templateRepository) {
+            function TemplatesViewModel(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository) {
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -2314,6 +2314,7 @@ var DynamicData;
                 _super.call(this);
                 this._location = location;
                 this._mdDialog = mdDialog;
+                this._appBarStatus = appBarStatus;
                 this._entityTypeRepository = entityTypeRepository;
                 this._templateRepository = templateRepository;
                 scope.$on("AppBarScope::cancel", this.Cancel.bind(this));
@@ -2333,6 +2334,7 @@ var DynamicData;
             };
             TemplatesViewModel.prototype.SelectType = function (type) {
                 this.SelectedType = !type ? null : type;
+                this._appBarStatus.IsDeleteDisabled = !type ? true : false;
                 this.LoadSelectedType();
             };
             TemplatesViewModel.prototype.Cancel = function () {
@@ -2898,9 +2900,10 @@ var DynamicData;
             "use strict";
             var TemplatesController = (function () {
                 function TemplatesController(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository) {
-                    scope.vm = new DynamicData.ViewModels.TemplatesViewModel(scope, location, mdDialog, entityTypeRepository, templateRepository);
+                    scope.vm = new DynamicData.ViewModels.TemplatesViewModel(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository);
                     appBarStatus.Detail();
                     appBarStatus.IsNewDisabled = true;
+                    appBarStatus.IsDeleteDisabled = true;
                 }
                 TemplatesController.$inject = [
                     "$scope",

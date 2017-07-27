@@ -6,6 +6,7 @@
 
         private _location: ng.ILocationService;
         private _mdDialog: ng.material.IDialogService;
+        private _appBarStatus: Core.IAppBarStatus;
         private _entityTypeRepository: Data.IEntityTypeRepository;
         private _templateRepository: Data.ITemplateRepository;
 
@@ -18,6 +19,7 @@
             scope: UI.Controllers.ITemplatesScope,
             location: ng.ILocationService,
             mdDialog: ng.material.IDialogService,
+            appBarStatus: Core.IAppBarStatus,
             entityTypeRepository: Data.IEntityTypeRepository,
             templateRepository: Data.ITemplateRepository) {
 
@@ -45,6 +47,7 @@
 
             this._location = location;
             this._mdDialog = mdDialog;
+            this._appBarStatus = appBarStatus;
             this._entityTypeRepository = entityTypeRepository;
             this._templateRepository = templateRepository;
 
@@ -73,7 +76,7 @@
         SelectType(type: Core.IEntityType): void {
 
             this.SelectedType = !type ? null : type;
-
+            this._appBarStatus.IsDeleteDisabled = !type ? true : false;
             this.LoadSelectedType();
         }
 

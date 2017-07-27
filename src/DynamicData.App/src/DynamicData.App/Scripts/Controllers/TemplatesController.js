@@ -7,9 +7,10 @@ var DynamicData;
             "use strict";
             var TemplatesController = (function () {
                 function TemplatesController(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository) {
-                    scope.vm = new DynamicData.ViewModels.TemplatesViewModel(scope, location, mdDialog, entityTypeRepository, templateRepository);
+                    scope.vm = new DynamicData.ViewModels.TemplatesViewModel(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository);
                     appBarStatus.Detail();
                     appBarStatus.IsNewDisabled = true;
+                    appBarStatus.IsDeleteDisabled = true;
                 }
                 TemplatesController.$inject = [
                     "$scope",
