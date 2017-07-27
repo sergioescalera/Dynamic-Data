@@ -7,6 +7,7 @@
         private _scope: UI.Controllers.IManageScope;
         private _location: ng.ILocationService;
         private _mdDialog: ng.material.IDialogService;
+        private _appBarStatus: Core.IAppBarStatus;
         private _repository: Data.IEntityTypeRepository;
 
         Types: Core.IEntityType[];
@@ -16,6 +17,7 @@
             scope: UI.Controllers.IManageScope,
             location: ng.ILocationService,
             mdDialog: ng.material.IDialogService,
+            appBarStatus: Core.IAppBarStatus,
             repository: Data.IEntityTypeRepository) {
 
             if (!scope) {
@@ -39,6 +41,7 @@
             this._scope = scope;
             this._location = location;
             this._mdDialog = mdDialog;
+            this._appBarStatus = appBarStatus;
             this._repository = repository;
 
             this.LoadTypes();
@@ -59,17 +62,9 @@
 
             Core.Trace.Message(`${manageViewModelName}.PromptDelete`);
 
-            var keys: string[] = Object
-                .keys(this.Selected)
-                .filter((k: string) => !!this.Selected[k]);
-
-            if (keys.length === 0) {
-                return;
-            }
-
             var confirm: angular.material.IConfirmDialog = this._mdDialog.confirm()
                 .title("Confirmation")
-                .textContent("Would you like to delete the selected types?")
+                .textContent("Would you like to delete the selected types cojones?")
                 .ariaLabel("Delete Confirmation")
                 .ok("Yes")
                 .cancel("No");
@@ -107,6 +102,15 @@
             var path: string = Config.Routes.type(this.Types[index].Name);
 
             this._location.url(path);
+        }
+
+        EnableDeletion(): void {
+
+            var keys: string[] = Object
+                .keys(this.Selected)
+                .filter((k: string) => !!this.Selected[k]);
+
+            this._appBarStatus.IsDeleteDisabled = !(keys.length > 0);
         }
 
         private LoadTypes(): void {

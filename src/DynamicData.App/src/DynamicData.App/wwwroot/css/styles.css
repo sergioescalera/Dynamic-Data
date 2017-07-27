@@ -64,3 +64,6 @@ dd-timepicker .md-button.md-icon-button {
 md-chips md-chips-wrap .md-errors-spacer {
   display: none;
 }
+.txt-selector {
+  cursor: pointer;
+}

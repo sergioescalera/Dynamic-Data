@@ -25,10 +25,12 @@
 
             Core.Trace.Message(`${manageControllerName}.constructor`);
 
-            scope.vm = new ViewModels.ManageViewModel(scope, location, mdDialog, repository);
+            scope.vm = new ViewModels.ManageViewModel(scope, location, mdDialog, appBarStatus, repository);
 
             appBarStatus.Master();
+
         }
+
     }
 
     angular.module(Config.appName)

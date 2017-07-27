@@ -258,7 +258,7 @@ var DynamicData;
             AppBarStatus.prototype.Master = function () {
                 this.IsNewDisabled = false;
                 this.IsRefreshDisabled = false;
-                this.IsDeleteDisabled = false;
+                this.IsDeleteDisabled = true;
                 this.IsSaveDisabled = true;
                 this.IsCancelDisabled = true;
             };
@@ -2154,7 +2154,7 @@ var DynamicData;
         "use strict";
         var ManageViewModel = (function (_super) {
             __extends(ManageViewModel, _super);
-            function ManageViewModel(scope, location, mdDialog, repository) {
+            function ManageViewModel(scope, location, mdDialog, appBarStatus, repository) {
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -2171,6 +2171,7 @@ var DynamicData;
                 this._scope = scope;
                 this._location = location;
                 this._mdDialog = mdDialog;
+                this._appBarStatus = appBarStatus;
                 this._repository = repository;
                 this.LoadTypes();
                 scope.$on("AppBarScope::add", this.Add.bind(this));
@@ -2182,17 +2183,10 @@ var DynamicData;
                 this._location.url(DynamicData.Config.Routes.typeCreate());
             };
             ManageViewModel.prototype.PromptDelete = function () {
-                var _this = this;
                 DynamicData.Core.Trace.Message(ViewModels.manageViewModelName + ".PromptDelete");
-                var keys = Object
-                    .keys(this.Selected)
-                    .filter(function (k) { return !!_this.Selected[k]; });
-                if (keys.length === 0) {
-                    return;
-                }
                 var confirm = this._mdDialog.confirm()
                     .title("Confirmation")
-                    .textContent("Would you like to delete the selected types?")
+                    .textContent("Would you like to delete the selected types cojones?")
                     .ariaLabel("Delete Confirmation")
                     .ok("Yes")
                     .cancel("No");
@@ -2218,6 +2212,13 @@ var DynamicData;
                 DynamicData.Core.Trace.Message(ViewModels.manageViewModelName + ".Open");
                 var path = DynamicData.Config.Routes.type(this.Types[index].Name);
                 this._location.url(path);
+            };
+            ManageViewModel.prototype.EnableDeletion = function () {
+                var _this = this;
+                var keys = Object
+                    .keys(this.Selected)
+                    .filter(function (k) { return !!_this.Selected[k]; });
+                this._appBarStatus.IsDeleteDisabled = !(keys.length > 0);
             };
             ManageViewModel.prototype.LoadTypes = function () {
                 this.Types = this._repository.GetAll();
@@ -2813,7 +2814,7 @@ var DynamicData;
             var ManageController = (function () {
                 function ManageController(scope, location, mdDialog, appBarStatus, repository) {
                     DynamicData.Core.Trace.Message(Controllers.manageControllerName + ".constructor");
-                    scope.vm = new DynamicData.ViewModels.ManageViewModel(scope, location, mdDialog, repository);
+                    scope.vm = new DynamicData.ViewModels.ManageViewModel(scope, location, mdDialog, appBarStatus, repository);
                     appBarStatus.Master();
                 }
                 ManageController.$inject = [
