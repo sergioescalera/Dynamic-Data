@@ -2186,7 +2186,7 @@ var DynamicData;
                 DynamicData.Core.Trace.Message(ViewModels.manageViewModelName + ".PromptDelete");
                 var confirm = this._mdDialog.confirm()
                     .title("Confirmation")
-                    .textContent("Would you like to delete the selected types cojones?")
+                    .textContent("Do you confirm that you want to delete the selected types?")
                     .ariaLabel("Delete Confirmation")
                     .ok("Yes")
                     .cancel("No");
