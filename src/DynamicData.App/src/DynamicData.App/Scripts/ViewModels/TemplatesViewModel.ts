@@ -35,6 +35,10 @@
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("mdDialog"));
             }
 
+            if (!appBarStatus) {
+                throw new Error(Resources.Strings.RequiredArgumentMessageFormat("appBarStatus"));
+            }
+
             if (!entityTypeRepository) {
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("entityTypeRepository"));
             }

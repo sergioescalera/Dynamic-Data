@@ -20,6 +20,7 @@
         }
 
         Master(): void {
+
             this.IsNewDisabled = false;
             this.IsRefreshDisabled = false;
             this.IsDeleteDisabled = true;

@@ -20,6 +20,9 @@ var DynamicData;
                 if (!mdDialog) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("mdDialog"));
                 }
+                if (!appBarStatus) {
+                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("appBarStatus"));
+                }
                 if (!entityTypeRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("entityTypeRepository"));
                 }

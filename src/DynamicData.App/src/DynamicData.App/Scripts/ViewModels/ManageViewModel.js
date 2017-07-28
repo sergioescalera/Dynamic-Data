@@ -20,6 +20,9 @@ var DynamicData;
                 if (!mdDialog) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("mdDialog"));
                 }
+                if (!appBarStatus) {
+                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("appBarStatus"));
+                }
                 if (!repository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("repository"));
                 }
@@ -42,7 +45,7 @@ var DynamicData;
                 DynamicData.Core.Trace.Message(ViewModels.manageViewModelName + ".PromptDelete");
                 var confirm = this._mdDialog.confirm()
                     .title("Confirmation")
-                    .textContent("Would you like to delete the selected types cojones?")
+                    .textContent("Would you like to delete the selected types?")
                     .ariaLabel("Delete Confirmation")
                     .ok("Yes")
                     .cancel("No");
@@ -74,7 +77,7 @@ var DynamicData;
                 var keys = Object
                     .keys(this.Selected)
                     .filter(function (k) { return !!_this.Selected[k]; });
-                this._appBarStatus.IsDeleteDisabled = !(keys.length > 0);
+                this._appBarStatus.IsDeleteDisabled = keys.length === 0;
             };
             ManageViewModel.prototype.LoadTypes = function () {
                 this.Types = this._repository.GetAll();
