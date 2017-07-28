@@ -32,6 +32,10 @@
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("mdDialog"));
             }
 
+            if (!appBarStatus) {
+                throw new Error(Resources.Strings.RequiredArgumentMessageFormat("appBarStatus"));
+            }
+
             if (!repository) {
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("repository"));
             }
@@ -64,7 +68,7 @@
 
             var confirm: angular.material.IConfirmDialog = this._mdDialog.confirm()
                 .title("Confirmation")
-                .textContent("Do you confirm that you want to delete the selected types?")
+                .textContent("Would you like to delete the selected types?")
                 .ariaLabel("Delete Confirmation")
                 .ok("Yes")
                 .cancel("No");
@@ -110,7 +114,7 @@
                 .keys(this.Selected)
                 .filter((k: string) => !!this.Selected[k]);
 
-            this._appBarStatus.IsDeleteDisabled = !(keys.length > 0);
+            this._appBarStatus.IsDeleteDisabled = keys.length === 0;
         }
 
         private LoadTypes(): void {

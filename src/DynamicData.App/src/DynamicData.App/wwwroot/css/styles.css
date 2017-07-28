@@ -25,6 +25,10 @@
 .type-view-form .entity-name {
   font-size: 1.1em;
 }
+.entity-view-form .type-name,
+.type-view-form .type-name {
+  cursor: pointer;
+}
 .entity-view-form .attribute-list .attribute,
 .type-view-form .attribute-list .attribute {
   font-size: .9em;
@@ -63,7 +67,4 @@ dd-timepicker .md-button.md-icon-button {
 }
 md-chips md-chips-wrap .md-errors-spacer {
   display: none;
-}
-.txt-selector {
-  cursor: pointer;
 }
