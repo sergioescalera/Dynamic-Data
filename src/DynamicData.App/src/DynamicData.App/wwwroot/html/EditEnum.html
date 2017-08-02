@@ -10,27 +10,39 @@
     </md-toolbar>
     <md-dialog-content class="md-padding">
         <div class="md-padding" layout="column">
-            <md-autocomplete md-selected-item="vm.Item"
+            <md-autocomplete ng-if="vm.New == true"
+                             md-selected-item="vm.Item"
                              md-input-name="EnumName"
                              md-search-text="vm.Text"
-                             md-items="item in vm.Enums"
+                             md-items="item in vm.FilteredEnums"
                              md-item-text="item.Name"
-                             md-min-length="1"
+                             md-min-length="0"
+                             md-search-text-change="vm.Filter()"
                              md-floating-label="Name">
                 <md-item-template>
                     <span md-highlight-text="vm.Text">{{item.Name}}</span>
                 </md-item-template>
             </md-autocomplete>
+            <md-input-container ng-if="vm.New != true">
+                <input type="text"
+                       name="EnumDisplayName"
+                       ng-model="vm.Text"
+                       placeholder="Name"
+                       aria-label="Name"
+                       ng-readonly="true" />
+            </md-input-container>
             <md-input-container>
                 <input type="text"
                        name="EnumDisplayName"
                        ng-model="vm.DisplayName"
                        placeholder="Display Name"
-                       aria-label="Display Name" />
+                       aria-label="Display Name" 
+                       ng-readonly="vm.New != true"/>
             </md-input-container>
             <md-chips ng-model="vm.Options"
                       name="EnumOptions"
-                      placeholder="+Values">
+                      placeholder="+Values"
+                      readonly="vm.New != true"/>
             </md-chips>
         </div>
     </md-dialog-content>
@@ -38,5 +50,6 @@
         <md-button ng-click="vm.Ok()"
                    class="md-primary">Ok</md-button>
         <md-button ng-click="vm.Cancel()">Cancel</md-button>
+        <md-button ng-click="vm.Clear()">Clear</md-button>
     </md-dialog-actions>
 </md-dialog>
