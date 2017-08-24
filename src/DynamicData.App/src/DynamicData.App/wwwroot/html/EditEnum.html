@@ -1,42 +1,133 @@
 ﻿<md-dialog>
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <span>Edit Enum</span>
+            <span>{{vm.State}} Enum</span>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="vm.Cancel()">
                 <md-icon aria-label="Close dialog">close</md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <md-dialog-content class="md-padding">
+    <md-dialog-content class="md-padding enum-dialog">
         <div class="md-padding" layout="column">
-            <md-autocomplete md-selected-item="vm.Item"
-                             md-input-name="EnumName"
-                             md-search-text="vm.Text"
-                             md-items="item in vm.Enums"
-                             md-item-text="item.Name"
-                             md-min-length="1"
-                             md-floating-label="Name">
-                <md-item-template>
-                    <span md-highlight-text="vm.Text">{{item.Name}}</span>
-                </md-item-template>
-            </md-autocomplete>
-            <md-input-container>
-                <input type="text"
-                       name="EnumDisplayName"
-                       ng-model="vm.DisplayName"
-                       placeholder="Display Name"
-                       aria-label="Display Name" />
-            </md-input-container>
-            <md-chips ng-model="vm.Options"
-                      name="EnumOptions"
-                      placeholder="+Values">
-            </md-chips>
+            <div ng-if="vm.State == 'Edit'">
+                <md-input-container>
+                    <input type="text"
+                           name="EnumDisplayName"
+                           ng-model="vm.Text"
+                           placeholder="Name"
+                           aria-label="Name"
+                           ng-readonly="true" />
+                </md-input-container>
+                <md-input-container>
+                    <input type="text"
+                            name="EnumDisplayName"
+                            ng-model="vm.DisplayName"
+                            placeholder="Display Name"
+                            aria-label="Display Name" />
+                </md-input-container>
+                <md-chips ng-model="vm.Options"
+                            name="EnumOptions"
+                            placeholder="+Values">
+                </md-chips>
+            </div>
+            <div ng-if="vm.State == 'Select'">
+                <!--<md-autocomplete md-selected-item="vm.Item"
+                                 md-input-name="EnumName"
+                                 md-search-text="vm.Text"
+                                 md-items="item in vm.FilteredEnums"
+                                 md-item-text="item.Name"
+                                 md-min-length="0"
+                                 md-search-text-change="vm.Filter()"
+                                 md-floating-label="Name">
+                    <md-item-template>
+                        <span md-highlight-text="vm.Text">{{item.Name}}</span>
+                    </md-item-template>
+                </md-autocomplete>-->
+                <md-input-container class="enum-select-container">
+                    <label>Name</label>
+                    <md-select ng-model="vm.Text" ng-change="vm.SelectEnum()"
+                               aria-label="Attribute Type" >
+                        <md-option ng-repeat="item in vm.Enums" ng-value="item.Name">
+                            {{ item.Name }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container>
+                    <input type="text"
+                            name="EnumDisplayName"
+                            ng-model="vm.DisplayName"
+                            placeholder="Display Name"
+                            aria-label="Display Name"
+                            ng-readonly="true" />
+                </md-input-container>
+                <md-chips ng-model="vm.Options"
+                            name="EnumOptions"
+                            placeholder="+Values"
+                            readonly="true" md-removable="false">
+                </md-chips>
+            </div>
+            <div ng-if="vm.State == 'New'">
+                <md-input-container>
+                    <input type="text"
+                           name="EnumDisplayName"
+                           ng-model="vm.Text"
+                           placeholder="Name"
+                           aria-label="Name" />
+                </md-input-container>
+                <md-input-container>
+                    <input type="text"
+                           name="EnumDisplayName"
+                           ng-model="vm.DisplayName"
+                           placeholder="Display Name"
+                           aria-label="Display Name" />
+                </md-input-container>
+                <md-chips ng-model="vm.Options"
+                          name="EnumOptions"
+                          placeholder="+Values">
+                </md-chips>
+            </div>
+            <div ng-if="vm.State == 'View'">
+                <md-input-container>
+                    <input type="text"
+                           name="EnumDisplayName"
+                           ng-model="vm.Item.Name"
+                           placeholder="Name"
+                           aria-label="Name" 
+                           ng-readonly="true"/>
+                </md-input-container>
+                <md-input-container>
+                    <input type="text"
+                           name="EnumDisplayName"
+                           ng-model="vm.Item.DisplayName"
+                           placeholder="Display Name"
+                           aria-label="Display Name" 
+                           ng-readonly="true"/>
+                </md-input-container>
+                <md-chips ng-model="vm.Item.Values"
+                          name="EnumOptions"
+                          readonly="true" md-removable="false">
+                </md-chips>
+            </div>
         </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-        <md-button ng-click="vm.Ok()"
-                   class="md-primary">Ok</md-button>
-        <md-button ng-click="vm.Cancel()">Cancel</md-button>
+        <md-select ng-model="vm.State" ng-change="vm.SelectState()" aria-label="Attribute Type">
+            <md-option value="View" ng-if="vm.State == 'View'">
+                <md-icon class="ng-scope material-icons">build</md-icon> Actions
+            </md-option>
+            <md-option value="Edit">
+                <md-icon class="ng-scope material-icons">mode_edit</md-icon> Edit
+            </md-option>
+            <md-option value="Select">
+                <md-icon class="ng-scope material-icons">content_copy</md-icon> Select
+            </md-option>
+            <md-option value="New">
+                <md-icon class="ng-scope material-icons">add</md-icon> New
+            </md-option>
+        </md-select>
+        <md-button ng-click="vm.Ok()" class="md-primary" ng-if="vm.State != 'View'">Ok</md-button>
+        <md-button ng-click="vm.Done()" class="md-primary" ng-if="vm.State == 'View'">Done</md-button>
+        <md-button ng-click="vm.Cancel()">{{vm.State == 'View' ? 'Close' : 'Cancel'}}</md-button>
     </md-dialog-actions>
 </md-dialog>
