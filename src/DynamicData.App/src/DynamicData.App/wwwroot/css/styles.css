@@ -68,3 +68,9 @@ dd-timepicker .md-button.md-icon-button {
 md-chips md-chips-wrap .md-errors-spacer {
   display: none;
 }
+.enum-dialog md-input-container {
+  display: block;
+}
+.enum-dialog .enum-select-container {
+  margin-bottom: 40px;
+}

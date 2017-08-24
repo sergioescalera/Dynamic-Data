@@ -1656,7 +1656,14 @@ var DynamicData;
                     return;
                 }
                 this._enumRepository.Save(this.Text, this.DisplayName, this.Options);
-                this._mdDialog.hide(this.Text);
+                this.Reload(this.Text);
+                this.View();
+            };
+            EditEnumViewModel.prototype.Done = function () {
+                if (!this.Item.Name) {
+                    return;
+                }
+                this._mdDialog.hide(this.Item.Name);
             };
             EditEnumViewModel.prototype.Cancel = function () {
                 this._mdDialog.cancel();
@@ -1665,27 +1672,67 @@ var DynamicData;
                 var _this = this;
                 this.FilteredEnums = this.Enums.filter(function (o) { return o.Name.toLowerCase().indexOf(_this.Text.toLowerCase()) >= 0; });
             };
-            EditEnumViewModel.prototype.Clear = function () {
-                this.Item = null;
+            EditEnumViewModel.prototype.View = function () {
+                this.DisplayName = this.Item.DisplayName;
+                this.Options = this.Item.Values;
+                this.Text = this.Item.Name;
+                this.State = "View";
+            };
+            EditEnumViewModel.prototype.Edit = function () {
+                this.State = "Edit";
+                this.DisplayName = this.Item.DisplayName;
+                this.Options = this.Item.Values;
+                this.Text = this.Item.Name;
+            };
+            EditEnumViewModel.prototype.Select = function () {
                 this.DisplayName = "";
                 this.Options = [];
                 this.Text = "";
-                this.New = true;
-                this.FilteredEnums = this.Enums;
+                this.State = "Select";
+            };
+            EditEnumViewModel.prototype.New = function () {
+                this.DisplayName = "";
+                this.Options = [];
+                this.Text = "";
+                this.State = "New";
+            };
+            EditEnumViewModel.prototype.SelectEnum = function () {
+                var _this = this;
+                var selectedItems = this.Enums.filter(function (o) { return o.Name.toLowerCase() == _this.Text.toLowerCase(); });
+                if (selectedItems.length > 0 && selectedItems[0] != null) {
+                    this.DisplayName = selectedItems[0].DisplayName;
+                    this.Options = selectedItems[0].Values;
+                }
+            };
+            EditEnumViewModel.prototype.SelectState = function () {
+                switch (this.State) {
+                    case "New":
+                        this.New();
+                        break;
+                    case "Select":
+                        this.Select();
+                        break;
+                    case "Edit":
+                        this.Edit();
+                        break;
+                    default:
+                        this.View();
+                        break;
+                }
             };
             EditEnumViewModel.prototype.LoadEnum = function () {
                 if (!this.Item) {
-                    this.DisplayName = "";
-                    this.Options = [];
-                    this.Text = "";
-                    this.New = true;
+                    this.Action = "Select";
+                    this.Select();
                 }
                 else {
-                    this.DisplayName = this.Item.DisplayName;
-                    this.Options = this.Item.Values;
-                    this.Text = this.Item.Name;
-                    this.New = false;
+                    this.View();
                 }
+            };
+            EditEnumViewModel.prototype.Reload = function (name) {
+                this.Enums = this._enumRepository.GetAll();
+                this.FilteredEnums = this.Enums;
+                this.Item = this.Enums.filter(function (o) { return o.Name === name; })[0] || null;
             };
             return EditEnumViewModel;
         }());
