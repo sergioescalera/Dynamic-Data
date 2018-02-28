@@ -1,16 +1,22 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var DashboardViewModel = (function (_super) {
+        var DashboardViewModel = /** @class */ (function (_super) {
             __extends(DashboardViewModel, _super);
             function DashboardViewModel(scope, location, repository, sampleData, entityTypeName) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -23,14 +29,15 @@ var DynamicData;
                 if (!sampleData) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("sampleData"));
                 }
-                _super.call(this);
-                this._scope = scope;
-                this._location = location;
-                this._repository = repository;
-                this._sampleData = sampleData;
-                scope.$on("AppBarScope::add", this.Add.bind(this));
-                scope.$watch("vm.SelectedIndex", this.SelectedIndexChanged.bind(this));
-                this.Init(entityTypeName);
+                _this = _super.call(this) || this;
+                _this._scope = scope;
+                _this._location = location;
+                _this._repository = repository;
+                _this._sampleData = sampleData;
+                scope.$on("AppBarScope::add", _this.Add.bind(_this));
+                scope.$watch("vm.SelectedIndex", _this.SelectedIndexChanged.bind(_this));
+                _this.Init(entityTypeName);
+                return _this;
             }
             DashboardViewModel.prototype.Init = function (entityTypeName) {
                 this.Types = this._repository.GetAll();

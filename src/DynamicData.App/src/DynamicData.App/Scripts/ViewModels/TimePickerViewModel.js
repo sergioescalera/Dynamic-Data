@@ -3,7 +3,7 @@ var DynamicData;
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var TimePickerViewModel = (function () {
+        var TimePickerViewModel = /** @class */ (function () {
             function TimePickerViewModel(scope) {
                 this.Options = [];
                 var multiplier = 4;

@@ -3,7 +3,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var Validation = (function () {
+        var Validation = /** @class */ (function () {
             function Validation() {
             }
             Validation.EnsureRequired = function (value, label, validateEmptyString) {

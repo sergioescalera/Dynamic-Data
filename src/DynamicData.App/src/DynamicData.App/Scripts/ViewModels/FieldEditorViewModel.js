@@ -1,33 +1,40 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var FieldEditorViewModel = (function (_super) {
+        var FieldEditorViewModel = /** @class */ (function (_super) {
             __extends(FieldEditorViewModel, _super);
             function FieldEditorViewModel(scope, enumRepository) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
                 if (!enumRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("enumRepository"));
                 }
-                _super.call(this);
-                this._scope = scope;
-                if (this.RenderAsOptionSet) {
-                    var enumeration = enumRepository.GetByName(this._scope.attribute.EnumName);
-                    this.Values = enumeration ? enumeration.Values : [];
+                _this = _super.call(this) || this;
+                _this._scope = scope;
+                if (_this.RenderAsOptionSet) {
+                    var enumeration = enumRepository.GetByName(_this._scope.attribute.EnumName);
+                    _this.Values = enumeration ? enumeration.Values : [];
                 }
-                scope.$watch("value", this.UpdateUI.bind(this));
-                scope.$watch("vm.Checked", this.UpdateValue.bind(this));
-                scope.$watch("vm.Text", this.UpdateValue.bind(this));
-                scope.$watch("vm.Date", this.UpdateDateValue.bind(this));
-                scope.$watch("vm.Time", this.UpdateTimeValue.bind(this));
+                scope.$watch("value", _this.UpdateUI.bind(_this));
+                scope.$watch("vm.Checked", _this.UpdateValue.bind(_this));
+                scope.$watch("vm.Text", _this.UpdateValue.bind(_this));
+                scope.$watch("vm.Date", _this.UpdateDateValue.bind(_this));
+                scope.$watch("vm.Time", _this.UpdateTimeValue.bind(_this));
+                return _this;
             }
             Object.defineProperty(FieldEditorViewModel.prototype, "RenderAsInputText", {
                 get: function () {

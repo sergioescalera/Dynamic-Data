@@ -3,7 +3,7 @@ var DynamicData;
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var EditEnumViewModel = (function () {
+        var EditEnumViewModel = /** @class */ (function () {
             function EditEnumViewModel(scope, mdDialog, enumRepository, name) {
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));

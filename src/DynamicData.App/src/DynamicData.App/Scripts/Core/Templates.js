@@ -3,7 +3,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var TemplateWrapper = (function () {
+        var TemplateWrapper = /** @class */ (function () {
             function TemplateWrapper(template, defaultEdit, defaultQuickView) {
                 if (template) {
                     this._edit = template.edit;

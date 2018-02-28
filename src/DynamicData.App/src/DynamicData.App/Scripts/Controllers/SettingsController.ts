@@ -28,6 +28,10 @@
             this.AppBar(appBarStatus);
         }
 
+        $onInit?(): void {
+
+        }
+
         AppBar(appBar: Core.IAppBarStatus): void {
 
             appBar.IsNewDisabled = true;

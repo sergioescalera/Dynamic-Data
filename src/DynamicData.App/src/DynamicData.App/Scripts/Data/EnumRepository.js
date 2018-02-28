@@ -3,7 +3,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var EnumRepository = (function () {
+        var EnumRepository = /** @class */ (function () {
             function EnumRepository() {
             }
             EnumRepository.prototype.GetAll = function () {

@@ -1,16 +1,22 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var EditTypeViewModel = (function (_super) {
+        var EditTypeViewModel = /** @class */ (function (_super) {
             __extends(EditTypeViewModel, _super);
             function EditTypeViewModel(scope, location, mdToast, mdDialog, appBarStatus, entityTypeRepository, entityTypeName) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -29,20 +35,21 @@ var DynamicData;
                 if (!entityTypeRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("entityTypeRepository"));
                 }
-                _super.call(this);
-                this._scope = scope;
-                this._location = location;
-                this._mdToast = mdToast;
-                this._mdDialog = mdDialog;
-                this._appBarStatus = appBarStatus;
-                this._entityTypeRepository = entityTypeRepository;
-                this._entityTypeName = entityTypeName;
-                this.Init();
-                scope.$on("AppBarScope::add", this.Add.bind(this));
-                scope.$on("AppBarScope::delete", this.Delete.bind(this));
-                scope.$on("AppBarScope::save", this.Save.bind(this));
-                scope.$on("AppBarScope::cancel", this.Cancel.bind(this));
-                scope.$on("AppBarScope::refresh", this.Refresh.bind(this));
+                _this = _super.call(this) || this;
+                _this._scope = scope;
+                _this._location = location;
+                _this._mdToast = mdToast;
+                _this._mdDialog = mdDialog;
+                _this._appBarStatus = appBarStatus;
+                _this._entityTypeRepository = entityTypeRepository;
+                _this._entityTypeName = entityTypeName;
+                _this.Init();
+                scope.$on("AppBarScope::add", _this.Add.bind(_this));
+                scope.$on("AppBarScope::delete", _this.Delete.bind(_this));
+                scope.$on("AppBarScope::save", _this.Save.bind(_this));
+                scope.$on("AppBarScope::cancel", _this.Cancel.bind(_this));
+                scope.$on("AppBarScope::refresh", _this.Refresh.bind(_this));
+                return _this;
             }
             Object.defineProperty(EditTypeViewModel.prototype, "Model", {
                 get: function () {

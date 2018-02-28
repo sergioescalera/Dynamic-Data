@@ -3,13 +3,13 @@ var DynamicData;
     var Resources;
     (function (Resources) {
         "use strict";
-        var Strings = (function () {
+        var Strings = /** @class */ (function () {
             function Strings() {
             }
-            Strings.RequiredFieldMessageFormat = function (paramName) { return ("'" + paramName + "' cannot be null or empty."); };
-            Strings.RequiredArgumentMessageFormat = function (paramName) { return ("Argument cannot be null or empty '" + paramName + "'."); };
-            Strings.DuplicatedEntityTypeMessageFormat = function (type) { return ("Duplicated entity type '" + type + "'."); };
-            Strings.MissingEntityTypeMessageFormat = function (type) { return ("Entity type '" + type + "' is missing."); };
+            Strings.RequiredFieldMessageFormat = function (paramName) { return "'" + paramName + "' cannot be null or empty."; };
+            Strings.RequiredArgumentMessageFormat = function (paramName) { return "Argument cannot be null or empty '" + paramName + "'."; };
+            Strings.DuplicatedEntityTypeMessageFormat = function (type) { return "Duplicated entity type '" + type + "'."; };
+            Strings.MissingEntityTypeMessageFormat = function (type) { return "Entity type '" + type + "' is missing."; };
             Strings.NotSupportedMessage = "Not supported.";
             Strings.No = "No";
             Strings.Yes = "Yes";

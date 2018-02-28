@@ -5,7 +5,7 @@ var DynamicData;
         var Directives;
         (function (Directives) {
             "use strict";
-            var EntityQuickViewForm = (function () {
+            var EntityQuickViewForm = /** @class */ (function () {
                 function EntityQuickViewForm(scope) {
                     DynamicData.Core.Trace.Message(Directives.entityQuickViewFormName + ".constructor");
                     scope.format = this.Format.bind(this);
@@ -61,7 +61,8 @@ var DynamicData;
                             open: "&"
                         }
                     };
-                }]);
+                }
+            ]);
         })(Directives = UI.Directives || (UI.Directives = {}));
     })(UI = DynamicData.UI || (DynamicData.UI = {}));
 })(DynamicData || (DynamicData = {}));

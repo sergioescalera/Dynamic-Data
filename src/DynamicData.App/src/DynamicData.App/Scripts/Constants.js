@@ -4,7 +4,6 @@ var DynamicData;
     "use strict";
     DynamicData.namespace = "DynamicData";
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var Config;
     (function (Config) {
@@ -12,7 +11,6 @@ var DynamicData;
         Config.namespace = DynamicData.namespace + ".Config";
     })(Config = DynamicData.Config || (DynamicData.Config = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var Core;
     (function (Core) {
@@ -21,7 +19,6 @@ var DynamicData;
         Core.appBarStatusName = Core.namespace + ".AppBarStatus";
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var Data;
     (function (Data) {
@@ -35,7 +32,6 @@ var DynamicData;
         Data.sampleDataName = Data.namespace + ".SampleData";
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
@@ -51,7 +47,6 @@ var DynamicData;
         ViewModels.templatesViewModelName = ViewModels.namespace + ".TemplatesViewModel";
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var UI;
     (function (UI) {
@@ -59,7 +54,6 @@ var DynamicData;
         UI.namespace = DynamicData.namespace + ".UI";
     })(UI = DynamicData.UI || (DynamicData.UI = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var Resources;
     (function (Resources) {
@@ -67,7 +61,6 @@ var DynamicData;
         Resources.namespace = DynamicData.namespace + ".Resources";
     })(Resources = DynamicData.Resources || (DynamicData.Resources = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var UI;
     (function (UI) {
@@ -87,7 +80,6 @@ var DynamicData;
         })(Controllers = UI.Controllers || (UI.Controllers = {}));
     })(UI = DynamicData.UI || (DynamicData.UI = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var UI;
     (function (UI) {

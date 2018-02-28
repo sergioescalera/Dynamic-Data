@@ -3,7 +3,7 @@ var DynamicData;
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var BaseViewModel = (function () {
+        var BaseViewModel = /** @class */ (function () {
             function BaseViewModel(settings) {
                 this.Settings = settings || DynamicData.Data.storage.Settings;
             }

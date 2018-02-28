@@ -34,12 +34,17 @@
             this._location = location;
         }
 
+        $onInit?(): void {
+
+        }
+
         Fire(cmdName: string): void {
 
             Core.Trace.Message(`${appBarControllerName}.Fire(${cmdName})`);
 
             this._rootScope.$broadcast(`AppBarScope::${cmdName}`);
         }
+
         GoTo(url: string): void {
 
             Core.Trace.Message(`${appBarControllerName}.GoTo(${url})`);

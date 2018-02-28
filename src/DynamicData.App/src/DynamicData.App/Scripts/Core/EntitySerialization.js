@@ -3,7 +3,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var EntitySerialization = (function () {
+        var EntitySerialization = /** @class */ (function () {
             function EntitySerialization() {
             }
             EntitySerialization.FromPOCO = function (type, id, poco) {

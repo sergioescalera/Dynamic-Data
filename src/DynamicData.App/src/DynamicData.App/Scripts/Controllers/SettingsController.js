@@ -5,12 +5,14 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var SettingsController = (function () {
+            var SettingsController = /** @class */ (function () {
                 function SettingsController(scope, appBarStatus, repository, sampleData) {
                     DynamicData.Core.Trace.Message(Controllers.settingsControllerName + ".constructor");
                     scope.vm = new DynamicData.ViewModels.SettingsViewModel(scope, repository, sampleData);
                     this.AppBar(appBarStatus);
                 }
+                SettingsController.prototype.$onInit = function () {
+                };
                 SettingsController.prototype.AppBar = function (appBar) {
                     appBar.IsNewDisabled = true;
                     appBar.IsRefreshDisabled = false;

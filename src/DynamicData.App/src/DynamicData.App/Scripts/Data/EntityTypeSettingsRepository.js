@@ -3,7 +3,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var EntityTypeSettingsRepository = (function () {
+        var EntityTypeSettingsRepository = /** @class */ (function () {
             function EntityTypeSettingsRepository(q) {
                 this._q = q;
             }
@@ -24,6 +24,7 @@ var DynamicData;
         angular.module(DynamicData.Config.appName)
             .factory(Data.entityTypeSettingsRepositoryName, [
             "$q",
-            function ($q) { return new EntityTypeSettingsRepository($q); }]);
+            function ($q) { return new EntityTypeSettingsRepository($q); }
+        ]);
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));

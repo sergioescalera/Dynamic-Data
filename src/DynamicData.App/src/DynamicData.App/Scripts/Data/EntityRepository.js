@@ -3,7 +3,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var EntityRepository = (function () {
+        var EntityRepository = /** @class */ (function () {
             function EntityRepository(entityTypeRepository) {
                 if (!entityTypeRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("entityTypeRepository"));
@@ -102,6 +102,7 @@ var DynamicData;
         angular.module(DynamicData.Config.appName)
             .factory(Data.entityRepositoryName, [
             Data.entityTypeRepositoryName,
-            function (entityTypeRepository) { return new EntityRepository(entityTypeRepository); }]);
+            function (entityTypeRepository) { return new EntityRepository(entityTypeRepository); }
+        ]);
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));

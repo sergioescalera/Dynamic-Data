@@ -123,18 +123,18 @@
 
         // templates
 
-        GetTemplate(typeName: string): string {
+        GetTemplate(typeName: string): Core.IEntityTemplate {
 
             if (!typeName) {
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("typeName"));
             }
 
-            var template: string = this.getObject(this._templateKey + typeName);
+            var template: Core.IEntityTemplate = this.getObject(this._templateKey + typeName);
 
             return template;
         }
 
-        SetTemplate(typeName: string, template: string): void {
+        SetTemplate(typeName: string, template: Core.IEntityTemplate): void {
 
             if (!typeName) {
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("typeName"));

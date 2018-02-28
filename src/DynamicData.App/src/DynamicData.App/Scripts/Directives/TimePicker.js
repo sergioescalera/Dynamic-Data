@@ -5,7 +5,7 @@ var DynamicData;
         var Directives;
         (function (Directives) {
             "use strict";
-            var TimePicker = (function () {
+            var TimePicker = /** @class */ (function () {
                 function TimePicker(scope) {
                     DynamicData.Core.Trace.Message(Directives.timePickerName + ".constructor");
                     scope.vm = new DynamicData.ViewModels.TimePickerViewModel(scope);

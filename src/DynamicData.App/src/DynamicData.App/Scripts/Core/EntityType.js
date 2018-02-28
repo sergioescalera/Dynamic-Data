@@ -3,7 +3,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var EntityType = (function () {
+        var EntityType = /** @class */ (function () {
             function EntityType(name, displayName, displayPluralName) {
                 this.Name = name;
                 this.DisplayName = displayName;

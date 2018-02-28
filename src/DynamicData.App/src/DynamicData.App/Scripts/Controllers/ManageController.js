@@ -5,7 +5,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var ManageController = (function () {
+            var ManageController = /** @class */ (function () {
                 function ManageController(scope, location, mdDialog, appBarStatus, repository) {
                     DynamicData.Core.Trace.Message(Controllers.manageControllerName + ".constructor");
                     scope.vm = new DynamicData.ViewModels.ManageViewModel(scope, location, mdDialog, appBarStatus, repository);

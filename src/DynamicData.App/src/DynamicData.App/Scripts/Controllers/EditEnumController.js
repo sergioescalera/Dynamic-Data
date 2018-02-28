@@ -5,7 +5,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var EditEnumController = (function () {
+            var EditEnumController = /** @class */ (function () {
                 function EditEnumController(scope, mdDialog, enumRepository, name) {
                     scope.vm = new DynamicData.ViewModels.EditEnumViewModel(scope, mdDialog, enumRepository, name);
                 }

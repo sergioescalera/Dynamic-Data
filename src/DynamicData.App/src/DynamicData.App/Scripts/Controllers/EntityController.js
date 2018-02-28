@@ -5,7 +5,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var EntityController = (function () {
+            var EntityController = /** @class */ (function () {
                 function EntityController(scope, routeParams, location, appBarStatus, entityTypeRepository, entityRepository) {
                     DynamicData.Core.Trace.Message(Controllers.entityControllerName + ".constructor");
                     var type = routeParams.entityType;

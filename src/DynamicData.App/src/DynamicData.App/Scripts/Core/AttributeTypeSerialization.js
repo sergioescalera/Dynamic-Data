@@ -3,7 +3,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var AttributeTypeSerialization = (function () {
+        var AttributeTypeSerialization = /** @class */ (function () {
             function AttributeTypeSerialization() {
             }
             AttributeTypeSerialization.FromPOCO = function (poco) {

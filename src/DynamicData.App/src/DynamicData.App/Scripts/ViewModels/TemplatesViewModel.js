@@ -1,16 +1,22 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var TemplatesViewModel = (function (_super) {
+        var TemplatesViewModel = /** @class */ (function (_super) {
             __extends(TemplatesViewModel, _super);
             function TemplatesViewModel(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -29,17 +35,18 @@ var DynamicData;
                 if (!templateRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("templateRepository"));
                 }
-                _super.call(this);
-                this._location = location;
-                this._mdDialog = mdDialog;
-                this._appBarStatus = appBarStatus;
-                this._entityTypeRepository = entityTypeRepository;
-                this._templateRepository = templateRepository;
-                scope.$on("AppBarScope::cancel", this.Cancel.bind(this));
-                scope.$on("AppBarScope::delete", this.PromptDelete.bind(this));
-                scope.$on("AppBarScope::refresh", this.Refresh.bind(this));
-                scope.$on("AppBarScope::save", this.Save.bind(this));
-                this.Init();
+                _this = _super.call(this) || this;
+                _this._location = location;
+                _this._mdDialog = mdDialog;
+                _this._appBarStatus = appBarStatus;
+                _this._entityTypeRepository = entityTypeRepository;
+                _this._templateRepository = templateRepository;
+                scope.$on("AppBarScope::cancel", _this.Cancel.bind(_this));
+                scope.$on("AppBarScope::delete", _this.PromptDelete.bind(_this));
+                scope.$on("AppBarScope::refresh", _this.Refresh.bind(_this));
+                scope.$on("AppBarScope::save", _this.Save.bind(_this));
+                _this.Init();
+                return _this;
             }
             TemplatesViewModel.prototype.Init = function () {
                 this.Types = this._entityTypeRepository

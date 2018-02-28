@@ -3,7 +3,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var AppBarStatus = (function () {
+        var AppBarStatus = /** @class */ (function () {
             function AppBarStatus() {
             }
             AppBarStatus.prototype.Detail = function () {

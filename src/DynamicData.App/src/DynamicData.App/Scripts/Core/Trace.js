@@ -3,7 +3,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var Trace = (function () {
+        var Trace = /** @class */ (function () {
             function Trace() {
             }
             Trace.ConsoleSupport = function () {

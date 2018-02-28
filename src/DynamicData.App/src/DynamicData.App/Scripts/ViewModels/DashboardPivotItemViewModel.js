@@ -1,16 +1,22 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var DashboardPivotItemViewModel = (function (_super) {
+        var DashboardPivotItemViewModel = /** @class */ (function (_super) {
             __extends(DashboardPivotItemViewModel, _super);
             function DashboardPivotItemViewModel(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository, type) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -29,17 +35,18 @@ var DynamicData;
                 if (!type) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("type"));
                 }
-                _super.call(this);
-                scope.$on("AppBarScope::delete", this.PromptDelete.bind(this));
-                this._scope = scope;
-                this._location = location;
-                this._mdDialog = mdDialog;
-                this._entityRepository = entityRepository;
-                this._entityTypeSettingsRepository = entityTypeSettingsRepository;
-                this.Type = type;
-                this.Init();
-                scope.$watch("vm.TypeSettings.SortBy", this.Sort.bind(this));
-                scope.$watch("vm.TypeSettings.SortByDescending", this.Sort.bind(this));
+                _this = _super.call(this) || this;
+                scope.$on("AppBarScope::delete", _this.PromptDelete.bind(_this));
+                _this._scope = scope;
+                _this._location = location;
+                _this._mdDialog = mdDialog;
+                _this._entityRepository = entityRepository;
+                _this._entityTypeSettingsRepository = entityTypeSettingsRepository;
+                _this.Type = type;
+                _this.Init();
+                scope.$watch("vm.TypeSettings.SortBy", _this.Sort.bind(_this));
+                scope.$watch("vm.TypeSettings.SortByDescending", _this.Sort.bind(_this));
+                return _this;
             }
             DashboardPivotItemViewModel.prototype.Init = function () {
                 this.Selected = {};

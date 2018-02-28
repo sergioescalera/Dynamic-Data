@@ -5,7 +5,7 @@ var DynamicData;
         var Directives;
         (function (Directives) {
             "use strict";
-            var TypeQuickViewForm = (function () {
+            var TypeQuickViewForm = /** @class */ (function () {
                 function TypeQuickViewForm(scope) {
                     DynamicData.Core.Trace.Message(Directives.typeQuickViewFormName + ".constructor");
                 }

@@ -3,7 +3,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var TemplateRepository = (function () {
+        var TemplateRepository = /** @class */ (function () {
             function TemplateRepository(http, q) {
                 var _this = this;
                 this._q = q;

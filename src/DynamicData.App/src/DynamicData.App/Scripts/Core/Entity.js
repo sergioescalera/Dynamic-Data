@@ -3,7 +3,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var Entity = (function () {
+        var Entity = /** @class */ (function () {
             function Entity(type, id) {
                 if (id === void 0) { id = null; }
                 Core.Validation.EnsureRequired(type, "type");

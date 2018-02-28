@@ -5,7 +5,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var TemplatesController = (function () {
+            var TemplatesController = /** @class */ (function () {
                 function TemplatesController(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository) {
                     scope.vm = new DynamicData.ViewModels.TemplatesViewModel(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository);
                     appBarStatus.Detail();

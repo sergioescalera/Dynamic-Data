@@ -5,7 +5,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var ProfileController = (function () {
+            var ProfileController = /** @class */ (function () {
                 function ProfileController(scope, appBarStatus) {
                     DynamicData.Core.Trace.Message(Controllers.profileControllerName + ".constructor");
                 }

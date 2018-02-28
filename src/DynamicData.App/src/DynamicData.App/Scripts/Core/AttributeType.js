@@ -3,7 +3,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var AttributeType = (function () {
+        var AttributeType = /** @class */ (function () {
             function AttributeType(name, displayName, typeCode, enumName) {
                 this.Name = name;
                 this.DisplayName = displayName;

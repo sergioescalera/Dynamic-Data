@@ -3,7 +3,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var Storage = (function () {
+        var Storage = /** @class */ (function () {
             function Storage() {
                 this._settingsKey = "settings";
                 this._typesKey = "types";

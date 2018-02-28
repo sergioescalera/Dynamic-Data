@@ -5,7 +5,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var DashboardPivotItemController = (function () {
+            var DashboardPivotItemController = /** @class */ (function () {
                 function DashboardPivotItemController(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository) {
                     DynamicData.Core.Trace.Message(Controllers.dashboardPivotItemControllerName + ".constructor");
                     scope.vm = new DynamicData.ViewModels.DashboardPivotItemViewModel(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository, scope.type);

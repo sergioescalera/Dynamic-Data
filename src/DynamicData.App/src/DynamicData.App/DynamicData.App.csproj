@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +17,32 @@
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="_typings\angular\*.d.ts" />
+    <None Remove="_typings\jquery\*.d.ts" />
+    <None Remove="_typings\moment\*.d.ts" />
+    <None Remove="Scripts\*.ts" />
+    <None Remove="Scripts\Controllers\*.ts" />
+    <None Remove="Scripts\Core\*.ts" />
+    <None Remove="Scripts\Data\*.ts" />
+    <None Remove="Scripts\Directives\*.ts" />
+    <None Remove="Scripts\Resources\*.ts" />
+    <None Remove="Scripts\ViewModels\*.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="_typings\angular\*.d.ts" />
+    <TypeScriptCompile Include="_typings\jquery\*.d.ts" />
+    <TypeScriptCompile Include="_typings\moment\*.d.ts" />
+    <TypeScriptCompile Include="Scripts\*.ts" />
+    <TypeScriptCompile Include="Scripts\Controllers\*.ts" />
+    <TypeScriptCompile Include="Scripts\Core\*.ts" />
+    <TypeScriptCompile Include="Scripts\Data\*.ts" />
+    <TypeScriptCompile Include="Scripts\Directives\*.ts" />
+    <TypeScriptCompile Include="Scripts\Resources\*.ts" />
+    <TypeScriptCompile Include="Scripts\ViewModels\*.ts" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

@@ -5,7 +5,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var ConfirmDialogController = (function () {
+            var ConfirmDialogController = /** @class */ (function () {
                 function ConfirmDialogController(scope, mdPanelRef) {
                     scope.title = "Abc";
                     scope.message = "Xyz";

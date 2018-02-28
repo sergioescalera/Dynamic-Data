@@ -3,6 +3,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
+        var AttributeTypeCode;
         (function (AttributeTypeCode) {
             AttributeTypeCode[AttributeTypeCode["Boolean"] = 1] = "Boolean";
             AttributeTypeCode[AttributeTypeCode["Date"] = 2] = "Date";
@@ -17,7 +18,6 @@ var DynamicData;
             AttributeTypeCode[AttributeTypeCode["Currency"] = 11] = "Currency";
             AttributeTypeCode[AttributeTypeCode["Time"] = 12] = "Time";
             AttributeTypeCode[AttributeTypeCode["Enum"] = 13] = "Enum";
-        })(Core.AttributeTypeCode || (Core.AttributeTypeCode = {}));
-        var AttributeTypeCode = Core.AttributeTypeCode;
+        })(AttributeTypeCode = Core.AttributeTypeCode || (Core.AttributeTypeCode = {}));
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));

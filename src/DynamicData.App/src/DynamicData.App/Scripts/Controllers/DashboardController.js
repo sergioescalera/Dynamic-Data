@@ -5,7 +5,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var DashboardController = (function () {
+            var DashboardController = /** @class */ (function () {
                 function DashboardController(scope, routeParams, location, appBarStatus, repository, sampleData) {
                     var entityType = routeParams.entityType;
                     DynamicData.Core.Trace.Message(Controllers.dashboardControllerName + ".constructor " + entityType);

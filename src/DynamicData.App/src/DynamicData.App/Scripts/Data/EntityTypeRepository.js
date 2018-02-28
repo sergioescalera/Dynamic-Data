@@ -3,7 +3,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var EntityTypeRepository = (function () {
+        var EntityTypeRepository = /** @class */ (function () {
             function EntityTypeRepository() {
             }
             EntityTypeRepository.prototype.GetAll = function () {

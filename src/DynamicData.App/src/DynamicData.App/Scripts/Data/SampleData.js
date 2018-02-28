@@ -3,7 +3,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var SampleData = (function () {
+        var SampleData = /** @class */ (function () {
             function SampleData(entityTypeRepository, templateRepository) {
                 if (!entityTypeRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("entityTypeRepository"));
@@ -19,7 +19,8 @@ var DynamicData;
                     this.CreateContacts(),
                     this.CreateExpenses(),
                     this.CreateNotes(),
-                    this.CreateTasks()];
+                    this.CreateTasks()
+                ];
                 this._entityTypeRepository.BulkCreate(types);
                 this.CreateTemplates();
             };
@@ -77,9 +78,7 @@ var DynamicData;
             .factory(Data.sampleDataName, [
             Data.entityTypeRepositoryName,
             Data.templateRepositoryName,
-            function (entityTypeRepository, templateRepository) {
-                return new SampleData(entityTypeRepository, templateRepository);
-            }
+            function (entityTypeRepository, templateRepository) { return new SampleData(entityTypeRepository, templateRepository); }
         ]);
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));

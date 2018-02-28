@@ -4,7 +4,6 @@ var DynamicData;
     "use strict";
     DynamicData.namespace = "DynamicData";
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var Config;
     (function (Config) {
@@ -12,7 +11,6 @@ var DynamicData;
         Config.namespace = DynamicData.namespace + ".Config";
     })(Config = DynamicData.Config || (DynamicData.Config = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var Core;
     (function (Core) {
@@ -21,7 +19,6 @@ var DynamicData;
         Core.appBarStatusName = Core.namespace + ".AppBarStatus";
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var Data;
     (function (Data) {
@@ -35,7 +32,6 @@ var DynamicData;
         Data.sampleDataName = Data.namespace + ".SampleData";
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
@@ -51,7 +47,6 @@ var DynamicData;
         ViewModels.templatesViewModelName = ViewModels.namespace + ".TemplatesViewModel";
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var UI;
     (function (UI) {
@@ -59,7 +54,6 @@ var DynamicData;
         UI.namespace = DynamicData.namespace + ".UI";
     })(UI = DynamicData.UI || (DynamicData.UI = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var Resources;
     (function (Resources) {
@@ -67,7 +61,6 @@ var DynamicData;
         Resources.namespace = DynamicData.namespace + ".Resources";
     })(Resources = DynamicData.Resources || (DynamicData.Resources = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var UI;
     (function (UI) {
@@ -87,7 +80,6 @@ var DynamicData;
         })(Controllers = UI.Controllers || (UI.Controllers = {}));
     })(UI = DynamicData.UI || (DynamicData.UI = {}));
 })(DynamicData || (DynamicData = {}));
-var DynamicData;
 (function (DynamicData) {
     var UI;
     (function (UI) {
@@ -108,13 +100,13 @@ var DynamicData;
     var Resources;
     (function (Resources) {
         "use strict";
-        var Strings = (function () {
+        var Strings = /** @class */ (function () {
             function Strings() {
             }
-            Strings.RequiredFieldMessageFormat = function (paramName) { return ("'" + paramName + "' cannot be null or empty."); };
-            Strings.RequiredArgumentMessageFormat = function (paramName) { return ("Argument cannot be null or empty '" + paramName + "'."); };
-            Strings.DuplicatedEntityTypeMessageFormat = function (type) { return ("Duplicated entity type '" + type + "'."); };
-            Strings.MissingEntityTypeMessageFormat = function (type) { return ("Entity type '" + type + "' is missing."); };
+            Strings.RequiredFieldMessageFormat = function (paramName) { return "'" + paramName + "' cannot be null or empty."; };
+            Strings.RequiredArgumentMessageFormat = function (paramName) { return "Argument cannot be null or empty '" + paramName + "'."; };
+            Strings.DuplicatedEntityTypeMessageFormat = function (type) { return "Duplicated entity type '" + type + "'."; };
+            Strings.MissingEntityTypeMessageFormat = function (type) { return "Entity type '" + type + "' is missing."; };
             Strings.NotSupportedMessage = "Not supported.";
             Strings.No = "No";
             Strings.Yes = "Yes";
@@ -129,7 +121,7 @@ var DynamicData;
     var Config;
     (function (Config) {
         "use strict";
-        var RouteParameters = (function () {
+        var RouteParameters = /** @class */ (function () {
             function RouteParameters() {
             }
             RouteParameters.entityType = ":entityType";
@@ -137,7 +129,7 @@ var DynamicData;
             return RouteParameters;
         }());
         Config.RouteParameters = RouteParameters;
-        var Routes = (function () {
+        var Routes = /** @class */ (function () {
             function Routes() {
             }
             Routes.home = function () { return "/home"; };
@@ -245,7 +237,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var AppBarStatus = (function () {
+        var AppBarStatus = /** @class */ (function () {
             function AppBarStatus() {
             }
             AppBarStatus.prototype.Detail = function () {
@@ -274,7 +266,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var AttributeType = (function () {
+        var AttributeType = /** @class */ (function () {
             function AttributeType(name, displayName, typeCode, enumName) {
                 this.Name = name;
                 this.DisplayName = displayName;
@@ -342,6 +334,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
+        var AttributeTypeCode;
         (function (AttributeTypeCode) {
             AttributeTypeCode[AttributeTypeCode["Boolean"] = 1] = "Boolean";
             AttributeTypeCode[AttributeTypeCode["Date"] = 2] = "Date";
@@ -356,8 +349,7 @@ var DynamicData;
             AttributeTypeCode[AttributeTypeCode["Currency"] = 11] = "Currency";
             AttributeTypeCode[AttributeTypeCode["Time"] = 12] = "Time";
             AttributeTypeCode[AttributeTypeCode["Enum"] = 13] = "Enum";
-        })(Core.AttributeTypeCode || (Core.AttributeTypeCode = {}));
-        var AttributeTypeCode = Core.AttributeTypeCode;
+        })(AttributeTypeCode = Core.AttributeTypeCode || (Core.AttributeTypeCode = {}));
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
 
@@ -366,7 +358,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var AttributeTypeSerialization = (function () {
+        var AttributeTypeSerialization = /** @class */ (function () {
             function AttributeTypeSerialization() {
             }
             AttributeTypeSerialization.FromPOCO = function (poco) {
@@ -391,7 +383,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var Entity = (function () {
+        var Entity = /** @class */ (function () {
             function Entity(type, id) {
                 if (id === void 0) { id = null; }
                 Core.Validation.EnsureRequired(type, "type");
@@ -440,7 +432,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var EntitySerialization = (function () {
+        var EntitySerialization = /** @class */ (function () {
             function EntitySerialization() {
             }
             EntitySerialization.FromPOCO = function (type, id, poco) {
@@ -499,7 +491,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var EntityType = (function () {
+        var EntityType = /** @class */ (function () {
             function EntityType(name, displayName, displayPluralName) {
                 this.Name = name;
                 this.DisplayName = displayName;
@@ -610,7 +602,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var EntityTypeSerialization = (function () {
+        var EntityTypeSerialization = /** @class */ (function () {
             function EntityTypeSerialization() {
             }
             EntityTypeSerialization.ToPOCO = function (type) {
@@ -703,7 +695,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var TemplateWrapper = (function () {
+        var TemplateWrapper = /** @class */ (function () {
             function TemplateWrapper(template, defaultEdit, defaultQuickView) {
                 if (template) {
                     this._edit = template.edit;
@@ -743,7 +735,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var Trace = (function () {
+        var Trace = /** @class */ (function () {
             function Trace() {
             }
             Trace.ConsoleSupport = function () {
@@ -775,7 +767,7 @@ var DynamicData;
     var Core;
     (function (Core) {
         "use strict";
-        var Validation = (function () {
+        var Validation = /** @class */ (function () {
             function Validation() {
             }
             Validation.EnsureRequired = function (value, label, validateEmptyString) {
@@ -798,21 +790,21 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
+        var DataActionError;
         (function (DataActionError) {
             DataActionError[DataActionError["Unknown"] = -1] = "Unknown";
             DataActionError[DataActionError["None"] = 0] = "None";
             DataActionError[DataActionError["NotFound"] = 1] = "NotFound";
             DataActionError[DataActionError["Duplicate"] = 2] = "Duplicate";
-        })(Data.DataActionError || (Data.DataActionError = {}));
-        var DataActionError = Data.DataActionError;
-        var DataActionResult = (function () {
+        })(DataActionError = Data.DataActionError || (Data.DataActionError = {}));
+        var DataActionResult = /** @class */ (function () {
             function DataActionResult(error) {
                 this.Success = !error;
                 this.Error = error || DataActionError.None;
             }
             return DataActionResult;
         }());
-        var DataActionResults = (function () {
+        var DataActionResults = /** @class */ (function () {
             function DataActionResults() {
             }
             DataActionResults.success = new DataActionResult();
@@ -829,7 +821,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var EntityRepository = (function () {
+        var EntityRepository = /** @class */ (function () {
             function EntityRepository(entityTypeRepository) {
                 if (!entityTypeRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("entityTypeRepository"));
@@ -928,7 +920,8 @@ var DynamicData;
         angular.module(DynamicData.Config.appName)
             .factory(Data.entityRepositoryName, [
             Data.entityTypeRepositoryName,
-            function (entityTypeRepository) { return new EntityRepository(entityTypeRepository); }]);
+            function (entityTypeRepository) { return new EntityRepository(entityTypeRepository); }
+        ]);
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
 
@@ -937,7 +930,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var EntityTypeRepository = (function () {
+        var EntityTypeRepository = /** @class */ (function () {
             function EntityTypeRepository() {
             }
             EntityTypeRepository.prototype.GetAll = function () {
@@ -1035,7 +1028,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var EntityTypeSettingsRepository = (function () {
+        var EntityTypeSettingsRepository = /** @class */ (function () {
             function EntityTypeSettingsRepository(q) {
                 this._q = q;
             }
@@ -1056,7 +1049,8 @@ var DynamicData;
         angular.module(DynamicData.Config.appName)
             .factory(Data.entityTypeSettingsRepositoryName, [
             "$q",
-            function ($q) { return new EntityTypeSettingsRepository($q); }]);
+            function ($q) { return new EntityTypeSettingsRepository($q); }
+        ]);
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
 
@@ -1065,7 +1059,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var EnumRepository = (function () {
+        var EnumRepository = /** @class */ (function () {
             function EnumRepository() {
             }
             EnumRepository.prototype.GetAll = function () {
@@ -1105,7 +1099,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var SampleData = (function () {
+        var SampleData = /** @class */ (function () {
             function SampleData(entityTypeRepository, templateRepository) {
                 if (!entityTypeRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("entityTypeRepository"));
@@ -1121,7 +1115,8 @@ var DynamicData;
                     this.CreateContacts(),
                     this.CreateExpenses(),
                     this.CreateNotes(),
-                    this.CreateTasks()];
+                    this.CreateTasks()
+                ];
                 this._entityTypeRepository.BulkCreate(types);
                 this.CreateTemplates();
             };
@@ -1179,9 +1174,7 @@ var DynamicData;
             .factory(Data.sampleDataName, [
             Data.entityTypeRepositoryName,
             Data.templateRepositoryName,
-            function (entityTypeRepository, templateRepository) {
-                return new SampleData(entityTypeRepository, templateRepository);
-            }
+            function (entityTypeRepository, templateRepository) { return new SampleData(entityTypeRepository, templateRepository); }
         ]);
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
@@ -1191,7 +1184,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var Storage = (function () {
+        var Storage = /** @class */ (function () {
             function Storage() {
                 this._settingsKey = "settings";
                 this._typesKey = "types";
@@ -1345,7 +1338,7 @@ var DynamicData;
     var Data;
     (function (Data) {
         "use strict";
-        var TemplateRepository = (function () {
+        var TemplateRepository = /** @class */ (function () {
             function TemplateRepository(http, q) {
                 var _this = this;
                 this._q = q;
@@ -1394,7 +1387,7 @@ var DynamicData;
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var BaseViewModel = (function () {
+        var BaseViewModel = /** @class */ (function () {
             function BaseViewModel(settings) {
                 this.Settings = settings || DynamicData.Data.storage.Settings;
             }
@@ -1404,19 +1397,25 @@ var DynamicData;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
 
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var DashboardPivotItemViewModel = (function (_super) {
+        var DashboardPivotItemViewModel = /** @class */ (function (_super) {
             __extends(DashboardPivotItemViewModel, _super);
             function DashboardPivotItemViewModel(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository, type) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -1435,17 +1434,18 @@ var DynamicData;
                 if (!type) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("type"));
                 }
-                _super.call(this);
-                scope.$on("AppBarScope::delete", this.PromptDelete.bind(this));
-                this._scope = scope;
-                this._location = location;
-                this._mdDialog = mdDialog;
-                this._entityRepository = entityRepository;
-                this._entityTypeSettingsRepository = entityTypeSettingsRepository;
-                this.Type = type;
-                this.Init();
-                scope.$watch("vm.TypeSettings.SortBy", this.Sort.bind(this));
-                scope.$watch("vm.TypeSettings.SortByDescending", this.Sort.bind(this));
+                _this = _super.call(this) || this;
+                scope.$on("AppBarScope::delete", _this.PromptDelete.bind(_this));
+                _this._scope = scope;
+                _this._location = location;
+                _this._mdDialog = mdDialog;
+                _this._entityRepository = entityRepository;
+                _this._entityTypeSettingsRepository = entityTypeSettingsRepository;
+                _this.Type = type;
+                _this.Init();
+                scope.$watch("vm.TypeSettings.SortBy", _this.Sort.bind(_this));
+                scope.$watch("vm.TypeSettings.SortByDescending", _this.Sort.bind(_this));
+                return _this;
             }
             DashboardPivotItemViewModel.prototype.Init = function () {
                 this.Selected = {};
@@ -1544,19 +1544,25 @@ var DynamicData;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
 
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var DashboardViewModel = (function (_super) {
+        var DashboardViewModel = /** @class */ (function (_super) {
             __extends(DashboardViewModel, _super);
             function DashboardViewModel(scope, location, repository, sampleData, entityTypeName) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -1569,14 +1575,15 @@ var DynamicData;
                 if (!sampleData) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("sampleData"));
                 }
-                _super.call(this);
-                this._scope = scope;
-                this._location = location;
-                this._repository = repository;
-                this._sampleData = sampleData;
-                scope.$on("AppBarScope::add", this.Add.bind(this));
-                scope.$watch("vm.SelectedIndex", this.SelectedIndexChanged.bind(this));
-                this.Init(entityTypeName);
+                _this = _super.call(this) || this;
+                _this._scope = scope;
+                _this._location = location;
+                _this._repository = repository;
+                _this._sampleData = sampleData;
+                scope.$on("AppBarScope::add", _this.Add.bind(_this));
+                scope.$watch("vm.SelectedIndex", _this.SelectedIndexChanged.bind(_this));
+                _this.Init(entityTypeName);
+                return _this;
             }
             DashboardViewModel.prototype.Init = function (entityTypeName) {
                 this.Types = this._repository.GetAll();
@@ -1633,7 +1640,7 @@ var DynamicData;
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var EditEnumViewModel = (function () {
+        var EditEnumViewModel = /** @class */ (function () {
             function EditEnumViewModel(scope, mdDialog, enumRepository, name) {
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
@@ -1677,19 +1684,25 @@ var DynamicData;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
 
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var EditTypeViewModel = (function (_super) {
+        var EditTypeViewModel = /** @class */ (function (_super) {
             __extends(EditTypeViewModel, _super);
             function EditTypeViewModel(scope, location, mdToast, mdDialog, appBarStatus, entityTypeRepository, entityTypeName) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -1708,20 +1721,21 @@ var DynamicData;
                 if (!entityTypeRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("entityTypeRepository"));
                 }
-                _super.call(this);
-                this._scope = scope;
-                this._location = location;
-                this._mdToast = mdToast;
-                this._mdDialog = mdDialog;
-                this._appBarStatus = appBarStatus;
-                this._entityTypeRepository = entityTypeRepository;
-                this._entityTypeName = entityTypeName;
-                this.Init();
-                scope.$on("AppBarScope::add", this.Add.bind(this));
-                scope.$on("AppBarScope::delete", this.Delete.bind(this));
-                scope.$on("AppBarScope::save", this.Save.bind(this));
-                scope.$on("AppBarScope::cancel", this.Cancel.bind(this));
-                scope.$on("AppBarScope::refresh", this.Refresh.bind(this));
+                _this = _super.call(this) || this;
+                _this._scope = scope;
+                _this._location = location;
+                _this._mdToast = mdToast;
+                _this._mdDialog = mdDialog;
+                _this._appBarStatus = appBarStatus;
+                _this._entityTypeRepository = entityTypeRepository;
+                _this._entityTypeName = entityTypeName;
+                _this.Init();
+                scope.$on("AppBarScope::add", _this.Add.bind(_this));
+                scope.$on("AppBarScope::delete", _this.Delete.bind(_this));
+                scope.$on("AppBarScope::save", _this.Save.bind(_this));
+                scope.$on("AppBarScope::cancel", _this.Cancel.bind(_this));
+                scope.$on("AppBarScope::refresh", _this.Refresh.bind(_this));
+                return _this;
             }
             Object.defineProperty(EditTypeViewModel.prototype, "Model", {
                 get: function () {
@@ -1860,19 +1874,25 @@ var DynamicData;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
 
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var EntityViewModel = (function (_super) {
+        var EntityViewModel = /** @class */ (function (_super) {
             __extends(EntityViewModel, _super);
             function EntityViewModel(scope, location, appBarStatus, entityTypeRepository, entityRepository, entityTypeName, entityId) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -1891,19 +1911,20 @@ var DynamicData;
                 if (!entityTypeName) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("entityTypeName"));
                 }
-                _super.call(this);
-                this._location = location;
-                this._appBarStatus = appBarStatus;
-                this._entityTypeRepository = entityTypeRepository;
-                this._entityRepository = entityRepository;
-                this._entityTypeName = entityTypeName;
-                this._entityId = entityId;
-                this.Init();
-                scope.$on("AppBarScope::add", this.Add.bind(this));
-                scope.$on("AppBarScope::delete", this.Delete.bind(this));
-                scope.$on("AppBarScope::save", this.Save.bind(this));
-                scope.$on("AppBarScope::cancel", this.Cancel.bind(this));
-                scope.$on("AppBarScope::refresh", this.Refresh.bind(this));
+                _this = _super.call(this) || this;
+                _this._location = location;
+                _this._appBarStatus = appBarStatus;
+                _this._entityTypeRepository = entityTypeRepository;
+                _this._entityRepository = entityRepository;
+                _this._entityTypeName = entityTypeName;
+                _this._entityId = entityId;
+                _this.Init();
+                scope.$on("AppBarScope::add", _this.Add.bind(_this));
+                scope.$on("AppBarScope::delete", _this.Delete.bind(_this));
+                scope.$on("AppBarScope::save", _this.Save.bind(_this));
+                scope.$on("AppBarScope::cancel", _this.Cancel.bind(_this));
+                scope.$on("AppBarScope::refresh", _this.Refresh.bind(_this));
+                return _this;
             }
             EntityViewModel.prototype.Init = function () {
                 this.EntityType = this._entityTypeRepository.GetByName(this._entityTypeName);
@@ -1955,36 +1976,43 @@ var DynamicData;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
 
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var FieldEditorViewModel = (function (_super) {
+        var FieldEditorViewModel = /** @class */ (function (_super) {
             __extends(FieldEditorViewModel, _super);
             function FieldEditorViewModel(scope, enumRepository) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
                 if (!enumRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("enumRepository"));
                 }
-                _super.call(this);
-                this._scope = scope;
-                if (this.RenderAsOptionSet) {
-                    var enumeration = enumRepository.GetByName(this._scope.attribute.EnumName);
-                    this.Values = enumeration ? enumeration.Values : [];
+                _this = _super.call(this) || this;
+                _this._scope = scope;
+                if (_this.RenderAsOptionSet) {
+                    var enumeration = enumRepository.GetByName(_this._scope.attribute.EnumName);
+                    _this.Values = enumeration ? enumeration.Values : [];
                 }
-                scope.$watch("value", this.UpdateUI.bind(this));
-                scope.$watch("vm.Checked", this.UpdateValue.bind(this));
-                scope.$watch("vm.Text", this.UpdateValue.bind(this));
-                scope.$watch("vm.Date", this.UpdateDateValue.bind(this));
-                scope.$watch("vm.Time", this.UpdateTimeValue.bind(this));
+                scope.$watch("value", _this.UpdateUI.bind(_this));
+                scope.$watch("vm.Checked", _this.UpdateValue.bind(_this));
+                scope.$watch("vm.Text", _this.UpdateValue.bind(_this));
+                scope.$watch("vm.Date", _this.UpdateDateValue.bind(_this));
+                scope.$watch("vm.Time", _this.UpdateTimeValue.bind(_this));
+                return _this;
             }
             Object.defineProperty(FieldEditorViewModel.prototype, "RenderAsInputText", {
                 get: function () {
@@ -2142,19 +2170,25 @@ var DynamicData;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
 
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var ManageViewModel = (function (_super) {
+        var ManageViewModel = /** @class */ (function (_super) {
             __extends(ManageViewModel, _super);
             function ManageViewModel(scope, location, mdDialog, appBarStatus, repository) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -2170,16 +2204,17 @@ var DynamicData;
                 if (!repository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("repository"));
                 }
-                _super.call(this);
-                this._scope = scope;
-                this._location = location;
-                this._mdDialog = mdDialog;
-                this._appBarStatus = appBarStatus;
-                this._repository = repository;
-                this.LoadTypes();
-                scope.$on("AppBarScope::add", this.Add.bind(this));
-                scope.$on("AppBarScope::delete", this.PromptDelete.bind(this));
-                scope.$on("AppBarScope::refresh", this.Refresh.bind(this));
+                _this = _super.call(this) || this;
+                _this._scope = scope;
+                _this._location = location;
+                _this._mdDialog = mdDialog;
+                _this._appBarStatus = appBarStatus;
+                _this._repository = repository;
+                _this.LoadTypes();
+                scope.$on("AppBarScope::add", _this.Add.bind(_this));
+                scope.$on("AppBarScope::delete", _this.PromptDelete.bind(_this));
+                scope.$on("AppBarScope::refresh", _this.Refresh.bind(_this));
+                return _this;
             }
             ManageViewModel.prototype.Add = function () {
                 DynamicData.Core.Trace.Message(ViewModels.manageViewModelName + ".Add");
@@ -2233,19 +2268,25 @@ var DynamicData;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
 
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var SettingsViewModel = (function (_super) {
+        var SettingsViewModel = /** @class */ (function (_super) {
             __extends(SettingsViewModel, _super);
             function SettingsViewModel(scope, repository, sampleData) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -2255,15 +2296,16 @@ var DynamicData;
                 if (!sampleData) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("sampleData"));
                 }
-                _super.call(this);
-                if (!repository.GetAll().length && this.Settings.IsSampleDataInstalled) {
-                    this.Settings.IsSampleDataInstalled = false;
+                _this = _super.call(this) || this;
+                if (!repository.GetAll().length && _this.Settings.IsSampleDataInstalled) {
+                    _this.Settings.IsSampleDataInstalled = false;
                 }
-                this._scope = scope;
-                this._sampleData = sampleData;
-                scope.$on("AppBarScope::cancel", this.Cancel.bind(this));
-                scope.$on("AppBarScope::save", this.Save.bind(this));
-                scope.$watch("vm.Settings.IsSampleDataInstalled", this.IsSampleDataInstalledChanged.bind(this));
+                _this._scope = scope;
+                _this._sampleData = sampleData;
+                scope.$on("AppBarScope::cancel", _this.Cancel.bind(_this));
+                scope.$on("AppBarScope::save", _this.Save.bind(_this));
+                scope.$watch("vm.Settings.IsSampleDataInstalled", _this.IsSampleDataInstalledChanged.bind(_this));
+                return _this;
             }
             SettingsViewModel.prototype.Cancel = function () {
                 DynamicData.Core.Trace.Message(ViewModels.settingsViewModelName + ".Cancel");
@@ -2286,19 +2328,25 @@ var DynamicData;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
 
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DynamicData;
 (function (DynamicData) {
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var TemplatesViewModel = (function (_super) {
+        var TemplatesViewModel = /** @class */ (function (_super) {
             __extends(TemplatesViewModel, _super);
             function TemplatesViewModel(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository) {
+                var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -2317,17 +2365,18 @@ var DynamicData;
                 if (!templateRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("templateRepository"));
                 }
-                _super.call(this);
-                this._location = location;
-                this._mdDialog = mdDialog;
-                this._appBarStatus = appBarStatus;
-                this._entityTypeRepository = entityTypeRepository;
-                this._templateRepository = templateRepository;
-                scope.$on("AppBarScope::cancel", this.Cancel.bind(this));
-                scope.$on("AppBarScope::delete", this.PromptDelete.bind(this));
-                scope.$on("AppBarScope::refresh", this.Refresh.bind(this));
-                scope.$on("AppBarScope::save", this.Save.bind(this));
-                this.Init();
+                _this = _super.call(this) || this;
+                _this._location = location;
+                _this._mdDialog = mdDialog;
+                _this._appBarStatus = appBarStatus;
+                _this._entityTypeRepository = entityTypeRepository;
+                _this._templateRepository = templateRepository;
+                scope.$on("AppBarScope::cancel", _this.Cancel.bind(_this));
+                scope.$on("AppBarScope::delete", _this.PromptDelete.bind(_this));
+                scope.$on("AppBarScope::refresh", _this.Refresh.bind(_this));
+                scope.$on("AppBarScope::save", _this.Save.bind(_this));
+                _this.Init();
+                return _this;
             }
             TemplatesViewModel.prototype.Init = function () {
                 this.Types = this._entityTypeRepository
@@ -2409,7 +2458,7 @@ var DynamicData;
     var ViewModels;
     (function (ViewModels) {
         "use strict";
-        var TimePickerViewModel = (function () {
+        var TimePickerViewModel = /** @class */ (function () {
             function TimePickerViewModel(scope) {
                 this.Options = [];
                 var multiplier = 4;
@@ -2433,7 +2482,7 @@ var DynamicData;
         var Directives;
         (function (Directives) {
             "use strict";
-            var EntityQuickViewForm = (function () {
+            var EntityQuickViewForm = /** @class */ (function () {
                 function EntityQuickViewForm(scope) {
                     DynamicData.Core.Trace.Message(Directives.entityQuickViewFormName + ".constructor");
                     scope.format = this.Format.bind(this);
@@ -2489,7 +2538,8 @@ var DynamicData;
                             open: "&"
                         }
                     };
-                }]);
+                }
+            ]);
         })(Directives = UI.Directives || (UI.Directives = {}));
     })(UI = DynamicData.UI || (DynamicData.UI = {}));
 })(DynamicData || (DynamicData = {}));
@@ -2501,7 +2551,7 @@ var DynamicData;
         var Directives;
         (function (Directives) {
             "use strict";
-            var FieldEditor = (function () {
+            var FieldEditor = /** @class */ (function () {
                 function FieldEditor(scope, enumRepository) {
                     DynamicData.Core.Trace.Message(Directives.fieldEditorName + ".constructor");
                     scope.vm = new DynamicData.ViewModels.FieldEditorViewModel(scope, enumRepository);
@@ -2554,7 +2604,7 @@ var DynamicData;
         var Directives;
         (function (Directives) {
             "use strict";
-            var TimePicker = (function () {
+            var TimePicker = /** @class */ (function () {
                 function TimePicker(scope) {
                     DynamicData.Core.Trace.Message(Directives.timePickerName + ".constructor");
                     scope.vm = new DynamicData.ViewModels.TimePickerViewModel(scope);
@@ -2584,7 +2634,7 @@ var DynamicData;
         var Directives;
         (function (Directives) {
             "use strict";
-            var TypeQuickViewForm = (function () {
+            var TypeQuickViewForm = /** @class */ (function () {
                 function TypeQuickViewForm(scope) {
                     DynamicData.Core.Trace.Message(Directives.typeQuickViewFormName + ".constructor");
                 }
@@ -2614,7 +2664,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var AppBarController = (function () {
+            var AppBarController = /** @class */ (function () {
                 function AppBarController(scope, rootScope, location, status) {
                     scope.fire = this.Fire.bind(this);
                     scope.goTo = this.GoTo.bind(this);
@@ -2622,6 +2672,8 @@ var DynamicData;
                     this._rootScope = rootScope;
                     this._location = location;
                 }
+                AppBarController.prototype.$onInit = function () {
+                };
                 AppBarController.prototype.Fire = function (cmdName) {
                     DynamicData.Core.Trace.Message(Controllers.appBarControllerName + ".Fire(" + cmdName + ")");
                     this._rootScope.$broadcast("AppBarScope::" + cmdName);
@@ -2655,7 +2707,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var ConfirmDialogController = (function () {
+            var ConfirmDialogController = /** @class */ (function () {
                 function ConfirmDialogController(scope, mdPanelRef) {
                     scope.title = "Abc";
                     scope.message = "Xyz";
@@ -2678,7 +2730,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var DashboardController = (function () {
+            var DashboardController = /** @class */ (function () {
                 function DashboardController(scope, routeParams, location, appBarStatus, repository, sampleData) {
                     var entityType = routeParams.entityType;
                     DynamicData.Core.Trace.Message(Controllers.dashboardControllerName + ".constructor " + entityType);
@@ -2708,7 +2760,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var DashboardPivotItemController = (function () {
+            var DashboardPivotItemController = /** @class */ (function () {
                 function DashboardPivotItemController(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository) {
                     DynamicData.Core.Trace.Message(Controllers.dashboardPivotItemControllerName + ".constructor");
                     scope.vm = new DynamicData.ViewModels.DashboardPivotItemViewModel(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository, scope.type);
@@ -2735,7 +2787,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var EditEnumController = (function () {
+            var EditEnumController = /** @class */ (function () {
                 function EditEnumController(scope, mdDialog, enumRepository, name) {
                     scope.vm = new DynamicData.ViewModels.EditEnumViewModel(scope, mdDialog, enumRepository, name);
                 }
@@ -2759,7 +2811,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var EditTypeController = (function () {
+            var EditTypeController = /** @class */ (function () {
                 function EditTypeController(scope, routeParams, location, mdToast, mdDialog, appBarStatus, repository) {
                     DynamicData.Core.Trace.Message(Controllers.editTypeControllerName + ".constructor");
                     var type = routeParams.entityType;
@@ -2789,7 +2841,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var EntityController = (function () {
+            var EntityController = /** @class */ (function () {
                 function EntityController(scope, routeParams, location, appBarStatus, entityTypeRepository, entityRepository) {
                     DynamicData.Core.Trace.Message(Controllers.entityControllerName + ".constructor");
                     var type = routeParams.entityType;
@@ -2819,7 +2871,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var ManageController = (function () {
+            var ManageController = /** @class */ (function () {
                 function ManageController(scope, location, mdDialog, appBarStatus, repository) {
                     DynamicData.Core.Trace.Message(Controllers.manageControllerName + ".constructor");
                     scope.vm = new DynamicData.ViewModels.ManageViewModel(scope, location, mdDialog, appBarStatus, repository);
@@ -2847,7 +2899,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var ProfileController = (function () {
+            var ProfileController = /** @class */ (function () {
                 function ProfileController(scope, appBarStatus) {
                     DynamicData.Core.Trace.Message(Controllers.profileControllerName + ".constructor");
                 }
@@ -2870,12 +2922,14 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var SettingsController = (function () {
+            var SettingsController = /** @class */ (function () {
                 function SettingsController(scope, appBarStatus, repository, sampleData) {
                     DynamicData.Core.Trace.Message(Controllers.settingsControllerName + ".constructor");
                     scope.vm = new DynamicData.ViewModels.SettingsViewModel(scope, repository, sampleData);
                     this.AppBar(appBarStatus);
                 }
+                SettingsController.prototype.$onInit = function () {
+                };
                 SettingsController.prototype.AppBar = function (appBar) {
                     appBar.IsNewDisabled = true;
                     appBar.IsRefreshDisabled = false;
@@ -2904,7 +2958,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var TemplatesController = (function () {
+            var TemplatesController = /** @class */ (function () {
                 function TemplatesController(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository) {
                     scope.vm = new DynamicData.ViewModels.TemplatesViewModel(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository);
                     appBarStatus.Detail();

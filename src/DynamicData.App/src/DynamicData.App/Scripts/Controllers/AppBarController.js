@@ -5,7 +5,7 @@ var DynamicData;
         var Controllers;
         (function (Controllers) {
             "use strict";
-            var AppBarController = (function () {
+            var AppBarController = /** @class */ (function () {
                 function AppBarController(scope, rootScope, location, status) {
                     scope.fire = this.Fire.bind(this);
                     scope.goTo = this.GoTo.bind(this);
@@ -13,6 +13,8 @@ var DynamicData;
                     this._rootScope = rootScope;
                     this._location = location;
                 }
+                AppBarController.prototype.$onInit = function () {
+                };
                 AppBarController.prototype.Fire = function (cmdName) {
                     DynamicData.Core.Trace.Message(Controllers.appBarControllerName + ".Fire(" + cmdName + ")");
                     this._rootScope.$broadcast("AppBarScope::" + cmdName);

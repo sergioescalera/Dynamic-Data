@@ -5,7 +5,7 @@ var DynamicData;
         var Directives;
         (function (Directives) {
             "use strict";
-            var FieldEditor = (function () {
+            var FieldEditor = /** @class */ (function () {
                 function FieldEditor(scope, enumRepository) {
                     DynamicData.Core.Trace.Message(Directives.fieldEditorName + ".constructor");
                     scope.vm = new DynamicData.ViewModels.FieldEditorViewModel(scope, enumRepository);

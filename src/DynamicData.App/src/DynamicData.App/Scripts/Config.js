@@ -3,7 +3,7 @@ var DynamicData;
     var Config;
     (function (Config) {
         "use strict";
-        var RouteParameters = (function () {
+        var RouteParameters = /** @class */ (function () {
             function RouteParameters() {
             }
             RouteParameters.entityType = ":entityType";
@@ -11,7 +11,7 @@ var DynamicData;
             return RouteParameters;
         }());
         Config.RouteParameters = RouteParameters;
-        var Routes = (function () {
+        var Routes = /** @class */ (function () {
             function Routes() {
             }
             Routes.home = function () { return "/home"; };
