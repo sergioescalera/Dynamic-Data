@@ -13,6 +13,7 @@
             "$scope",
             "$location",
             "$mdDialog",
+            Core.appBarStatusName,
             Data.entityRepositoryName,
             Data.entityTypeSettingsRepositoryName
         ];
@@ -21,6 +22,7 @@
             scope: IDashboardPivotItemScope,
             location: ng.ILocationService,
             mdDialog: ng.material.IDialogService,
+            appBarStatus: Core.IAppBarStatus,
             entityRepository: Data.IEntityRepository,
             entityTypeSettingsRepository: Data.IEntityTypeSettingsRepository) {
 
@@ -30,6 +32,7 @@
                 scope,
                 location,
                 mdDialog,
+                appBarStatus,
                 entityRepository,
                 entityTypeSettingsRepository,
                 scope.type);

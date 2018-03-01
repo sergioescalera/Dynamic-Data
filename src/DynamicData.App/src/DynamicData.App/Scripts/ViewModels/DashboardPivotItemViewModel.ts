@@ -7,6 +7,7 @@
         private _scope: UI.Controllers.IDashboardPivotItemScope;
         private _location: ng.ILocationService;
         private _mdDialog: ng.material.IDialogService;
+        private _appBarStatus: Core.IAppBarStatus;
         private _entityRepository: Data.IEntityRepository;
         private _entityTypeSettingsRepository: Data.IEntityTypeSettingsRepository;
 
@@ -20,6 +21,7 @@
             scope: UI.Controllers.IDashboardPivotItemScope,
             location: ng.ILocationService,
             mdDialog: ng.material.IDialogService,
+            appBarStatus: Core.IAppBarStatus,
             entityRepository: Data.IEntityRepository,
             entityTypeSettingsRepository: Data.IEntityTypeSettingsRepository,
             type: Core.IEntityType) {
@@ -36,6 +38,10 @@
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("mdDialog"));
             }
 
+            if (!appBarStatus) {
+                throw new Error(Resources.Strings.RequiredArgumentMessageFormat("appBarStatus"));
+            }
+
             if (!entityRepository) {
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("repository"));
             }
@@ -50,11 +56,14 @@
 
             super();
 
+            appBarStatus.Master();
+
             scope.$on("AppBarScope::delete", this.PromptDelete.bind(this));
 
             this._scope = scope;
             this._location = location;
             this._mdDialog = mdDialog;
+            this._appBarStatus = appBarStatus;
             this._entityRepository = entityRepository;
             this._entityTypeSettingsRepository = entityTypeSettingsRepository;
 
@@ -164,6 +173,15 @@
             this.Entities = array;
 
             this._entityTypeSettingsRepository.Save(this.Type.Name, this.TypeSettings);
+        }
+
+        EnableDeletion(): void {
+
+            var keys: string[] = Object
+                .keys(this.Selected)
+                .filter((k: string) => !!this.Selected[k]);
+
+            this._appBarStatus.IsDeleteDisabled = keys.length === 0;
         }
 
         private SetSettings(value: Core.IEntityTypeSettings): void {

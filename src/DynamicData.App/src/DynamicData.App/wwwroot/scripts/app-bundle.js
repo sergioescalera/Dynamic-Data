@@ -1449,7 +1449,7 @@ var DynamicData;
         "use strict";
         var DashboardPivotItemViewModel = /** @class */ (function (_super) {
             __extends(DashboardPivotItemViewModel, _super);
-            function DashboardPivotItemViewModel(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository, type) {
+            function DashboardPivotItemViewModel(scope, location, mdDialog, appBarStatus, entityRepository, entityTypeSettingsRepository, type) {
                 var _this = this;
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
@@ -1459,6 +1459,9 @@ var DynamicData;
                 }
                 if (!mdDialog) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("mdDialog"));
+                }
+                if (!appBarStatus) {
+                    throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("appBarStatus"));
                 }
                 if (!entityRepository) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("repository"));
@@ -1470,10 +1473,12 @@ var DynamicData;
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("type"));
                 }
                 _this = _super.call(this) || this;
+                appBarStatus.Master();
                 scope.$on("AppBarScope::delete", _this.PromptDelete.bind(_this));
                 _this._scope = scope;
                 _this._location = location;
                 _this._mdDialog = mdDialog;
+                _this._appBarStatus = appBarStatus;
                 _this._entityRepository = entityRepository;
                 _this._entityTypeSettingsRepository = entityTypeSettingsRepository;
                 _this.Type = type;
@@ -1556,6 +1561,13 @@ var DynamicData;
                 }
                 this.Entities = array;
                 this._entityTypeSettingsRepository.Save(this.Type.Name, this.TypeSettings);
+            };
+            DashboardPivotItemViewModel.prototype.EnableDeletion = function () {
+                var _this = this;
+                var keys = Object
+                    .keys(this.Selected)
+                    .filter(function (k) { return !!_this.Selected[k]; });
+                this._appBarStatus.IsDeleteDisabled = keys.length === 0;
             };
             DashboardPivotItemViewModel.prototype.SetSettings = function (value) {
                 this.TypeSettings = value;
@@ -2803,14 +2815,15 @@ var DynamicData;
         (function (Controllers) {
             "use strict";
             var DashboardPivotItemController = /** @class */ (function () {
-                function DashboardPivotItemController(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository) {
+                function DashboardPivotItemController(scope, location, mdDialog, appBarStatus, entityRepository, entityTypeSettingsRepository) {
                     DynamicData.Core.Trace.Message(Controllers.dashboardPivotItemControllerName + ".constructor");
-                    scope.vm = new DynamicData.ViewModels.DashboardPivotItemViewModel(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository, scope.type);
+                    scope.vm = new DynamicData.ViewModels.DashboardPivotItemViewModel(scope, location, mdDialog, appBarStatus, entityRepository, entityTypeSettingsRepository, scope.type);
                 }
                 DashboardPivotItemController.$inject = [
                     "$scope",
                     "$location",
                     "$mdDialog",
+                    DynamicData.Core.appBarStatusName,
                     DynamicData.Data.entityRepositoryName,
                     DynamicData.Data.entityTypeSettingsRepositoryName
                 ];

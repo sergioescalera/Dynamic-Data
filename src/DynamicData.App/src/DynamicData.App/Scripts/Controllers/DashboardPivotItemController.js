@@ -6,14 +6,15 @@ var DynamicData;
         (function (Controllers) {
             "use strict";
             var DashboardPivotItemController = /** @class */ (function () {
-                function DashboardPivotItemController(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository) {
+                function DashboardPivotItemController(scope, location, mdDialog, appBarStatus, entityRepository, entityTypeSettingsRepository) {
                     DynamicData.Core.Trace.Message(Controllers.dashboardPivotItemControllerName + ".constructor");
-                    scope.vm = new DynamicData.ViewModels.DashboardPivotItemViewModel(scope, location, mdDialog, entityRepository, entityTypeSettingsRepository, scope.type);
+                    scope.vm = new DynamicData.ViewModels.DashboardPivotItemViewModel(scope, location, mdDialog, appBarStatus, entityRepository, entityTypeSettingsRepository, scope.type);
                 }
                 DashboardPivotItemController.$inject = [
                     "$scope",
                     "$location",
                     "$mdDialog",
+                    DynamicData.Core.appBarStatusName,
                     DynamicData.Data.entityRepositoryName,
                     DynamicData.Data.entityTypeSettingsRepositoryName
                 ];

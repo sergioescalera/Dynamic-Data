@@ -18,7 +18,8 @@
 
                                 <md-checkbox class="md-secondary entity-select"
                                              ng-model="vm.Selected[entity.Id]"
-                                             aria-label="Select Record"></md-checkbox>
+                                             aria-label="Select Record"
+                                             ng-change="vm.EnableDeletion()"></md-checkbox>
 
                             </div>                            
                             <md-divider></md-divider>
