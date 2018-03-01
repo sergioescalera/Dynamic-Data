@@ -54,11 +54,18 @@ var DynamicData;
             Object.defineProperty(EditTypeViewModel.prototype, "Model", {
                 get: function () {
                     if (!this._model) {
-                        this._model = !this.EntityType ? {
-                            Attributes: [{
-                                    TypeCode: DynamicData.Core.AttributeTypeCode.String
-                                }]
-                        } : DynamicData.Core.EntityTypeSerialization.ToPOCO(this.EntityType);
+                        if (!this.EntityType) {
+                            this._model = {
+                                Attributes: [
+                                    {
+                                        TypeCode: DynamicData.Core.AttributeTypeCode.String
+                                    }
+                                ]
+                            };
+                        }
+                        else {
+                            this._model = DynamicData.Core.EntityTypeSerialization.ToPOCO(this.EntityType);
+                        }
                         this._model.Attributes.forEach(function (a) { return a.Options = []; });
                     }
                     return this._model;
@@ -112,14 +119,14 @@ var DynamicData;
                 DynamicData.Core.Trace.Message(ViewModels.editTypeViewModelName + ".Save");
                 var exit = true;
                 if (this._scope.TypeForm.$valid) {
-                    var type;
+                    var type = void 0;
                     try {
                         type = DynamicData.Core.EntityTypeSerialization.FromPOCO(this.Model);
                     }
                     catch (e) {
                         DynamicData.Core.Trace.Warning(e);
                     }
-                    var result;
+                    var result = void 0;
                     if (this.IsNew && !!type) {
                         result = this._entityTypeRepository.Create(type);
                     }

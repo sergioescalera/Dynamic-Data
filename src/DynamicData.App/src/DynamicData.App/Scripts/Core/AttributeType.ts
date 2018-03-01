@@ -1,7 +1,7 @@
 ﻿module DynamicData.Core {
 
     "use strict";
-
+    
     export class AttributeType implements IAttributeType {
 
         private _name: string;
@@ -63,5 +63,19 @@
 
             return AttributeTypeCode[this._typeCode];
         }
+
+        get IsSystemAttribute(): boolean {
+
+            return systemAttributes()
+                .filter(o => o.Name === this.Name)
+                .length > 0;
+        }
+    }
+
+    export function systemAttributes(): AttributeType[] {
+        return [
+            new AttributeType("CreatedOn", "Created On", AttributeTypeCode.DateTime),
+            new AttributeType("ModifiedOn", "Modified On", AttributeTypeCode.DateTime)
+        ];
     }
 }

@@ -23,13 +23,22 @@
         get Model(): any {
 
             if (!this._model) {
+                
+                if (!this.EntityType) {
+                    
+                    this._model = {
+                        Attributes: [
+                            {
+                                TypeCode: Core.AttributeTypeCode.String
+                            }
+                        ]
+                    };
 
-                this._model = !this.EntityType ? {
-                    Attributes: [{
-                        TypeCode: Core.AttributeTypeCode.String
-                    }]
-                } : Core.EntityTypeSerialization.ToPOCO(this.EntityType);
+                } else {
 
+                    this._model = Core.EntityTypeSerialization.ToPOCO(this.EntityType);
+                }
+                
                 this._model.Attributes.forEach((a: any) => a.Options = []);
             }
 
@@ -132,9 +141,9 @@
 
             Core.Trace.Message(`${editTypeViewModelName}.Delete`);
 
-            var attributes: any[] = this.Model.Attributes;
+            let attributes: any[] = this.Model.Attributes;
 
-            for (var i: number = attributes.length - 1; i >= 0; i--) {
+            for (let i: number = attributes.length - 1; i >= 0; i--) {
 
                 if (!!this.SelectedAttributes[i.toString()]) {
 
@@ -153,11 +162,11 @@
 
             Core.Trace.Message(`${editTypeViewModelName}.Save`);
 
-            var exit: boolean = true;
+            let exit: boolean = true;
 
             if (this._scope.TypeForm.$valid) {
 
-                var type: Core.IEntityType;
+                let type: Core.IEntityType;
 
                 try {
 
@@ -168,7 +177,7 @@
                     Core.Trace.Warning(e);
                 }
 
-                var result: Data.IDataActionResult;
+                let result: Data.IDataActionResult;
 
                 if (this.IsNew && !!type) {
 
@@ -215,7 +224,7 @@
 
         EditEnum(attribute: Core.IAttributeType): void {
 
-            var options: ng.material.IDialogOptions = {
+            let options: ng.material.IDialogOptions = {
                 controller: UI.Controllers.EditEnumController,
                 templateUrl: "html/EditEnum.html",
                 parent: angular.element(document.body),
@@ -235,13 +244,13 @@
 
         private SetFormDirty(): void {
 
-            var keys: string[] = Object
+            let keys: string[] = Object
                 .keys(this._scope.TypeForm)
                 .filter((k: string) => k.indexOf("$") !== 0);
 
             keys.forEach((key: string) => {
 
-                var field: ng.INgModelController = this._scope.TypeForm[key];
+                let field: ng.INgModelController = this._scope.TypeForm[key];
 
                 if (field.$valid) {
                     return;

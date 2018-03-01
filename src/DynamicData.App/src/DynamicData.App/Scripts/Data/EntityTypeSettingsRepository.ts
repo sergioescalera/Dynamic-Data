@@ -23,8 +23,8 @@
             var deferred: ng.IDeferred<Core.IEntityTypeSettings> = this._q.defer<Core.IEntityTypeSettings>();
 
             deferred.resolve(settings || {
-                SortBy: "",
-                SortByDescending: false
+                SortBy: "CreatedOn",
+                SortByDescending: true
             });
 
             return deferred.promise;

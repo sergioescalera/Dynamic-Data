@@ -3,7 +3,7 @@
     "use strict";
     
     export interface IEntity {
-        Fields: Object;
+        Fields: any;
         HasValidId: boolean;
         Id: number;
         Type: IEntityType;

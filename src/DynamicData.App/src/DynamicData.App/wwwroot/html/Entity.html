@@ -12,10 +12,10 @@
             <md-card-content>
                 <form name="EntityForm">
                     <div layout="column">
-                        <dd-editor ng-repeat="attribute in vm.EntityType.Attributes"
+                        <dd-editor ng-repeat="attribute in vm.EntityType.Attributes | filter:{IsSystemAttribute:false}"
                                    attribute="attribute"
                                    value="vm.Model[attribute.Name]"></dd-editor>
-                    </div>                    
+                    </div>                 
                 </form>
             </md-card-content>
 

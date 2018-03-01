@@ -7,5 +7,6 @@
         DisplayName: string;
         TypeCode: AttributeTypeCode;
         EnumName?: string;
+        IsSystemAttribute: boolean;
     }
 }

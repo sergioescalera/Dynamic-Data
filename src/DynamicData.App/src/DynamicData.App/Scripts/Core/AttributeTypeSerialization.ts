@@ -11,6 +11,10 @@
 
         static ToPOCO(attribute: IAttributeType): any {
 
+            if (attribute.IsSystemAttribute) {
+                throw new Error(Resources.Strings.SystemAttributeSerializationMessageFormat(attribute.Name));
+            }
+
             return {
                 Name: attribute.Name,
                 DisplayName: attribute.DisplayName,

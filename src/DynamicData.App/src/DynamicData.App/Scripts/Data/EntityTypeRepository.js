@@ -20,14 +20,19 @@ var DynamicData;
                 }
                 var storedTypes = this.GetAll();
                 var results = [];
-                for (var i = 0; i < types.length; i++) {
+                var _loop_1 = function (i) {
                     var type = types[i];
                     if (storedTypes.filter(function (t) { return t.Name === type.Name; }).length > 0) {
                         DynamicData.Core.Trace.Warning(DynamicData.Resources.Strings.DuplicatedEntityTypeMessageFormat(type.Name));
                         results.push(Data.DataActionResults.duplicate);
                     }
-                    storedTypes.push(type);
-                    results.push(Data.DataActionResults.success);
+                    else {
+                        storedTypes.push(type);
+                        results.push(Data.DataActionResults.success);
+                    }
+                };
+                for (var i = 0; i < types.length; i++) {
+                    _loop_1(i);
                 }
                 if (results.filter(function (o) { return o.Success; }).length > 0) {
                     Data.storage.Types = storedTypes;
@@ -70,9 +75,11 @@ var DynamicData;
                     DynamicData.Core.Trace.Warning(DynamicData.Resources.Strings.DuplicatedEntityTypeMessageFormat(type.Name));
                     return Data.DataActionResults.duplicate;
                 }
-                types.push(type);
-                Data.storage.Types = types;
-                return Data.DataActionResults.success;
+                else {
+                    types.push(type);
+                    Data.storage.Types = types;
+                    return Data.DataActionResults.success;
+                }
             };
             EntityTypeRepository.prototype.Update = function (type) {
                 if (!type) {

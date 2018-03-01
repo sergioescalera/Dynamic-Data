@@ -11,6 +11,7 @@ var DynamicData;
             Strings.DuplicatedEntityTypeMessageFormat = function (type) { return "Duplicated entity type '" + type + "'."; };
             Strings.MissingEntityTypeMessageFormat = function (type) { return "Entity type '" + type + "' is missing."; };
             Strings.NotSupportedMessage = "Not supported.";
+            Strings.SystemAttributeSerializationMessageFormat = function (name) { return "Unable to serialize a System Attribute " + name + "."; };
             Strings.No = "No";
             Strings.Yes = "Yes";
             return Strings;

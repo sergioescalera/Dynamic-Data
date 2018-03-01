@@ -108,6 +108,7 @@ var DynamicData;
             Strings.DuplicatedEntityTypeMessageFormat = function (type) { return "Duplicated entity type '" + type + "'."; };
             Strings.MissingEntityTypeMessageFormat = function (type) { return "Entity type '" + type + "' is missing."; };
             Strings.NotSupportedMessage = "Not supported.";
+            Strings.SystemAttributeSerializationMessageFormat = function (name) { return "Unable to serialize a System Attribute " + name + "."; };
             Strings.No = "No";
             Strings.Yes = "Yes";
             return Strings;
@@ -323,9 +324,26 @@ var DynamicData;
                 enumerable: true,
                 configurable: true
             });
+            Object.defineProperty(AttributeType.prototype, "IsSystemAttribute", {
+                get: function () {
+                    var _this = this;
+                    return systemAttributes()
+                        .filter(function (o) { return o.Name === _this.Name; })
+                        .length > 0;
+                },
+                enumerable: true,
+                configurable: true
+            });
             return AttributeType;
         }());
         Core.AttributeType = AttributeType;
+        function systemAttributes() {
+            return [
+                new AttributeType("CreatedOn", "Created On", Core.AttributeTypeCode.DateTime),
+                new AttributeType("ModifiedOn", "Modified On", Core.AttributeTypeCode.DateTime)
+            ];
+        }
+        Core.systemAttributes = systemAttributes;
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
 
@@ -365,6 +383,9 @@ var DynamicData;
                 return new Core.AttributeType(poco.Name, poco.DisplayName, poco.TypeCode, poco.EnumName || null);
             };
             AttributeTypeSerialization.ToPOCO = function (attribute) {
+                if (attribute.IsSystemAttribute) {
+                    throw new Error(DynamicData.Resources.Strings.SystemAttributeSerializationMessageFormat(attribute.Name));
+                }
                 return {
                     Name: attribute.Name,
                     DisplayName: attribute.DisplayName,
@@ -543,7 +564,7 @@ var DynamicData;
             Object.defineProperty(EntityType.prototype, "Attributes", {
                 get: function () {
                     if (!this._attributes) {
-                        this._attributes = [];
+                        this._attributes = Core.systemAttributes();
                     }
                     return this._attributes;
                 },
@@ -611,7 +632,9 @@ var DynamicData;
                     DisplayName: type.DisplayName,
                     DisplayPluralName: type.DisplayPluralName,
                     Icon: type.Icon,
-                    Attributes: type.Attributes.map(function (a) { return Core.AttributeTypeSerialization.ToPOCO(a); })
+                    Attributes: type.Attributes
+                        .filter(function (a) { return !a.IsSystemAttribute; })
+                        .map(function (a) { return Core.AttributeTypeSerialization.ToPOCO(a); })
                 };
             };
             EntityTypeSerialization.FromPOCO = function (poco) {
@@ -893,6 +916,9 @@ var DynamicData;
                     return Data.DataActionResults.notFound;
                 }
                 entities.push(entity);
+                var now = moment().toDate();
+                entity.Fields.CreatedOn = now;
+                entity.Fields.ModifiedOn = now;
                 entity.Id = entities.length - 1;
                 Data.storage.SetEntities(entity.Type, entities);
                 return Data.DataActionResults.success;
@@ -908,6 +934,8 @@ var DynamicData;
                 if (entity.Id > entities.length) {
                     return Data.DataActionResults.notFound;
                 }
+                var now = moment().toDate();
+                entity.Fields.ModifiedOn = now;
                 entities[entity.Id] = entity;
                 Data.storage.SetEntities(entity.Type, entities);
                 return Data.DataActionResults.success;
@@ -947,14 +975,19 @@ var DynamicData;
                 }
                 var storedTypes = this.GetAll();
                 var results = [];
-                for (var i = 0; i < types.length; i++) {
+                var _loop_1 = function (i) {
                     var type = types[i];
                     if (storedTypes.filter(function (t) { return t.Name === type.Name; }).length > 0) {
                         DynamicData.Core.Trace.Warning(DynamicData.Resources.Strings.DuplicatedEntityTypeMessageFormat(type.Name));
                         results.push(Data.DataActionResults.duplicate);
                     }
-                    storedTypes.push(type);
-                    results.push(Data.DataActionResults.success);
+                    else {
+                        storedTypes.push(type);
+                        results.push(Data.DataActionResults.success);
+                    }
+                };
+                for (var i = 0; i < types.length; i++) {
+                    _loop_1(i);
                 }
                 if (results.filter(function (o) { return o.Success; }).length > 0) {
                     Data.storage.Types = storedTypes;
@@ -997,9 +1030,11 @@ var DynamicData;
                     DynamicData.Core.Trace.Warning(DynamicData.Resources.Strings.DuplicatedEntityTypeMessageFormat(type.Name));
                     return Data.DataActionResults.duplicate;
                 }
-                types.push(type);
-                Data.storage.Types = types;
-                return Data.DataActionResults.success;
+                else {
+                    types.push(type);
+                    Data.storage.Types = types;
+                    return Data.DataActionResults.success;
+                }
             };
             EntityTypeRepository.prototype.Update = function (type) {
                 if (!type) {
@@ -1036,8 +1071,8 @@ var DynamicData;
                 var settings = Data.storage.GetTypeSettings(typeName);
                 var deferred = this._q.defer();
                 deferred.resolve(settings || {
-                    SortBy: "",
-                    SortByDescending: false
+                    SortBy: "CreatedOn",
+                    SortByDescending: true
                 });
                 return deferred.promise;
             };
@@ -1740,11 +1775,18 @@ var DynamicData;
             Object.defineProperty(EditTypeViewModel.prototype, "Model", {
                 get: function () {
                     if (!this._model) {
-                        this._model = !this.EntityType ? {
-                            Attributes: [{
-                                    TypeCode: DynamicData.Core.AttributeTypeCode.String
-                                }]
-                        } : DynamicData.Core.EntityTypeSerialization.ToPOCO(this.EntityType);
+                        if (!this.EntityType) {
+                            this._model = {
+                                Attributes: [
+                                    {
+                                        TypeCode: DynamicData.Core.AttributeTypeCode.String
+                                    }
+                                ]
+                            };
+                        }
+                        else {
+                            this._model = DynamicData.Core.EntityTypeSerialization.ToPOCO(this.EntityType);
+                        }
                         this._model.Attributes.forEach(function (a) { return a.Options = []; });
                     }
                     return this._model;
@@ -1798,14 +1840,14 @@ var DynamicData;
                 DynamicData.Core.Trace.Message(ViewModels.editTypeViewModelName + ".Save");
                 var exit = true;
                 if (this._scope.TypeForm.$valid) {
-                    var type;
+                    var type = void 0;
                     try {
                         type = DynamicData.Core.EntityTypeSerialization.FromPOCO(this.Model);
                     }
                     catch (e) {
                         DynamicData.Core.Trace.Warning(e);
                     }
-                    var result;
+                    var result = void 0;
                     if (this.IsNew && !!type) {
                         result = this._entityTypeRepository.Create(type);
                     }

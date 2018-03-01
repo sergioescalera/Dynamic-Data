@@ -21,9 +21,9 @@
 
         GetByName(entityTypeName: string): Core.IEntityType {
 
-            var types: Core.IEntityType[] = this.GetAll();
+            let types: Core.IEntityType[] = this.GetAll();
 
-            var filtered: Core.IEntityType[] = types.filter((t: Core.IEntityType) => t.Name === entityTypeName);
+            let filtered: Core.IEntityType[] = types.filter((t: Core.IEntityType) => t.Name === entityTypeName);
 
             return filtered.length ? filtered[0] : null;
         }
@@ -34,23 +34,25 @@
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("types"));
             }
 
-            var storedTypes: Core.IEntityType[] = this.GetAll();
-            var results: IDataActionResult[] = [];
+            let storedTypes: Core.IEntityType[] = this.GetAll();
+            let results: IDataActionResult[] = [];
 
-            for (var i: number = 0; i < types.length; i++) {
+            for (let i: number = 0; i < types.length; i++) {
 
-                var type: Core.IEntityType = types[i];
+                let type: Core.IEntityType = types[i];
 
                 if (storedTypes.filter((t: Core.IEntityType) => t.Name === type.Name).length > 0) {
 
                     Core.Trace.Warning(Resources.Strings.DuplicatedEntityTypeMessageFormat(type.Name));
 
                     results.push(DataActionResults.duplicate);
+
+                } else {
+
+                    storedTypes.push(type);
+
+                    results.push(DataActionResults.success);
                 }
-
-                storedTypes.push(type);
-
-                results.push(DataActionResults.success);
             }
 
             if (results.filter((o: IDataActionResult) => o.Success).length > 0) {
@@ -66,16 +68,16 @@
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("types"));
             }
 
-            var storedTypes: Core.IEntityType[] = this.GetAll();
-            var results: IDataActionResult[] = [];
+            let storedTypes: Core.IEntityType[] = this.GetAll();
+            let results: IDataActionResult[] = [];
 
             types.forEach((name: string) => {
 
-                var filter: Core.IEntityType[] = storedTypes.filter((t: Core.IEntityType) => t.Name === name);
+                let filter: Core.IEntityType[] = storedTypes.filter((t: Core.IEntityType) => t.Name === name);
 
                 if (filter.length > 0) {
 
-                    var index: number = storedTypes.indexOf(filter[0]);
+                    let index: number = storedTypes.indexOf(filter[0]);
 
                     Data.storage.DeleteEntities(name);
                     Data.storage.DeleteTemplate(name);
@@ -105,22 +107,24 @@
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("type"));
             }
 
-            var types: Core.IEntityType[] = this.GetAll();
+            let types: Core.IEntityType[] = this.GetAll();
 
-            var filtered: Core.IEntityType[] = types.filter((t: Core.IEntityType) => t.Name === type.Name);
+            let filtered: Core.IEntityType[] = types.filter((t: Core.IEntityType) => t.Name === type.Name);
 
             if (filtered.length > 0) {
 
                 Core.Trace.Warning(Resources.Strings.DuplicatedEntityTypeMessageFormat(type.Name));
 
                 return DataActionResults.duplicate;
+
+            } else {
+
+                types.push(type);
+
+                Data.storage.Types = types;
+
+                return DataActionResults.success;
             }
-
-            types.push(type);
-
-            Data.storage.Types = types;
-
-            return DataActionResults.success;
         }
 
         Update(type: Core.IEntityType): IDataActionResult {
@@ -129,9 +133,9 @@
                 throw new Error(Resources.Strings.RequiredArgumentMessageFormat("type"));
             }
 
-            var types: Core.IEntityType[] = this.GetAll();
+            let types: Core.IEntityType[] = this.GetAll();
 
-            var filtered: Core.IEntityType[] = types.filter((t: Core.IEntityType) => t.Name === type.Name);
+            let filtered: Core.IEntityType[] = types.filter((t: Core.IEntityType) => t.Name === type.Name);
 
             if (filtered.length === 0) {
 
@@ -140,7 +144,7 @@
                 return DataActionResults.notFound;
             }
 
-            var index: number = types.indexOf(filtered[0]);
+            let index: number = types.indexOf(filtered[0]);
 
             types[index] = type;
 

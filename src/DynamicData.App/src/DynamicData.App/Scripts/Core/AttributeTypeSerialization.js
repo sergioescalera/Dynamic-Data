@@ -10,6 +10,9 @@ var DynamicData;
                 return new Core.AttributeType(poco.Name, poco.DisplayName, poco.TypeCode, poco.EnumName || null);
             };
             AttributeTypeSerialization.ToPOCO = function (attribute) {
+                if (attribute.IsSystemAttribute) {
+                    throw new Error(DynamicData.Resources.Strings.SystemAttributeSerializationMessageFormat(attribute.Name));
+                }
                 return {
                     Name: attribute.Name,
                     DisplayName: attribute.DisplayName,

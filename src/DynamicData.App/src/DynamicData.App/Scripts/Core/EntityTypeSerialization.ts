@@ -11,7 +11,9 @@
                 DisplayName: type.DisplayName,
                 DisplayPluralName: type.DisplayPluralName,
                 Icon: type.Icon,
-                Attributes: type.Attributes.map((a: IAttributeType) => { return AttributeTypeSerialization.ToPOCO(a); })
+                Attributes: type.Attributes
+                    .filter((a: IAttributeType) => !a.IsSystemAttribute)
+                    .map((a: IAttributeType) => { return AttributeTypeSerialization.ToPOCO(a); })
             };
         }
 

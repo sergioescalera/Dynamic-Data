@@ -55,7 +55,7 @@ var DynamicData;
             Object.defineProperty(EntityType.prototype, "Attributes", {
                 get: function () {
                     if (!this._attributes) {
-                        this._attributes = [];
+                        this._attributes = Core.systemAttributes();
                     }
                     return this._attributes;
                 },

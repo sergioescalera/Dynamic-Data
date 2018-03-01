@@ -60,8 +60,25 @@ var DynamicData;
                 enumerable: true,
                 configurable: true
             });
+            Object.defineProperty(AttributeType.prototype, "IsSystemAttribute", {
+                get: function () {
+                    var _this = this;
+                    return systemAttributes()
+                        .filter(function (o) { return o.Name === _this.Name; })
+                        .length > 0;
+                },
+                enumerable: true,
+                configurable: true
+            });
             return AttributeType;
         }());
         Core.AttributeType = AttributeType;
+        function systemAttributes() {
+            return [
+                new AttributeType("CreatedOn", "Created On", Core.AttributeTypeCode.DateTime),
+                new AttributeType("ModifiedOn", "Modified On", Core.AttributeTypeCode.DateTime)
+            ];
+        }
+        Core.systemAttributes = systemAttributes;
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));

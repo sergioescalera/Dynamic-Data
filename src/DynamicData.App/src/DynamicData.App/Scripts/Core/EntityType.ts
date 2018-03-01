@@ -9,7 +9,7 @@
         private _displayPluralName: string;
         private _icon: string;
         private _attributes: AttributeType[];
-
+        
         constructor(name: string, displayName: string, displayPluralName: string) {
 
             this.Name = name;
@@ -63,7 +63,7 @@
 
             if (!this._attributes) {
 
-                this._attributes = [];
+                this._attributes = systemAttributes();
             }
 
             return this._attributes;

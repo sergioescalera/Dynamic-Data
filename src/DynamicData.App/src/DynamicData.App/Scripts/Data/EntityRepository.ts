@@ -120,6 +120,10 @@
 
             entities.push(entity);
 
+            let now = moment().toDate();
+
+            entity.Fields.CreatedOn = now;
+            entity.Fields.ModifiedOn = now;
             entity.Id = entities.length - 1;
 
             storage.SetEntities(entity.Type, entities);
@@ -142,7 +146,11 @@
             if (entity.Id > entities.length) {
                 return DataActionResults.notFound;
             }
+            
+            let now = moment().toDate();
 
+            entity.Fields.ModifiedOn = now;
+            
             entities[entity.Id] = entity;
 
             storage.SetEntities(entity.Type, entities);

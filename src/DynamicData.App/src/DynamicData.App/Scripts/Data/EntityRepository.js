@@ -75,6 +75,9 @@ var DynamicData;
                     return Data.DataActionResults.notFound;
                 }
                 entities.push(entity);
+                var now = moment().toDate();
+                entity.Fields.CreatedOn = now;
+                entity.Fields.ModifiedOn = now;
                 entity.Id = entities.length - 1;
                 Data.storage.SetEntities(entity.Type, entities);
                 return Data.DataActionResults.success;
@@ -90,6 +93,8 @@ var DynamicData;
                 if (entity.Id > entities.length) {
                     return Data.DataActionResults.notFound;
                 }
+                var now = moment().toDate();
+                entity.Fields.ModifiedOn = now;
                 entities[entity.Id] = entity;
                 Data.storage.SetEntities(entity.Type, entities);
                 return Data.DataActionResults.success;

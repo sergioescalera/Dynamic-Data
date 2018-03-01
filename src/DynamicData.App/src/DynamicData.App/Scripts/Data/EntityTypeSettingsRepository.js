@@ -11,8 +11,8 @@ var DynamicData;
                 var settings = Data.storage.GetTypeSettings(typeName);
                 var deferred = this._q.defer();
                 deferred.resolve(settings || {
-                    SortBy: "",
-                    SortByDescending: false
+                    SortBy: "CreatedOn",
+                    SortByDescending: true
                 });
                 return deferred.promise;
             };

@@ -9,6 +9,7 @@
         static DuplicatedEntityTypeMessageFormat = (type: string) => `Duplicated entity type '${type}'.`;
         static MissingEntityTypeMessageFormat = (type: string) => `Entity type '${type}' is missing.`;
         static NotSupportedMessage = "Not supported.";
+        static SystemAttributeSerializationMessageFormat = (name: string) => `Unable to serialize a System Attribute ${name}.`;
         static No = "No";
         static Yes = "Yes";
     }

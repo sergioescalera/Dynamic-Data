@@ -12,7 +12,9 @@ var DynamicData;
                     DisplayName: type.DisplayName,
                     DisplayPluralName: type.DisplayPluralName,
                     Icon: type.Icon,
-                    Attributes: type.Attributes.map(function (a) { return Core.AttributeTypeSerialization.ToPOCO(a); })
+                    Attributes: type.Attributes
+                        .filter(function (a) { return !a.IsSystemAttribute; })
+                        .map(function (a) { return Core.AttributeTypeSerialization.ToPOCO(a); })
                 };
             };
             EntityTypeSerialization.FromPOCO = function (poco) {
