@@ -1,4 +1,7 @@
-﻿.noscript {
+﻿body {
+  min-width: 320px;
+}
+.noscript {
   text-align: center;
 }
 .debug {
@@ -67,4 +70,14 @@ dd-timepicker .md-button.md-icon-button {
 }
 md-chips md-chips-wrap .md-errors-spacer {
   display: none;
+}
+md-sidenav {
+  max-width: 200px;
+  width: 200px;
+}
+md-sidenav .md-button span {
+  display: inline-block;
+  margin-left: 10px;
+  text-align: left;
+  width: 120px;
 }

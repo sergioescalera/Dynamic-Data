@@ -6,12 +6,18 @@ var DynamicData;
         (function (Controllers) {
             "use strict";
             var AppBarController = /** @class */ (function () {
-                function AppBarController(scope, rootScope, location, status) {
+                function AppBarController(scope, rootScope, location, mdSidenav, status) {
+                    var _this = this;
                     scope.fire = this.Fire.bind(this);
                     scope.goTo = this.GoTo.bind(this);
+                    scope.toggleSidenav = this.ToggleSidenav.bind(this);
                     scope.status = status;
                     this._rootScope = rootScope;
                     this._location = location;
+                    this._mdSidenav = mdSidenav;
+                    scope.$on("$routeChangeSuccess", function () {
+                        _this._mdSidenav("sidenav").close();
+                    });
                 }
                 AppBarController.prototype.$onInit = function () {
                 };
@@ -27,10 +33,14 @@ var DynamicData;
                     }
                     this._location.url(url);
                 };
+                AppBarController.prototype.ToggleSidenav = function () {
+                    this._mdSidenav("sidenav").toggle();
+                };
                 AppBarController.$inject = [
                     "$scope",
                     "$rootScope",
                     "$location",
+                    "$mdSidenav",
                     DynamicData.Core.appBarStatusName
                 ];
                 return AppBarController;

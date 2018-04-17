@@ -14,24 +14,33 @@
             "$scope",
             "$rootScope",
             "$location",
+            "$mdSidenav",
             Core.appBarStatusName
         ];
 
         private _location: ng.ILocationService;
         private _rootScope: ng.IScope;
+        private _mdSidenav: ng.material.ISidenavService;
 
         constructor(
             scope: IAppBarScope,
             rootScope: ng.IScope,
             location: ng.ILocationService,
+            mdSidenav: ng.material.ISidenavService,
             status: Core.IAppBarStatus) {
 
             scope.fire = this.Fire.bind(this);
             scope.goTo = this.GoTo.bind(this);
+            scope.toggleSidenav = this.ToggleSidenav.bind(this);
             scope.status = status;
 
             this._rootScope = rootScope;
             this._location = location;
+            this._mdSidenav = mdSidenav;
+
+            scope.$on("$routeChangeSuccess", () => {
+                this._mdSidenav("sidenav").close();
+            });
         }
 
         $onInit?(): void {
@@ -57,6 +66,11 @@
             }
 
             this._location.url(url);
+        }
+
+        ToggleSidenav(): void {
+
+            this._mdSidenav("sidenav").toggle();
         }
     }
 

@@ -2,40 +2,89 @@
     <md-content>
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Home" ng-click="goTo('home')">
+                <md-button class="md-icon-button hide-xs" aria-label="Home"
+                           ng-click="goTo('home')">
                     <md-icon>home</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="Settings" ng-click="goTo('settings')">
+                <md-button class="md-icon-button hide-xs" aria-label="Settings"
+                           ng-click="goTo('settings')">
                     <md-icon>settings</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="Profile" ng-click="goTo('profile')">
+                <md-button class="md-icon-button hide-xs" aria-label="Profile"
+                           ng-click="goTo('profile')">
                     <md-icon>person</md-icon>
-                </md-button> 
-                <md-button class="md-icon-button" aria-label="Edit" ng-click="goTo('manage')">
+                </md-button>
+                <md-button class="md-icon-button hide-xs" aria-label="Edit"
+                           ng-click="goTo('manage')">
                     <md-icon>mode_edit</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="Templates" ng-click="goTo('templates')">
+                <md-button class="md-icon-button hide-xs" aria-label="Templates"
+                           ng-click="goTo('templates')">
                     <md-icon>content_copy</md-icon>
                 </md-button>
-                
+
+                <md-button class="md-icon-button hidex-gt-xs" aria-label="Options"
+                           ng-click="toggleSidenav()">
+                    <md-icon>menu</md-icon>
+                </md-button>
+
                 <span flex></span>
 
-                <md-button class="md-icon-button" aria-label="Add" ng-disabled="status.IsNewDisabled" ng-click="fire('add')">
+                <md-button class="md-icon-button" aria-label="Add"
+                           ng-disabled="status.IsNewDisabled" ng-click="fire('add')">
                     <md-icon>add</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="Refresh" ng-disabled="status.IsRefreshDisabled" ng-click="fire('refresh')">
+                <md-button class="md-icon-button" aria-label="Refresh"
+                           ng-disabled="status.IsRefreshDisabled" ng-click="fire('refresh')">
                     <md-icon>refresh</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="Delete" ng-disabled="status.IsDeleteDisabled" ng-click="fire('delete')">
+                <md-button class="md-icon-button" aria-label="Delete"
+                           ng-disabled="status.IsDeleteDisabled" ng-click="fire('delete')">
                     <md-icon>delete</md-icon>
-                </md-button>                
+                </md-button>
                 <md-button class="md-icon-button" aria-label="Save" ng-disabled="status.IsSaveDisabled" ng-click="fire('save')">
                     <md-icon>save</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="Cancel" ng-disabled="status.IsCancelDisabled" ng-click="fire('cancel')">
+                <md-button class="md-icon-button" aria-label="Cancel"
+                           ng-disabled="status.IsCancelDisabled" ng-click="fire('cancel')">
                     <md-icon>clear</md-icon>
                 </md-button>
             </div>
         </md-toolbar>
     </md-content>
+
+    <md-sidenav class="md-sidenav-left hidex-gt-xs"
+                md-component-id="sidenav">
+
+        <md-content layout="column" layout-margin>
+
+            <md-button aria-label="Home"
+                       ng-click="goTo('home')">
+                <md-icon>home</md-icon>
+                <span>Home</span>
+            </md-button>
+            <md-button aria-label="Settings"
+                       ng-click="goTo('settings')">
+                <md-icon>settings</md-icon>
+                <span>Settings</span>
+            </md-button>
+            <md-button aria-label="Profile"
+                       ng-click="goTo('profile')">
+                <md-icon>person</md-icon>
+                <span>Profile</span>
+            </md-button>
+            <md-button aria-label="Edit"
+                       ng-click="goTo('manage')">
+                <md-icon>mode_edit</md-icon>
+                <span>Manage</span>
+            </md-button>
+            <md-button aria-label="Templates"
+                       ng-click="goTo('templates')">
+                <md-icon>content_copy</md-icon>
+                <span>Templates</span>
+            </md-button>
+
+        </md-content>
+
+    </md-sidenav>
 </div>
