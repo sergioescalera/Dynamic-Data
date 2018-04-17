@@ -28,3 +28,4 @@ var DynamicData;
         Data.DataActionResults = DataActionResults;
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=DataAction.js.map

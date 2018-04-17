@@ -52,6 +52,7 @@ var DynamicData;
                 this.Types = this._entityTypeRepository
                     .GetAll()
                     .sort(function (t1, t2) { return t1.Name > t2.Name ? 1 : t1.Name < t2.Name ? -1 : 0; });
+                this.SelectType(this.Types[0]);
             };
             TemplatesViewModel.prototype.Add = function () {
                 DynamicData.Core.Trace.Message(ViewModels.templatesViewModelName + ".Add");
@@ -105,20 +106,22 @@ var DynamicData;
                 if (!this.SelectedType) {
                     this.QuickViewTemplate = "";
                     this.EditTemplate = "";
+                    return;
                 }
                 this._templateRepository
                     .GetByName(this.SelectedType.Name)
-                    .then((function (template) {
+                    .then(function (template) {
                     _this.EditTemplate = template.edit;
                     _this.QuickViewTemplate = template.quickView;
-                }).bind(this))
-                    .catch((function () {
+                })
+                    .catch(function () {
                     _this.EditTemplate = "Unable to retrieve template";
                     _this.QuickViewTemplate = "Unable to retrieve template";
-                }).bind(this));
+                });
             };
             return TemplatesViewModel;
         }(ViewModels.BaseViewModel));
         ViewModels.TemplatesViewModel = TemplatesViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=TemplatesViewModel.js.map

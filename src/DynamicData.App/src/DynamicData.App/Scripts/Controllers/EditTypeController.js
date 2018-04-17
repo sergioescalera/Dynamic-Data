@@ -27,3 +27,4 @@ var DynamicData;
         })(Controllers = UI.Controllers || (UI.Controllers = {}));
     })(UI = DynamicData.UI || (DynamicData.UI = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=EditTypeController.js.map

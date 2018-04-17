@@ -68,43 +68,43 @@ var DynamicData;
             $routeProvider
                 .when(Routes.home(), {
                 controller: DynamicData.UI.Controllers.dashboardControllerName,
-                templateUrl: "html/Dashboard.html"
+                templateUrl: "html/Dashboard.html?v=" + app_version
             })
                 .when(Routes.homeWithType(), {
                 controller: DynamicData.UI.Controllers.dashboardControllerName,
-                templateUrl: "html/Dashboard.html"
+                templateUrl: "html/Dashboard.html?v=" + app_version
             })
                 .when(Routes.profile(), {
                 controller: DynamicData.UI.Controllers.profileControllerName,
-                templateUrl: "html/Profile.html"
+                templateUrl: "html/Profile.html?v=" + app_version
             })
                 .when(Routes.settings(), {
                 controller: DynamicData.UI.Controllers.settingsControllerName,
-                templateUrl: "html/Settings.html"
+                templateUrl: "html/Settings.html?v=" + app_version
             })
                 .when(Routes.manage(), {
                 controller: DynamicData.UI.Controllers.manageControllerName,
-                templateUrl: "html/Manage.html"
+                templateUrl: "html/Manage.html?v=" + app_version
             })
                 .when(Routes.typeCreate(), {
                 controller: DynamicData.UI.Controllers.editTypeControllerName,
-                templateUrl: "html/EditType.html"
+                templateUrl: "html/EditType.html?v=" + app_version
             })
                 .when(Routes.type(), {
                 controller: DynamicData.UI.Controllers.editTypeControllerName,
-                templateUrl: "html/EditType.html"
+                templateUrl: "html/EditType.html?v=" + app_version
             })
                 .when(Routes.entityCreate(), {
                 controller: DynamicData.UI.Controllers.entityControllerName,
-                templateUrl: "html/Entity.html"
+                templateUrl: "html/Entity.html?v=" + app_version
             })
                 .when(Routes.entity(), {
                 controller: DynamicData.UI.Controllers.entityControllerName,
-                templateUrl: "html/Entity.html"
+                templateUrl: "html/Entity.html?v=" + app_version
             })
                 .when(Routes.templates(), {
                 controller: DynamicData.UI.Controllers.templatesControllerName,
-                templateUrl: "html/Templates.html"
+                templateUrl: "html/Templates.html?v=" + app_version
             })
                 .otherwise({
                 redirectTo: Routes.home
@@ -113,3 +113,4 @@ var DynamicData;
         module.config(init);
     })(Config = DynamicData.Config || (DynamicData.Config = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=Config.js.map

@@ -26,3 +26,4 @@ var DynamicData;
             .factory(Core.appBarStatusName, function () { return new AppBarStatus(); });
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=AppBarStatus.js.map

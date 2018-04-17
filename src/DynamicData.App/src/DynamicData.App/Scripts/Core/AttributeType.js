@@ -82,3 +82,4 @@ var DynamicData;
         Core.systemAttributes = systemAttributes;
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=AttributeType.js.map

@@ -1,92 +1,97 @@
 ﻿<section class="edit-type">
     <md-content class="md-padding">
 
-        <form name="TypeForm">
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">
+                        <span ng-if="vm.IsNew">Create Entity Type</span>
+                        <span ng-if="!vm.IsNew">Edit <span ng-bind="vm.Model.DisplayName"></span> Type</span>
+                    </span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <form name="TypeForm">
 
-            <fieldset class="standard">
-                <legend>
-                    <span ng-if="vm.IsNew">Create Entity Type</span>
-                    <span ng-if="!vm.IsNew">Edit <span ng-bind="vm.Model.DisplayName"></span> Type</span>
-                </legend>
-                
-                <md-input-container>
-                    <label>Name</label>
-                    <input type="text" name="Name"
-                           placeholder="Name"
-                           aria-label="Name"
-                           ng-model="vm.Model.Name"
-                           ng-disabled="!vm.IsNew"
-                           required pattern="^[a-zA-Z_]+" />
-                </md-input-container>
+                    <md-input-container>
+                        <label>Name</label>
+                        <input type="text" name="Name"
+                               placeholder="Name"
+                               aria-label="Name"
+                               ng-model="vm.Model.Name"
+                               ng-disabled="!vm.IsNew"
+                               required pattern="^[a-zA-Z_]+" />
+                    </md-input-container>
 
-                <md-input-container>
-                    <label>Display Name</label>
-                    <input type="text" name="DisplayName"
-                           aria-label="Display Name"
-                           placeholder="Display Name"
-                           ng-model="vm.Model.DisplayName"
-                           required />
-                </md-input-container>
+                    <md-input-container>
+                        <label>Display Name</label>
+                        <input type="text" name="DisplayName"
+                               aria-label="Display Name"
+                               placeholder="Display Name"
+                               ng-model="vm.Model.DisplayName"
+                               required />
+                    </md-input-container>
 
-                <md-input-container>
-                    <label>Display Plural Name</label>
-                    <input type="text" name="DisplayPluralName"
-                           aria-label="Display Plural Name"
-                           placeholder="Display Plural Name"
-                           ng-model="vm.Model.DisplayPluralName"
-                           required />
-                </md-input-container>
+                    <md-input-container>
+                        <label>Display Plural Name</label>
+                        <input type="text" name="DisplayPluralName"
+                               aria-label="Display Plural Name"
+                               placeholder="Display Plural Name"
+                               ng-model="vm.Model.DisplayPluralName"
+                               required />
+                    </md-input-container>
 
-                <md-list class="attribute-list">
+                    <md-list class="attribute-list">
 
-                    <md-subheader class="md-no-sticky">Attributes</md-subheader>
+                        <md-subheader class="md-no-sticky">Attributes</md-subheader>
 
-                    <md-list-item ng-repeat="attribute in vm.Model.Attributes">
-                        <div class="md-list-item-text" layout="row" layout-align="start start">
+                        <md-list-item ng-repeat="attribute in vm.Model.Attributes">
+                            <div class="md-list-item-text" layout="row" layout-align="start start">
 
-                            <md-input-container>
-                                <input type="text"
-                                       name="Name{{$index}}"
-                                       placeholder="Name"
-                                       aria-label="Attribute Name"
-                                       ng-model="attribute.Name"
-                                       required />
-                            </md-input-container>
+                                <md-input-container>
+                                    <input type="text"
+                                           name="Name{{$index}}"
+                                           placeholder="Name"
+                                           aria-label="Attribute Name"
+                                           ng-model="attribute.Name"
+                                           required />
+                                </md-input-container>
 
-                            <md-input-container>
-                                <input type="text"
-                                       name="DisplayName{{$index}}"
-                                       placeholder="Display Name"
-                                       aria-label="Attribute Display Name"
-                                       ng-model="attribute.DisplayName" required />
-                            </md-input-container>
+                                <md-input-container>
+                                    <input type="text"
+                                           name="DisplayName{{$index}}"
+                                           placeholder="Display Name"
+                                           aria-label="Attribute Display Name"
+                                           ng-model="attribute.DisplayName" required />
+                                </md-input-container>
 
-                            <md-input-container>
-                                <label>Type</label>
-                                <md-select ng-model="attribute.TypeCode"
-                                           aria-label="Attribute Type">
-                                    <md-option ng-repeat="option in vm.TypeCodeOptions" ng-value="option.value">
-                                        {{ option.name }}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
-                            
-                            <md-button ng-show="attribute.TypeCode === 13"
-                                       ng-click="vm.EditEnum(attribute)">
-                                Edit
-                            </md-button>
+                                <md-input-container>
+                                    <label>Type</label>
+                                    <md-select ng-model="attribute.TypeCode"
+                                               aria-label="Attribute Type">
+                                        <md-option ng-repeat="option in vm.TypeCodeOptions" ng-value="option.value">
+                                            {{ option.name }}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
 
-                            <md-checkbox class="md-secondary"
-                                         md-no-ink aria-label="Select Attribute"
-                                         ng-if="vm.Model.Attributes.length > 1"
-                                         ng-model="vm.SelectedAttributes[$index]"></md-checkbox>
+                                <md-button ng-show="attribute.TypeCode === 13"
+                                           ng-click="vm.EditEnum(attribute)">
+                                    Edit
+                                </md-button>
 
-                        </div>
-                    </md-list-item>
+                                <md-checkbox class="md-secondary"
+                                             md-no-ink aria-label="Select Attribute"
+                                             ng-if="vm.Model.Attributes.length > 1"
+                                             ng-model="vm.SelectedAttributes[$index]"></md-checkbox>
 
-                </md-list>
-            </fieldset>
-        </form>
+                            </div>
+                        </md-list-item>
+
+                    </md-list>
+                </form>
+            </md-card-content>
+        </md-card>
 
         <pre class="debug" ng-bind="vm | json" ng-show="vm.Settings.IsDebugEnabled"></pre>
 

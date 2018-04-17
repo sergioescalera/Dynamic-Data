@@ -1,7 +1,5 @@
 ﻿<section class="dashboard">
-    <md-content class="md-padding">
-
-        <h3>Home</h3>
+    <md-content layout-padding>
 
         <md-tabs md-dynamic-height md-border-bottom
                  md-selected="vm.SelectedIndex"
@@ -23,21 +21,26 @@
 
                             </div>                            
                             <md-divider></md-divider>
-                            <md-subheader class="md-no-sticky">Sort By</md-subheader>
-                            <div layout="row" layout-align="start start">
-                                <md-select ng-model="vm.TypeSettings.SortBy"
-                                           aria-label="Sort By">
-                                    <md-option ng-value="''"><em>None</em></md-option>
-                                    <md-option ng-repeat="option in vm.SortByOptions" ng-value="option.Name">
-                                        {{ option.DisplayName }}
-                                    </md-option>
-                                </md-select>
-                                <md-select ng-model="vm.TypeSettings.SortByDescending"
-                                           ng-disabled="!vm.TypeSettings.SortBy"
-                                           aria-label="Descending">
-                                    <md-option ng-value="true">Descending</md-option>
-                                    <md-option ng-value="false">Ascending</md-option>
-                                </md-select>
+                            <div layout="row" layout-align="start start" layout-padding>
+                                <md-input-container>
+                                    <label>Sort By</label>
+                                    <md-select ng-model="vm.TypeSettings.SortBy"
+                                               aria-label="Sort By">
+                                        <md-option ng-value="''"><em>None</em></md-option>
+                                        <md-option ng-repeat="option in vm.SortByOptions"
+                                                   ng-value="option.Name">
+                                            {{ option.DisplayName }}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container>
+                                    <md-select ng-model="vm.TypeSettings.SortByDescending"
+                                               ng-disabled="!vm.TypeSettings.SortBy"
+                                               aria-label="Descending">
+                                        <md-option ng-value="true">Descending</md-option>
+                                        <md-option ng-value="false">Ascending</md-option>
+                                    </md-select>
+                                </md-input-container>
                             </div>
                         </div>
                         <p ng-if="!vm.Entities.length" layout-margin layout-padding>

@@ -88,3 +88,4 @@ var DynamicData;
         ViewModels.DashboardViewModel = DashboardViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=DashboardViewModel.js.map

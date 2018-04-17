@@ -151,3 +151,4 @@ var DynamicData;
         Data.storage = new Storage();
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=Storage.js.map

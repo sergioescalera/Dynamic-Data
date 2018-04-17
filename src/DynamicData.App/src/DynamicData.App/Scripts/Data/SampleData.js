@@ -82,3 +82,4 @@ var DynamicData;
         ]);
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=SampleData.js.map

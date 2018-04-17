@@ -46,3 +46,4 @@ var DynamicData;
         ViewModels.EditEnumViewModel = EditEnumViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=EditEnumViewModel.js.map

@@ -21,3 +21,4 @@ var DynamicData;
         })(AttributeTypeCode = Core.AttributeTypeCode || (Core.AttributeTypeCode = {}));
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=AttributeTypeCode.js.map

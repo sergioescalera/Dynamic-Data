@@ -1,37 +1,58 @@
 ﻿<section class="templates">
-    <md-content class="md-padding">
+    <md-content layout-padding>
 
-        <h3>Manage templates</h3>
+        <md-toolbar layout="row" class="md-hue-3">
+            <div class="md-toolbar-tools">
+                <span>Templates</span>
+            </div>
+        </md-toolbar>
 
-        <div class="md-margin">
-            <md-button class="md-raised"
-                       aria-label="{{ type.DisplayName }}"
-                       ng-repeat="type in vm.Types"
-                       ng-click="vm.SelectType(type)"
-                       ng-class="{ 'md-primary': vm.SelectedType === type }">
+        <md-nav-bar md-no-ink-bar="disableInkBar"
+                    md-selected-nav-item="vm.SelectedType.Name"
+                    nav-bar-aria-label="navigation links">
+            <md-nav-item ng-repeat="type in vm.Types" name="{{ type.Name }}"
+                         md-nav-click="vm.SelectType(type)">
                 <span ng-bind="type.DisplayName"></span>
-            </md-button>
-        </div>
+            </md-nav-item>
+        </md-nav-bar>
 
         <span ng-show="!vm.Types.length">
             <md-button ng-click="vm.Add()">Create your first entity</md-button>
         </span>
 
         <form class="template-editor" ng-hide="!vm.SelectedType">
-            <fieldset layout="row">
-                <legend>Quick View Template</legend>
-                <md-input-container>
-                    <textarea ng-model="vm.QuickViewTemplate" layout-align="start stretch"
-                              spellcheck="false" aria-label="Quick View Template"></textarea>
-                </md-input-container>
-            </fieldset>
-            <fieldset layout="row">
-                <legend>Edit Template</legend>
-                <md-input-container>
-                    <textarea ng-model="vm.EditTemplate" layout-align="start stretch"
-                              spellcheck="false" aria-label="Edit Template"></textarea>
-                </md-input-container>
-            </fieldset>            
+
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Quick View Template</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <div layout="column">
+                        <md-input-container>
+                            <textarea ng-model="vm.QuickViewTemplate" layout-align="start stretch"
+                                      spellcheck="false" aria-label="Quick View Template"></textarea>
+                        </md-input-container>
+                    </div>
+                </md-card-content>
+            </md-card>
+
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Profile</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <div layout="column">
+                        <md-input-container>
+                            <textarea ng-model="vm.EditTemplate" layout-align="start stretch"
+                                      spellcheck="false" aria-label="Edit Template"></textarea>
+                        </md-input-container>
+                    </div>
+                </md-card-content>
+            </md-card>
         </form>
 
     </md-content>

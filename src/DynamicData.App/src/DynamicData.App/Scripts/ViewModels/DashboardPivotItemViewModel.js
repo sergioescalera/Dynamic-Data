@@ -156,3 +156,4 @@ var DynamicData;
         ViewModels.DashboardPivotItemViewModel = DashboardPivotItemViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=DashboardPivotItemViewModel.js.map

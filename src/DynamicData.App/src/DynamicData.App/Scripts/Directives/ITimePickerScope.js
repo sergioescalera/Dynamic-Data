@@ -8,3 +8,4 @@ var DynamicData;
         })(Directives = UI.Directives || (UI.Directives = {}));
     })(UI = DynamicData.UI || (DynamicData.UI = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=ITimePickerScope.js.map

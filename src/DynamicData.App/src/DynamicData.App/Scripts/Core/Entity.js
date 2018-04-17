@@ -46,3 +46,4 @@ var DynamicData;
         Core.Entity = Entity;
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=Entity.js.map

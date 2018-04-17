@@ -68,6 +68,7 @@
             this.Types = this._entityTypeRepository
                 .GetAll()
                 .sort((t1: Core.IEntityType, t2: Core.IEntityType) => t1.Name > t2.Name ? 1 : t1.Name < t2.Name ? -1 : 0);
+            this.SelectType(this.Types[0]);
         }
 
         Add(): void {
@@ -146,22 +147,23 @@
             if (!this.SelectedType) {
                 this.QuickViewTemplate = "";
                 this.EditTemplate = "";
+                return;
             }
 
             this._templateRepository
                 .GetByName(this.SelectedType.Name)
-                .then(((template: Core.IEntityTemplate) => {
+                .then((template: Core.IEntityTemplate) => {
 
                     this.EditTemplate = template.edit;
                     this.QuickViewTemplate = template.quickView;
 
-                }).bind(this))
-                .catch((() => {
+                })
+                .catch(() => {
 
                     this.EditTemplate = "Unable to retrieve template";
                     this.QuickViewTemplate = "Unable to retrieve template";
 
-                }).bind(this));
+                });
         }
     }
 }

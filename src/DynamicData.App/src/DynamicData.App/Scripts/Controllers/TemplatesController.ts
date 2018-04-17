@@ -25,7 +25,13 @@
             entityTypeRepository: Data.IEntityTypeRepository,
             templateRepository: Data.ITemplateRepository) {
 
-            scope.vm = new ViewModels.TemplatesViewModel(scope, location, mdDialog, appBarStatus, entityTypeRepository, templateRepository);
+            scope.vm = new ViewModels.TemplatesViewModel(
+                scope,
+                location,
+                mdDialog,
+                appBarStatus,
+                entityTypeRepository,
+                templateRepository);
 
             appBarStatus.Detail();
             appBarStatus.IsNewDisabled = true;

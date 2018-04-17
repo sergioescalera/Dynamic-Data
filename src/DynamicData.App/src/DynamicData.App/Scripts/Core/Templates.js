@@ -37,3 +37,4 @@ var DynamicData;
         Core.TemplateWrapper = TemplateWrapper;
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=Templates.js.map

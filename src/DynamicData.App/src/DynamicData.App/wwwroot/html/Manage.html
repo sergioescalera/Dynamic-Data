@@ -1,13 +1,18 @@
 ﻿<section class="manage">
-    <md-content class="md-padding">
+    <md-content layout-padding>
 
-        <h3>Manage your schema</h3>
+        <md-toolbar layout="row" class="md-hue-3">
+            <div class="md-toolbar-tools">
+                <span>Manage</span>
+            </div>
+        </md-toolbar>
+
 
         <div ng-repeat="type in vm.Types" class="type-view-container">
 
             <type-quick-view-form type="type" open="vm.Open($index)"></type-quick-view-form>
 
-            <md-checkbox class="md-secondary type-select"                         
+            <md-checkbox class="md-secondary type-select"
                          ng-model="vm.Selected[type.Name]"
                          aria-label="Select Type"
                          ng-change="vm.EnableDeletion()"></md-checkbox>

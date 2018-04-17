@@ -37,3 +37,4 @@ var DynamicData;
             .factory(Data.enumRepositoryName, function () { return new EnumRepository(); });
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=EnumRepository.js.map

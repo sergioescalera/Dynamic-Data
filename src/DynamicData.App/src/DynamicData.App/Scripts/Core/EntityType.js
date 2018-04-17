@@ -108,3 +108,4 @@ var DynamicData;
         Core.EntityType = EntityType;
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=EntityType.js.map

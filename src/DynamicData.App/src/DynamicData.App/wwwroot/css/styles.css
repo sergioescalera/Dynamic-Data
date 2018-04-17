@@ -22,7 +22,7 @@
 .type-view-container .type-select {
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 20px;
 }
 .entity-view-form .entity-name,
 .type-view-form .entity-name {

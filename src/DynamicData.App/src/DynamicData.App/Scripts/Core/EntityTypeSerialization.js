@@ -36,3 +36,4 @@ var DynamicData;
         Core.EntityTypeSerialization = EntityTypeSerialization;
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=EntityTypeSerialization.js.map

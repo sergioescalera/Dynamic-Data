@@ -28,3 +28,4 @@ var DynamicData;
         ]);
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=EntityTypeSettingsRepository.js.map

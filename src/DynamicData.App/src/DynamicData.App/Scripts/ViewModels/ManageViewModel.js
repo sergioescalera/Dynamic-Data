@@ -95,3 +95,4 @@ var DynamicData;
         ViewModels.ManageViewModel = ManageViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=ManageViewModel.js.map

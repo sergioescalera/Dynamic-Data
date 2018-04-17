@@ -19,3 +19,4 @@ var DynamicData;
         Resources.Strings = Strings;
     })(Resources = DynamicData.Resources || (DynamicData.Resources = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=Strings.js.map

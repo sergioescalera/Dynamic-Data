@@ -46,3 +46,4 @@ var DynamicData;
         ]);
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=TemplateRepository.js.map

@@ -191,3 +191,4 @@ var DynamicData;
         ViewModels.FieldEditorViewModel = FieldEditorViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=FieldEditorViewModel.js.map

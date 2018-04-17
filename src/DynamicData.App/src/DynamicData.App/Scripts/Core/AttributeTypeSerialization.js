@@ -25,3 +25,4 @@ var DynamicData;
         Core.AttributeTypeSerialization = AttributeTypeSerialization;
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=AttributeTypeSerialization.js.map

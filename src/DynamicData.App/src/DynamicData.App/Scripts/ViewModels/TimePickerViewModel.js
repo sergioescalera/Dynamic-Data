@@ -19,3 +19,4 @@ var DynamicData;
         ViewModels.TimePickerViewModel = TimePickerViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=TimePickerViewModel.js.map

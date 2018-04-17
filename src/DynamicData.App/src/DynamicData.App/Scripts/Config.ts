@@ -1,5 +1,7 @@
 ﻿module DynamicData.Config {
 
+    declare var app_version: string;
+
     "use strict";
 
     export class RouteParameters {
@@ -93,43 +95,43 @@
         $routeProvider
             .when(Routes.home(), {
                 controller: UI.Controllers.dashboardControllerName,
-                templateUrl: "html/Dashboard.html"
+                templateUrl: `html/Dashboard.html?v=${app_version}`
             })
             .when(Routes.homeWithType(), {
                 controller: UI.Controllers.dashboardControllerName,
-                templateUrl: "html/Dashboard.html"
+                templateUrl: `html/Dashboard.html?v=${app_version}`
             })
             .when(Routes.profile(), {
                 controller: UI.Controllers.profileControllerName,
-                templateUrl: "html/Profile.html"
+                templateUrl: `html/Profile.html?v=${app_version}`
             })
             .when(Routes.settings(), {
                 controller: UI.Controllers.settingsControllerName,
-                templateUrl: "html/Settings.html"
+                templateUrl: `html/Settings.html?v=${app_version}`
             })
             .when(Routes.manage(), {
                 controller: UI.Controllers.manageControllerName,
-                templateUrl: "html/Manage.html"
+                templateUrl: `html/Manage.html?v=${app_version}`
             })
             .when(Routes.typeCreate(), {
                 controller: UI.Controllers.editTypeControllerName,
-                templateUrl: "html/EditType.html"
+                templateUrl: `html/EditType.html?v=${app_version}`
             })
             .when(Routes.type(), {
                 controller: UI.Controllers.editTypeControllerName,
-                templateUrl: "html/EditType.html"
+                templateUrl: `html/EditType.html?v=${app_version}`
             })
             .when(Routes.entityCreate(), {
                 controller: UI.Controllers.entityControllerName,
-                templateUrl: "html/Entity.html"
+                templateUrl: `html/Entity.html?v=${app_version}`
             })
             .when(Routes.entity(), {
                 controller: UI.Controllers.entityControllerName,
-                templateUrl: "html/Entity.html"
+                templateUrl: `html/Entity.html?v=${app_version}`
             })
             .when(Routes.templates(), {
                 controller: UI.Controllers.templatesControllerName,
-                templateUrl: "html/Templates.html"
+                templateUrl: `html/Templates.html?v=${app_version}`
             })
             .otherwise({
                 redirectTo: Routes.home

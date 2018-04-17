@@ -99,3 +99,4 @@ var DynamicData;
         ViewModels.EntityViewModel = EntityViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=EntityViewModel.js.map

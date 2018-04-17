@@ -5,3 +5,4 @@ var DynamicData;
         "use strict";
     })(Core = DynamicData.Core || (DynamicData.Core = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=IAppBarStatus.js.map

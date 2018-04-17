@@ -102,3 +102,4 @@ var DynamicData;
             .factory(Data.entityTypeRepositoryName, function () { return new EntityTypeRepository(); });
     })(Data = DynamicData.Data || (DynamicData.Data = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=EntityTypeRepository.js.map

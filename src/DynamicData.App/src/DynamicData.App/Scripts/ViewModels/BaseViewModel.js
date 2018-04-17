@@ -12,3 +12,4 @@ var DynamicData;
         ViewModels.BaseViewModel = BaseViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=BaseViewModel.js.map

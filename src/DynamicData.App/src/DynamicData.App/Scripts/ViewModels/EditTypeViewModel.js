@@ -194,3 +194,4 @@ var DynamicData;
         ViewModels.EditTypeViewModel = EditTypeViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=EditTypeViewModel.js.map

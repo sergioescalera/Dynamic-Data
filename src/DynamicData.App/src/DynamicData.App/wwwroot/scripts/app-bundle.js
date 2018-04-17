@@ -187,43 +187,43 @@ var DynamicData;
             $routeProvider
                 .when(Routes.home(), {
                 controller: DynamicData.UI.Controllers.dashboardControllerName,
-                templateUrl: "html/Dashboard.html"
+                templateUrl: "html/Dashboard.html?v=" + app_version
             })
                 .when(Routes.homeWithType(), {
                 controller: DynamicData.UI.Controllers.dashboardControllerName,
-                templateUrl: "html/Dashboard.html"
+                templateUrl: "html/Dashboard.html?v=" + app_version
             })
                 .when(Routes.profile(), {
                 controller: DynamicData.UI.Controllers.profileControllerName,
-                templateUrl: "html/Profile.html"
+                templateUrl: "html/Profile.html?v=" + app_version
             })
                 .when(Routes.settings(), {
                 controller: DynamicData.UI.Controllers.settingsControllerName,
-                templateUrl: "html/Settings.html"
+                templateUrl: "html/Settings.html?v=" + app_version
             })
                 .when(Routes.manage(), {
                 controller: DynamicData.UI.Controllers.manageControllerName,
-                templateUrl: "html/Manage.html"
+                templateUrl: "html/Manage.html?v=" + app_version
             })
                 .when(Routes.typeCreate(), {
                 controller: DynamicData.UI.Controllers.editTypeControllerName,
-                templateUrl: "html/EditType.html"
+                templateUrl: "html/EditType.html?v=" + app_version
             })
                 .when(Routes.type(), {
                 controller: DynamicData.UI.Controllers.editTypeControllerName,
-                templateUrl: "html/EditType.html"
+                templateUrl: "html/EditType.html?v=" + app_version
             })
                 .when(Routes.entityCreate(), {
                 controller: DynamicData.UI.Controllers.entityControllerName,
-                templateUrl: "html/Entity.html"
+                templateUrl: "html/Entity.html?v=" + app_version
             })
                 .when(Routes.entity(), {
                 controller: DynamicData.UI.Controllers.entityControllerName,
-                templateUrl: "html/Entity.html"
+                templateUrl: "html/Entity.html?v=" + app_version
             })
                 .when(Routes.templates(), {
                 controller: DynamicData.UI.Controllers.templatesControllerName,
-                templateUrl: "html/Templates.html"
+                templateUrl: "html/Templates.html?v=" + app_version
             })
                 .otherwise({
                 redirectTo: Routes.home
@@ -2436,6 +2436,7 @@ var DynamicData;
                 this.Types = this._entityTypeRepository
                     .GetAll()
                     .sort(function (t1, t2) { return t1.Name > t2.Name ? 1 : t1.Name < t2.Name ? -1 : 0; });
+                this.SelectType(this.Types[0]);
             };
             TemplatesViewModel.prototype.Add = function () {
                 DynamicData.Core.Trace.Message(ViewModels.templatesViewModelName + ".Add");
@@ -2489,17 +2490,18 @@ var DynamicData;
                 if (!this.SelectedType) {
                     this.QuickViewTemplate = "";
                     this.EditTemplate = "";
+                    return;
                 }
                 this._templateRepository
                     .GetByName(this.SelectedType.Name)
-                    .then((function (template) {
+                    .then(function (template) {
                     _this.EditTemplate = template.edit;
                     _this.QuickViewTemplate = template.quickView;
-                }).bind(this))
-                    .catch((function () {
+                })
+                    .catch(function () {
                     _this.EditTemplate = "Unable to retrieve template";
                     _this.QuickViewTemplate = "Unable to retrieve template";
-                }).bind(this));
+                });
             };
             return TemplatesViewModel;
         }(ViewModels.BaseViewModel));

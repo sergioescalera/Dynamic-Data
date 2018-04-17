@@ -57,3 +57,4 @@ var DynamicData;
         ViewModels.SettingsViewModel = SettingsViewModel;
     })(ViewModels = DynamicData.ViewModels || (DynamicData.ViewModels = {}));
 })(DynamicData || (DynamicData = {}));
+//# sourceMappingURL=SettingsViewModel.js.map
