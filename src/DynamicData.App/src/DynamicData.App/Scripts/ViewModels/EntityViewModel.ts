@@ -98,7 +98,7 @@
 
             Core.Trace.Message(`${entityViewModelName}.Add`);
 
-            this._location.url(Config.Routes.entity(this.EntityType.Name));
+            this._location.url(Config.Routes.entityCreate(this.EntityType.Name));
         }
 
         Delete(): void {

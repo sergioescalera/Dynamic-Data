@@ -1,13 +1,15 @@
-﻿module DynamicData.Config {
+﻿declare var app_version: string;
+declare var user_name: string;
+declare var user_email: string;
 
-    declare var app_version: string;
+module DynamicData.Config {
 
     "use strict";
 
     export class RouteParameters {
 
-        static entityType = ":entityType";
-        static entityId = ":entityId";
+        static entityType: string = ":entityType";
+        static entityId: string = ":entityId";
     }
 
     export class Routes {
@@ -33,45 +35,11 @@
 
         static typeCreate = () => "/type";
 
-        static type = (entityType?: string) => {
+        static type = (entityType: string) => `/type/${entityType}`;
 
-            var route: string = `/type/${RouteParameters.entityType}`;
+        static entityCreate = (entityType: string) => `/entity/${entityType}`;
 
-            if (!angular.isUndefined(entityType)) {
-
-                route = route.replace(Config.RouteParameters.entityType, entityType);
-            }
-
-            return route;
-        };
-
-        static entityCreate = (entityType?: string) => {
-
-            var route: string = `/entity/${RouteParameters.entityType}`;
-
-            if (!angular.isUndefined(entityType)) {
-
-                route = route.replace(Config.RouteParameters.entityType, entityType);
-            }
-
-            return route;
-        };
-
-        static entity = (entityType?: string, entityId?: string) => {
-
-            var route: string = `/entity/${RouteParameters.entityType}/${RouteParameters.entityId}`;
-
-            if (!angular.isUndefined(entityType)) {
-                route = route.replace(Config.RouteParameters.entityType, entityType);
-            }
-
-            if (!angular.isUndefined(entityId)) {
-
-                route = route.replace(Config.RouteParameters.entityId, entityId);
-            }
-
-            return route;
-        };
+        static entity = (entityType: string, entityId: string) => `/entity/${entityType}/${entityId}`;
 
         static templates = () => "/templates";
     }
@@ -117,15 +85,15 @@
                 controller: UI.Controllers.editTypeControllerName,
                 templateUrl: `html/EditType.html?v=${app_version}`
             })
-            .when(Routes.type(), {
+            .when(Routes.type(RouteParameters.entityType), {
                 controller: UI.Controllers.editTypeControllerName,
                 templateUrl: `html/EditType.html?v=${app_version}`
             })
-            .when(Routes.entityCreate(), {
+            .when(Routes.entityCreate(RouteParameters.entityType), {
                 controller: UI.Controllers.entityControllerName,
                 templateUrl: `html/Entity.html?v=${app_version}`
             })
-            .when(Routes.entity(), {
+            .when(Routes.entity(RouteParameters.entityType, RouteParameters.entityId), {
                 controller: UI.Controllers.entityControllerName,
                 templateUrl: `html/Entity.html?v=${app_version}`
             })

@@ -2,5 +2,9 @@
   {
     "outputFile": "wwwroot/css/styles.css",
     "inputFile": "wwwroot/css/styles.less"
+  },
+  {
+    "outputFile": "wwwroot/css/sign_in_up.css",
+    "inputFile": "wwwroot/css/sign_in_up.less"
   }
 ]

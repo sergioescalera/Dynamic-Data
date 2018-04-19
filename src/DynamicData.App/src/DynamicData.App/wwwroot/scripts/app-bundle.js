@@ -145,30 +145,9 @@ var DynamicData;
             Routes.settings = function () { return "/settings"; };
             Routes.manage = function () { return "/manage"; };
             Routes.typeCreate = function () { return "/type"; };
-            Routes.type = function (entityType) {
-                var route = "/type/" + RouteParameters.entityType;
-                if (!angular.isUndefined(entityType)) {
-                    route = route.replace(Config.RouteParameters.entityType, entityType);
-                }
-                return route;
-            };
-            Routes.entityCreate = function (entityType) {
-                var route = "/entity/" + RouteParameters.entityType;
-                if (!angular.isUndefined(entityType)) {
-                    route = route.replace(Config.RouteParameters.entityType, entityType);
-                }
-                return route;
-            };
-            Routes.entity = function (entityType, entityId) {
-                var route = "/entity/" + RouteParameters.entityType + "/" + RouteParameters.entityId;
-                if (!angular.isUndefined(entityType)) {
-                    route = route.replace(Config.RouteParameters.entityType, entityType);
-                }
-                if (!angular.isUndefined(entityId)) {
-                    route = route.replace(Config.RouteParameters.entityId, entityId);
-                }
-                return route;
-            };
+            Routes.type = function (entityType) { return "/type/" + entityType; };
+            Routes.entityCreate = function (entityType) { return "/entity/" + entityType; };
+            Routes.entity = function (entityType, entityId) { return "/entity/" + entityType + "/" + entityId; };
             Routes.templates = function () { return "/templates"; };
             return Routes;
         }());
@@ -209,15 +188,15 @@ var DynamicData;
                 controller: DynamicData.UI.Controllers.editTypeControllerName,
                 templateUrl: "html/EditType.html?v=" + app_version
             })
-                .when(Routes.type(), {
+                .when(Routes.type(RouteParameters.entityType), {
                 controller: DynamicData.UI.Controllers.editTypeControllerName,
                 templateUrl: "html/EditType.html?v=" + app_version
             })
-                .when(Routes.entityCreate(), {
+                .when(Routes.entityCreate(RouteParameters.entityType), {
                 controller: DynamicData.UI.Controllers.entityControllerName,
                 templateUrl: "html/Entity.html?v=" + app_version
             })
-                .when(Routes.entity(), {
+                .when(Routes.entity(RouteParameters.entityType, RouteParameters.entityId), {
                 controller: DynamicData.UI.Controllers.entityControllerName,
                 templateUrl: "html/Entity.html?v=" + app_version
             })
@@ -2000,7 +1979,7 @@ var DynamicData;
             };
             EntityViewModel.prototype.Add = function () {
                 DynamicData.Core.Trace.Message(ViewModels.entityViewModelName + ".Add");
-                this._location.url(DynamicData.Config.Routes.entity(this.EntityType.Name));
+                this._location.url(DynamicData.Config.Routes.entityCreate(this.EntityType.Name));
             };
             EntityViewModel.prototype.Delete = function () {
                 DynamicData.Core.Trace.Message(ViewModels.entityViewModelName + ".Delete");

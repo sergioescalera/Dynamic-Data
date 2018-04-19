@@ -39,6 +39,10 @@
 
         var app_version = '@DynamicData.App.Startup.version';
 
+        var user_name = '@Context.User.Identity.Name';
+
+        var user_email = '@Context.User.FindFirst("emails")?.Value';
+
     </script>
     <script src="scripts/app-bundle.js?v=@DynamicData.App.Startup.version"></script>
 </body>

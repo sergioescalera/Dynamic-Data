@@ -70,7 +70,7 @@ var DynamicData;
             };
             EntityViewModel.prototype.Add = function () {
                 DynamicData.Core.Trace.Message(ViewModels.entityViewModelName + ".Add");
-                this._location.url(DynamicData.Config.Routes.entity(this.EntityType.Name));
+                this._location.url(DynamicData.Config.Routes.entityCreate(this.EntityType.Name));
             };
             EntityViewModel.prototype.Delete = function () {
                 DynamicData.Core.Trace.Message(ViewModels.entityViewModelName + ".Delete");

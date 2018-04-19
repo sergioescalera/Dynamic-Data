@@ -1,0 +1,169 @@
+﻿.md-content {
+  background-color: #eee;
+  min-height: 100vh;
+  padding: 8px;
+  position: relative;
+}
+#api {
+  background-color: #fff;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  margin: 8px;
+  width: 420px;
+}
+#api .intro {
+  padding: 24px 16px 16px 16px;
+}
+#api .intro h2 {
+  font-size: 24px;
+  font-weight: 400;
+}
+#api .entry {
+  padding: 0 16px 16px 16px;
+}
+#api .entry .entry-item {
+  margin: 0 0 18px 0;
+  padding: 2px 0 2px 0;
+}
+#api .entry .entry-item label {
+  font-size: 12px;
+  margin: 0 0 5px 0;
+}
+#api #attributeList .attrEntry {
+  margin: 0 0 18px 0;
+  padding: 2px 0 2px 0;
+}
+#api #attributeList .attrEntry label {
+  display: none;
+  font-size: 12px;
+  margin: 0 0 5px 0;
+}
+#api .verify label {
+  display: none;
+}
+#api .error {
+  display: none;
+  color: #dd2c00;
+  font-size: 12px;
+  margin: 2px 0;
+}
+#api .error.show {
+  display: block;
+}
+#api .localAccount .error.pageLevel {
+  padding: 0 16px;
+}
+#api input {
+  display: block;
+  margin-top: 0;
+  background-color: none;
+  font-size: 14px;
+  padding: 2px 2px 1px;
+  border-width: 0 0 1px;
+  line-height: 26px;
+  height: 30px;
+  border-radius: 0;
+  border-style: solid;
+  width: 100%;
+  box-sizing: border-box;
+}
+#api #attributeVerification {
+  padding: 0 16px 16px 16px;
+}
+#api .verificationInfoText {
+  font-size: 14px;
+}
+#api button {
+  background: transparent;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  min-height: 36px;
+  min-width: 88px;
+  line-height: 36px;
+  vertical-align: middle;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  border: 0;
+  padding: 0px 6px;
+  margin: 6px 0;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  font-style: inherit;
+  font-variant: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  -webkit-transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+#api .buttons {
+  margin: 8px 0;
+}
+#api .buttons #next,
+#api .buttons #continue {
+  background: #3949ab;
+  color: rgba(255, 255, 255, 0.87);
+}
+#api .divider {
+  display: none;
+  margin: 0 16px;
+}
+#api .divider h2 {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+#api .create {
+  margin: 0 16px;
+  padding: 0 0 16px 0;
+}
+#api #forgotPassword {
+  font-size: 12px;
+  margin: 0 1px;
+}
+#api #createAccount {
+  margin: 0 10px;
+}
+#api a {
+  text-decoration: none;
+}
+#api .helpLink {
+  display: none;
+}
+#api ul {
+  margin: 0;
+  padding: 0;
+}
+#api ul li {
+  list-style: none;
+}
+#api .verify label {
+  display: none !important;
+}
+#api .verifying-modal {
+  display: none;
+}
