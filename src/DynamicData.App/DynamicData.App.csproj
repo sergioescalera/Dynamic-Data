@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.22.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="wwwroot\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\*.ts" />
+    <None Remove="Scripts\Controllers\*.ts" />
+    <None Remove="Scripts\Core\*.ts" />
+    <None Remove="Scripts\Data\*.ts" />
+    <None Remove="Scripts\Directives\*.ts" />
+    <None Remove="Scripts\Resources\*.ts" />
+    <None Remove="Scripts\ViewModels\*.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\*.ts" />
+    <TypeScriptCompile Include="Scripts\Controllers\*.ts" />
+    <TypeScriptCompile Include="Scripts\Core\*.ts" />
+    <TypeScriptCompile Include="Scripts\Data\*.ts" />
+    <TypeScriptCompile Include="Scripts\Directives\*.ts" />
+    <TypeScriptCompile Include="Scripts\Resources\*.ts" />
+    <TypeScriptCompile Include="Scripts\ViewModels\*.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\Filters\Format.ts" />
+    <None Remove="_typings\angular\angular-material.d.ts" />
+    <None Remove="_typings\angular\angular-route.d.ts" />
+    <None Remove="_typings\angular\angular.d.ts" />
+    <None Remove="_typings\jquery\jquery.d.ts" />
+    <None Remove="_typings\lodash\lodash.d.ts" />
+    <None Remove="_typings\moment\moment.d.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Filters\Format.ts" />
+    <TypeScriptCompile Include="_typings\angular\angular-material.d.ts" />
+    <TypeScriptCompile Include="_typings\angular\angular-route.d.ts" />
+    <TypeScriptCompile Include="_typings\angular\angular.d.ts" />
+    <TypeScriptCompile Include="_typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="_typings\lodash\lodash.d.ts" />
+    <TypeScriptCompile Include="_typings\moment\moment.d.ts" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+</Project>

@@ -250,3 +250,9 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+#Generated_Code
+src/DynamicData.App/Scripts/*.js
+src/DynamicData.App/Scripts/*.js.map
+src/DynamicData.App/Scripts/**/*.js
+src/DynamicData.App/Scripts/**/*.js.map
