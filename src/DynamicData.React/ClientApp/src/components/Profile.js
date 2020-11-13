@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-export class Home extends Component {
+export class Profile extends Component {
 
-    static displayName = Home.name;
+    static displayName = Profile.name;
 
     render() {
         return (
             <div>
-                Home
+                Profile
             </div>
         );
     }

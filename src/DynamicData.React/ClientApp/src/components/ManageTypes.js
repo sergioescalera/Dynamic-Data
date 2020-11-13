@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-export class Home extends Component {
+export class ManageTypes extends Component {
 
-    static displayName = Home.name;
+    static displayName = ManageTypes.name;
 
     render() {
         return (
             <div>
-                Home
+                Manage Types
             </div>
         );
     }

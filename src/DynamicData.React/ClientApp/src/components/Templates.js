@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-export class Home extends Component {
+export class Templates extends Component {
 
-    static displayName = Home.name;
+    static displayName = Templates.name;
 
     render() {
         return (
             <div>
-                Home
+                Templates
             </div>
         );
     }
