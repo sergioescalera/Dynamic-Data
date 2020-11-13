@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2DD1AFE9-2164-44A2-B87F-87287F040DEF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7EE2B4F-29FE-441D-829E-F75495F2DADF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicData.App", "src\DynamicData.App\DynamicData.App.csproj", "{9A779705-782A-40FA-89A1-253C678CB350}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicData.React", "src\DynamicData.React\DynamicData.React.csproj", "{F1456CD9-3417-490A-B15E-07BFFFC2A992}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,12 +21,17 @@ Global
 		{9A779705-782A-40FA-89A1-253C678CB350}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A779705-782A-40FA-89A1-253C678CB350}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A779705-782A-40FA-89A1-253C678CB350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1456CD9-3417-490A-B15E-07BFFFC2A992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1456CD9-3417-490A-B15E-07BFFFC2A992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1456CD9-3417-490A-B15E-07BFFFC2A992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1456CD9-3417-490A-B15E-07BFFFC2A992}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9A779705-782A-40FA-89A1-253C678CB350} = {2DD1AFE9-2164-44A2-B87F-87287F040DEF}
+		{F1456CD9-3417-490A-B15E-07BFFFC2A992} = {2DD1AFE9-2164-44A2-B87F-87287F040DEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {222C859C-D48C-4FBA-9BBA-9EA0A26498B4}
