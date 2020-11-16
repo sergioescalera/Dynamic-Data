@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
+import { EditType } from './components/EditType';
 import { Home } from './components/Home';
 import { Layout } from './components/Layout';
 import { ManageTypes } from './components/ManageTypes';
@@ -20,6 +21,8 @@ export default class App extends Component {
                 <Route exact path='/settings' component={Settings} />
                 <Route exact path='/templates' component={Templates} />
                 <Route exact path='/manage' component={ManageTypes} />
+                <Route exact path='/type' component={EditType} />
+                <Route exact path='/type/:id' component={EditType} />
             </Layout>
         );
     }
