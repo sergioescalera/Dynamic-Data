@@ -9,7 +9,6 @@ import { Settings } from './components/Settings';
 import { Templates } from './components/Templates';
 import './custom.css';
 
-
 export default class App extends Component {
     static displayName = App.name;
 

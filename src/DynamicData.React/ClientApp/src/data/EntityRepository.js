@@ -1,5 +1,5 @@
-﻿import { Strings } from './core/Resources';
-import { DataActionResults } from './core/DataAction';
+﻿import { Strings } from '../core/Resources';
+import { DataActionResults } from '../core/DataAction';
 
 export class EntityRepository {
 

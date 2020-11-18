@@ -1,7 +1,7 @@
-﻿import { AttributeType } from './core/AttributeType';
-import { AttributeTypeCode } from './core/AttributeTypeCode';
-import { EntityType } from './core/EntityType';
-import { Strings } from './core/Resources';
+﻿import { AttributeType } from '../core/AttributeType';
+import { AttributeTypeCode } from '../core/AttributeTypeCode';
+import { EntityType } from '../core/EntityType';
+import { Strings } from '../core/Resources';
 
 export class SampleData {
 

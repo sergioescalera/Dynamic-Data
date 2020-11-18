@@ -1,6 +1,6 @@
-﻿import { DataActionResults } from '.core/DataAction';
-import { Strings } from './core/Resources';
-import { Trace } from './core/Trace';
+﻿import { DataActionResults } from '../core/DataAction';
+import { Strings } from '../core/Resources';
+import { Trace } from '../core/Trace';
 
 export class EntityTypeRepository {
 

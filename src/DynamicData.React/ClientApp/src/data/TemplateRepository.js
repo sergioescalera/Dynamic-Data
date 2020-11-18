@@ -1,28 +1,21 @@
-﻿import { TemplateWrapper } from '../core/Template';
+﻿import { Strings } from '../core/Resources';
+import { TemplateWrapper } from '../core/Template';
 
 export class TemplateRepository {
 
     _edit;
-    //_editPromise;
     _quickView;
-    //_quickViewPromise;
 
-    //constructor() {
+    _storage;
 
-        //this._editPromise = http
-        //    .get("html/Entity.html")
-        //    .then((response: ng.IHttpPromiseCallbackArg<string>) => {
+    constructor(storage) {
 
-        //        this._edit = response.data;
-        //    });
+        if (!storage) {
+            throw new Error(Strings.RequiredArgumentMessageFormat("storage"));
+        }
 
-        //this._quickViewPromise = http
-        //    .get("html/EntityQuickViewForm.html")
-        //    .then((response: ng.IHttpPromiseCallbackArg<string>) => {
-
-        //        this._quickView = response.data;
-        //    });
-    //}
+        this._storage = storage;
+    }
 
     Delete(name) {
 
