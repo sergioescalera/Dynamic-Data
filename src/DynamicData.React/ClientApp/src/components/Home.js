@@ -16,10 +16,11 @@ export class Home extends Component {
     _typeRepository;
     _types;
     _sampleData;
+    _entityTypeName;
 
-    constructor() {
+    constructor(props) {
 
-        super();
+        super(props);
 
         this._storage = new Storage();
         this._typeRepository = new EntityTypeRepository(this._storage);
@@ -27,22 +28,16 @@ export class Home extends Component {
         this._types = this._typeRepository.GetAll();
         this._sampleData = new SampleData(this._typeRepository, new TemplateRepository(this._storage));
 
+        this._entityTypeName = props.match.params.name || this._settings.CurrentEntityType;
+
+        this._settings.CurrentEntityType = this._entityTypeName;
+        this._storage.Settings = this._settings;
+
         this.state = {
             noData: this._types.length === 0,
             types: this._types,
-            selectedType: this._settings.CurrentEntityType
+            selectedType: this._types.find(t => t.Name === this._entityTypeName) || this._types[0]
         };
-    }
-
-    toggle(type) {
-
-        this._settings.CurrentEntityType = type.Name;
-
-        this._storage.Settings = this._settings;
-
-        this.setState({
-            selectedType: type.Name
-        });
     }
 
     installData() {
@@ -76,24 +71,20 @@ export class Home extends Component {
 
                             <NavItem key={t.Name}>
                                 <NavLink
-                                    className={classnames({ active: this.state.selectedType === t.Name })}
-                                    onClick={() => this.toggle(t)}>{t.DisplayName}
+                                    className={classnames({ active: this.state.selectedType.Name === t.Name })}
+                                    href={"/home/" + t.Name}>
+                                    {t.DisplayName}
                                 </NavLink>
                             </NavItem>
 
                         )
                     }
                 </Nav>
-                <TabContent activeTab={this.state.selectedType}>
-                    {
-                        this.state.types.map(t =>
-
-                            <TabPane key={t.Name} tabId={t.Name}>
-                                <EntityList entityType={t}></EntityList>
-                            </TabPane>
-
-                        )
-                    }
+                <TabContent activeTab={this.state.selectedType.Name}>
+                    <TabPane tabId={this.state.selectedType.Name}>
+                        <br />
+                        <EntityList entityType={this.state.selectedType}></EntityList>
+                    </TabPane>
                 </TabContent>
             </div>
         );

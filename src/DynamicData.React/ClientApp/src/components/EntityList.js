@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Alert, Button } from 'reactstrap';
+import { Alert } from 'reactstrap';
 import { EntityRepository } from '../data/EntityRepository';
 import { EntityTypeRepository } from '../data/EntityTypeRepository';
 import { Storage } from '../data/Storage';
@@ -36,7 +36,7 @@ export class EntityList extends Component {
             return (
                 <Alert color="secondary">
                     <p>It's lonely here...</p>
-                    <Button color="primary" outline>Create your first {this.state.type.DisplayName}</Button>
+                    <a className="btn btn-outline-primary" href={"/entity/" + this.state.type.Name}>Create your first {this.state.type.DisplayName}</a>
                 </Alert>
             );
         }

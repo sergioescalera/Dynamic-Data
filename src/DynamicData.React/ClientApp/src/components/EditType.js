@@ -10,7 +10,7 @@ export class EditType extends Component {
 
         super(props);
 
-        this._entityTypeName = props.match.params.id || "";
+        this._entityTypeName = props.match.params.name || "";
     }
 
     render() {

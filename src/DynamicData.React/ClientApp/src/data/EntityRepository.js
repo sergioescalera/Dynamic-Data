@@ -37,6 +37,14 @@ export class EntityRepository {
 
     GetById(type, entityId) {
 
+        if (!type) {
+            throw new Error(Strings.RequiredArgumentMessageFormat("type"));
+        }
+
+        if (!entityId) {
+            return null;
+        }
+
         const entities = this.GetByType(type);
 
         if (!entities) {

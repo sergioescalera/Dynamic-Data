@@ -22,11 +22,15 @@ export class EntityTypeRepository {
 
     GetByName(entityTypeName) {
 
+        if (!entityTypeName) {
+            return null;
+        }
+
         const types = this.GetAll();
 
         const filtered = types.filter((t) => t.Name === entityTypeName);
 
-        return filtered.length ? filtered[0] : null;
+        return filtered[0] || null;
     }
 
     BulkCreate(types) {
