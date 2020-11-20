@@ -3,6 +3,7 @@ import { Alert } from 'reactstrap';
 import { EntityRepository } from '../data/EntityRepository';
 import { EntityTypeRepository } from '../data/EntityTypeRepository';
 import { Storage } from '../data/Storage';
+import { EntityView } from './EntityView';
 
 export class EntityList extends Component {
 
@@ -28,6 +29,26 @@ export class EntityList extends Component {
             entities: this._entities,
             type: this._type
         };
+
+        document.addEventListener("add", () => window.location.href = "/entity/" + this.state.type.Name, false);
+
+        document.addEventListener("refresh", () => this.refresh(), false);
+
+        document.addEventListener("delete", () => this.delete(), false);
+    }
+
+    refresh() {
+
+        this._entities = this._entityRepository.GetByType(this._type);
+
+        this.setState({
+            noData: this._entities.length === 0,
+            entities: this._entities
+        });
+    }
+
+    delete() {
+
     }
 
     render() {
@@ -42,7 +63,11 @@ export class EntityList extends Component {
         }
 
         return (
-            <div>Entity List goes here</div>
+            <div>
+                {
+                    this.state.entities.map((entity) => <EntityView key={entity.Id} entity={entity} entityType={this.state.type}></EntityView>)
+                }
+            </div>
         );
     }
 }

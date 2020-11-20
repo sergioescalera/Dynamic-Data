@@ -1,8 +1,10 @@
 ﻿import React, { Component } from 'react';
+import { Form } from 'reactstrap';
 import { Entity } from '../core/Entity';
 import { EntityRepository } from '../data/EntityRepository';
 import { EntityTypeRepository } from '../data/EntityTypeRepository';
 import { Storage } from '../data/Storage';
+import { FieldEditor } from './FieldEditor';
 
 export class EditEntity extends Component {
 
@@ -40,6 +42,12 @@ export class EditEntity extends Component {
             type: this._type,
             model: Object.create(this._entity.Fields)
         };
+
+        document.addEventListener("save", () => this.save(), false);
+
+        document.addEventListener("add", () => this.redirectEntityCreate(), false);
+
+        document.addEventListener("cancel", () => this.redirectEntityList(), false);
     }
 
     redirectHome() {
@@ -47,15 +55,33 @@ export class EditEntity extends Component {
         window.location.href = "/home";
     }
 
-    redirectEntityList() {
+    redirectEntityCreate() {
 
         window.location.href = "/entity/" + this._type.Name;
+    }
+
+    redirectEntityList() {
+
+        window.location.href = "/home/" + this._type.Name;
+    }
+
+    save() {
+
+        this._entityRepository.CreateOrUpdate(this._entity);
+
+        this.redirectEntityList();
     }
 
     render() {
 
         return (
-            <div>Entity goes here</div>
+            <Form>
+                {
+                    this.state.type.Attributes.map(attr =>
+                        <FieldEditor key={attr.Name} attribute={attr} value={this.state.model[attr.Name]}></FieldEditor>
+                    )
+                }
+            </Form>
         );
     }
 }

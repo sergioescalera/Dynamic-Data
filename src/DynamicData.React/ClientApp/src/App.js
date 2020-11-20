@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
+import { Redirect, Route } from 'react-router';
 import { EditEntity } from './components/EditEntity';
 import { EditType } from './components/EditType';
 import { Home } from './components/Home';
@@ -11,6 +11,7 @@ import { Templates } from './components/Templates';
 import './custom.css';
 
 export default class App extends Component {
+
     static displayName = App.name;
 
     render() {

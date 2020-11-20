@@ -63,6 +63,49 @@ export class AttributeType {
         return AttributeTypeCode[this._typeCode];
     }
 
+    get HtmlInputType() {
+
+        if (this._typeCode === AttributeTypeCode.Email) {
+            return "email";
+        }
+
+        if (this._typeCode === AttributeTypeCode.Decimal ||
+            this._typeCode === AttributeTypeCode.Int ||
+            this._typeCode === AttributeTypeCode.Currency) {
+            return "number";
+        }
+
+        if (this._typeCode === AttributeTypeCode.Time) {
+            return "time";
+        }
+
+        if (this._typeCode === AttributeTypeCode.Date) {
+            return "date";
+        }
+
+        if (this._typeCode === AttributeTypeCode.DateTime) {
+            return "datetime-local";
+        }
+
+        if (this._typeCode === AttributeTypeCode.Url) {
+            return "url";
+        }
+
+        if (this._typeCode === AttributeTypeCode.Phone) {
+            return "tel";
+        }
+
+        if (this._typeCode === AttributeTypeCode.Enum) {
+            return "select";
+        }
+
+        if (this._typeCode === AttributeTypeCode.Boolean) {
+            return "checkbox";
+        }
+
+        return "text";
+    }
+
     get IsSystemAttribute() {
 
         return systemAttributes()

@@ -22,6 +22,13 @@ export class NavMenu extends Component {
         });
     }
 
+    fireCommand(cmd) {
+
+        const event = new Event(cmd);
+
+        document.dispatchEvent(event);
+    }
+
     render() {
         return (
             <header>
@@ -55,27 +62,27 @@ export class NavMenu extends Component {
                     </Nav>
                     <Nav className="w-50 justify-content-end">
                         <NavItem>
-                            <NavLink tag={Link} className="text-dark" to="/">
+                            <NavLink tag={Link} className="text-dark" to="#" onClick={() => this.fireCommand('add')}>
                                 <FaPlus />
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} className="text-dark" to="/">
+                            <NavLink tag={Link} className="text-dark" to="#" onClick={() =>this.fireCommand('refresh')}>
                                 <FaRedo />
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} className="text-dark" to="/">
+                            <NavLink tag={Link} className="text-dark" to="#" onClick={() =>this.fireCommand('delete')}>
                                 <FaTrash />
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} className="text-dark" to="/">
+                            <NavLink tag={Link} className="text-dark" to="#" onClick={() =>this.fireCommand('save')}>
                                 <FaSave />
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} className="text-dark" to="/">
+                            <NavLink tag={Link} className="text-dark" to="#" onClick={() => this.fireCommand('cancel')}>
                                 <FaTimes />
                             </NavLink>
                         </NavItem>
