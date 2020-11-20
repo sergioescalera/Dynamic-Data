@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import { Card, CardBody } from 'reactstrap';
 
 export class EntityView extends Component {
 
@@ -21,12 +22,17 @@ export class EntityView extends Component {
     render() {
 
         return (
-            <ul>
-                {
-                    this.state.type.Attributes.map(attr =>
-                        <li key={attr.Name}>{attr.DisplayName}: {this.state.entity.Fields[attr.Name]}</li>)
-                }
-            </ul>
+            <Card>
+                <CardBody>
+                    {
+                        this.state.type.Attributes.map(attr =>
+                            <div key={attr.Name}>
+                                {attr.DisplayName}: {this.state.entity.Fields[attr.Name]}
+                            </div>
+                        )
+                    }
+                </CardBody>
+            </Card>
         );
     }
 }

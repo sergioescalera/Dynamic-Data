@@ -1,11 +1,11 @@
-﻿import { Strings } from './core/Resources';
+﻿import { Strings } from "../core/Resources";
 
 export class EnumRepository {
 
     _storage;
 
     constructor(storage) {
-
+        
         if (!storage) {
             throw new Error(Strings.RequiredArgumentMessageFormat("storage"));
         }

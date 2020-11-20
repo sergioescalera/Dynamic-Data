@@ -82,7 +82,6 @@ export class Home extends Component {
                 </Nav>
                 <TabContent activeTab={this.state.selectedType.Name}>
                     <TabPane tabId={this.state.selectedType.Name}>
-                        <br />
                         <EntityList entityType={this.state.selectedType}></EntityList>
                     </TabPane>
                 </TabContent>
