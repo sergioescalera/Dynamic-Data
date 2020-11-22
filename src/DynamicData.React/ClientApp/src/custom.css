@@ -6,6 +6,7 @@
     position: relative;
 }
 
+.type-list-item input[type=checkbox],
 .entity-list-item input[type=checkbox] {
     position: absolute;
     top: 5px;

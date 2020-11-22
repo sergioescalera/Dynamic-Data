@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Route } from 'react-router';
+import { Route } from 'react-router';
 import { EditEntity } from './components/EditEntity';
 import { EditType } from './components/EditType';
 import { Home } from './components/Home';

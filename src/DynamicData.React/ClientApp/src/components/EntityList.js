@@ -80,10 +80,7 @@ export class EntityList extends Component {
         this.setState({
             noData: this._entities.length === 0,
             entities: this._entities,
-            showNoneSelectedAlert: false
-        });
-
-        this.setState({
+            showNoneSelectedAlert: false,
             showDeleteConfirmationModal: false
         });
     }
