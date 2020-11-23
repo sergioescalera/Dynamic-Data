@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FaEdit } from 'react-icons/fa';
-import { Alert, Button, Card, CardBody, CardText, CardTitle, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
+import { Alert, Button, Card, CardBody, CardTitle, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
 import { EntityTypeRepository } from '../data/EntityTypeRepository';
 import { Storage } from '../data/Storage';
 import { AttributeSummary } from './AttributeSummary';
@@ -126,7 +126,7 @@ export class ManageTypes extends Component {
                 <Modal isOpen={this.state.showDeleteConfirmationModal} fade={false} toggle={() => this.cancelDelete()}>
                     <ModalHeader toggle={() => this.cancelDelete()}>Confirm Action</ModalHeader>
                     <ModalBody>
-                        Are you sure you want to delete these items?
+                        Are you sure you want to delete these types?
                     </ModalBody>
                     <ModalFooter>
                         <Button color="danger" onClick={() => this.confirmDelete()}>Yes</Button>
@@ -143,9 +143,7 @@ export class ManageTypes extends Component {
                                         <CardTitle>
                                             {type.DisplayName} <a href={"/type/" + type.Name}><FaEdit></FaEdit></a>
                                         </CardTitle>
-                                        <CardText>
-                                            <AttributeSummary type={type}></AttributeSummary>
-                                        </CardText>
+                                        <AttributeSummary type={type}></AttributeSummary>
                                         <Input type="checkbox" onChange={() => this.toggle(type)} />
                                     </CardBody>
                                 </Card>

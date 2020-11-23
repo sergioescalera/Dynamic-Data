@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { FaEdit, FaTimes } from 'react-icons/fa';
-import { Button, Form, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Button, Card, CardBody, CardTitle, Form, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Entity } from '../core/Entity';
 import { EntityRepository } from '../data/EntityRepository';
 import { EntityTypeRepository } from '../data/EntityTypeRepository';
@@ -115,33 +115,38 @@ export class EditEntity extends Component {
                     <ModalHeader toggle={() => this.cancelDelete()}>Confirm Action</ModalHeader>
                     <ModalBody>
                         Are you sure you want to delete this item?
-                </ModalBody>
+                            </ModalBody>
                     <ModalFooter>
                         <Button color="danger" onClick={() => this.confirmDelete()}>Yes</Button>
                         <Button color="secondary" onClick={() => this.cancelDelete()}>No</Button>
                     </ModalFooter>
                 </Modal>
-                <Form onSubmit={(event) => this.save(event)} noValidate>
-                    {
-                        this.state.type.Attributes.map(attr =>
-                            <FieldEditor key={attr.Name}
-                                attribute={attr}
-                                value={this.state.model[attr.Name]}></FieldEditor>
-                        )
-                    }
-                    <div className="text-right">
-                        <Button color="primary"
-                            type="submit"
-                            className="mr-2">
-                            <FaEdit className="mb-1" /> Save
-                    </Button>
-                        <Button color="secondary"
-                            type="button"
-                            onClick={() => this.redirectEntityList()}>
-                            <FaTimes className="mb-1" /> Cancel
-                    </Button>
-                    </div>
-                </Form>
+                <Card>
+                    <CardBody>
+                        <CardTitle>{this.state.type.DisplayName}</CardTitle>
+                        <Form onSubmit={(event) => this.save(event)} noValidate>
+                            {
+                                this.state.type.Attributes.map(attr =>
+                                    <FieldEditor key={attr.Name}
+                                        attribute={attr}
+                                        value={this.state.model[attr.Name]}></FieldEditor>
+                                )
+                            }
+                            <div className="text-right">
+                                <Button color="primary"
+                                    type="submit"
+                                    className="mr-2">
+                                    <FaEdit className="mb-1" /> Save
+                                </Button>
+                                <Button color="secondary"
+                                    type="button"
+                                    onClick={() => this.redirectEntityList()}>
+                                    <FaTimes className="mb-1" /> Cancel
+                                </Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                </Card>
             </div>
         );
     }

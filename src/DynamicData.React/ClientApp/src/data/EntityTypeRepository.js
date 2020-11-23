@@ -1,4 +1,5 @@
-﻿import { DataActionResults } from '../core/DataAction';
+﻿import { AttributeTypeCode } from '../core/AttributeTypeCode';
+import { DataActionResults } from '../core/DataAction';
 import { Strings } from '../core/Resources';
 import { Trace } from '../core/Trace';
 
@@ -13,6 +14,22 @@ export class EntityTypeRepository {
         }
 
         this._storage = storage;
+    }
+
+    New() {
+
+        return {
+            Name: '',
+            DisplayName: '',
+            DisplayPluralName: '',
+            Attributes: [
+                {
+                    Name: '',
+                    DisplayName: '',
+                    TypeCode: AttributeTypeCode.String
+                }
+            ]
+        };
     }
 
     GetAll() {
