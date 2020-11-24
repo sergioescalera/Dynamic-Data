@@ -21,8 +21,6 @@
 .entity-view-container .type-select,
 .type-view-container .type-select {
   position: absolute;
-  right: 20px;
-  top: 20px;
   min-height: 24px;
 }
 .entity-view-container .entity-select .md-container,
@@ -30,6 +28,16 @@
 .entity-view-container .type-select .md-container,
 .type-view-container .type-select .md-container {
   margin: 3px;
+}
+.entity-view-container .entity-select,
+.type-view-container .entity-select {
+  right: 10px;
+  top: 20px;
+}
+.entity-view-container .type-select,
+.type-view-container .type-select {
+  right: 20px;
+  top: 30px;
 }
 .entity-view-form .entity-name,
 .type-view-form .entity-name {
