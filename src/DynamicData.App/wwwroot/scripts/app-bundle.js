@@ -1675,7 +1675,7 @@ var DynamicData;
     (function (ViewModels) {
         "use strict";
         var EditEnumViewModel = /** @class */ (function () {
-            function EditEnumViewModel(scope, mdDialog, enumRepository, name) {
+            function EditEnumViewModel(scope, mdDialog, mdConstant, enumRepository, name) {
                 if (!scope) {
                     throw new Error(DynamicData.Resources.Strings.RequiredArgumentMessageFormat("scope"));
                 }
@@ -1689,6 +1689,7 @@ var DynamicData;
                 this._enumRepository = enumRepository;
                 this.Enums = enumRepository.GetAll();
                 this.Item = this.Enums.filter(function (o) { return o.Name === name; })[0] || null;
+                this.SeparatorKeys = [mdConstant.KEY_CODE.ENTER, mdConstant.KEY_CODE.COMMA];
                 scope.$watch("vm.Item", this.LoadEnum.bind(this));
             }
             EditEnumViewModel.prototype.Ok = function () {
@@ -2867,12 +2868,13 @@ var DynamicData;
         (function (Controllers) {
             "use strict";
             var EditEnumController = /** @class */ (function () {
-                function EditEnumController(scope, mdDialog, enumRepository, name) {
-                    scope.vm = new DynamicData.ViewModels.EditEnumViewModel(scope, mdDialog, enumRepository, name);
+                function EditEnumController(scope, mdDialog, mdConstant, enumRepository, name) {
+                    scope.vm = new DynamicData.ViewModels.EditEnumViewModel(scope, mdDialog, mdConstant, enumRepository, name);
                 }
                 EditEnumController.$inject = [
                     "$scope",
                     "$mdDialog",
+                    "$mdConstant",
                     DynamicData.Data.enumRepositoryName,
                     "name"
                 ];
