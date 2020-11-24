@@ -2,13 +2,15 @@
     cursor: pointer;
 }
 
-.entity-list-item {
+.entity-list-item,
+.attribute-list-item {
     position: relative;
 }
 
-.type-list-item input[type=checkbox],
-.entity-list-item input[type=checkbox] {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-}
+    .type-list-item input[type=checkbox],
+    .entity-list-item input[type=checkbox],
+    .attribute-list-item input[type=checkbox] {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+    }

@@ -46,12 +46,12 @@ export class EditType extends Component {
         document.addEventListener("save", () => this.save(), false);
 
         document.addEventListener("cancel", () => this.redirectManageTypes(), false);
+
+        document.addEventListener("refresh", () => window.location.reload(), false);
     }
 
     save(event) {
 
-
-        
         if (event) {
             event.preventDefault();
         }

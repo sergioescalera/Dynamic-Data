@@ -27,3 +27,19 @@
     static 12 = "Time";
     static 13 = "Enum";
 }
+
+export const ATTRIBUTE_TYPE_CODES = [
+    AttributeTypeCode.Boolean,
+    AttributeTypeCode.Date,
+    AttributeTypeCode.DateTime,
+    AttributeTypeCode.Decimal,
+    AttributeTypeCode.Email,
+    AttributeTypeCode.Int,
+    AttributeTypeCode.Phone,
+    AttributeTypeCode.String,
+    AttributeTypeCode.Text,
+    AttributeTypeCode.Url,
+    AttributeTypeCode.Currency,
+    AttributeTypeCode.Time,
+    AttributeTypeCode.Enum
+];
