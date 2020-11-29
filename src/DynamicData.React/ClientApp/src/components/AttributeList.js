@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Alert, Button, Input, ListGroup, ListGroupItem, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Alert, Button, Input, ListGroup, ListGroupItem, ListGroupItemHeading, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { AttributeTypeCode } from '../core/AttributeTypeCode';
 import { EditAttribute } from './EditAttribute';
 
@@ -33,7 +33,8 @@ export class AttributeList extends Component {
         this._attributes.push({
             Name: "",
             DisplayName: "",
-            TypeCode: AttributeTypeCode.String
+            TypeCode: AttributeTypeCode.String,
+            EnumName: "",
         });
 
         this.setState({
@@ -67,6 +68,10 @@ export class AttributeList extends Component {
         this._attributes
             .filter((_, index) => this._selected[index] === true)
             .forEach((attr) => {
+
+                if (this._attributes.length <= 1) {
+                    return;
+                }
 
                 const index = this._attributes.indexOf(attr);
 
@@ -117,12 +122,18 @@ export class AttributeList extends Component {
                     </ModalFooter>
                 </Modal>
                 <ListGroup>
+                    <ListGroupItem color="info">
+                        <ListGroupItemHeading>Attribute List</ListGroupItemHeading>
+                    </ListGroupItem>
                     {
                         this.state.attributes.map((attr, index) =>
                             <ListGroupItem className="attribute-list-item"
                                 key={"attr_" + index + "_" + this.state.count}>
-                                <EditAttribute attribute={attr} index={index}></EditAttribute>
-                                <Input type="checkbox" onChange={() => this.toggle(index)} />
+                                <EditAttribute attribute={attr}
+                                    index={index}></EditAttribute>
+                                <Input type="checkbox"
+                                    onChange={() => this.toggle(index)}
+                                    disabled={this.state.count === 1} />
                             </ListGroupItem>
                         )
                     }

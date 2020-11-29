@@ -26,7 +26,8 @@ export class EntityTypeRepository {
                 {
                     Name: '',
                     DisplayName: '',
-                    TypeCode: AttributeTypeCode.String
+                    TypeCode: AttributeTypeCode.String,
+                    EnumName: ''
                 }
             ]
         };

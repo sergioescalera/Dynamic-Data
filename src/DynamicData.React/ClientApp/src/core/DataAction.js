@@ -14,6 +14,19 @@ export class DataActionResult {
         this.Success = !error;
         this.Error = error || DataActionError.None;
     }
+
+    get ErrorMessage() {
+
+        if (Error === DataActionError.NotFound) {
+            return "Item not found";
+        }
+
+        if (Error === DataActionError.NotFound) {
+            return "Duplicated item";
+        }
+
+        return "";
+    }
 }
 
 export class DataActionResults {

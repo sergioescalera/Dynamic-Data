@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FaEdit, FaTimes } from 'react-icons/fa';
-import { Alert, Button, Card, CardBody, CardTitle, Col, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap';
+import { Alert, Button, Card, CardBody, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap';
+import { EntityTypeSerialization } from '../core/EntityTypeSerialization';
 import { EntityTypeRepository } from '../data/EntityTypeRepository';
 import { Storage } from '../data/Storage';
 import { AttributeList } from './AttributeList';
@@ -20,10 +21,10 @@ export class EditType extends Component {
 
         this._storage = new Storage();
         this._typeRepository = new EntityTypeRepository(this._storage);
-
+        
         this._entityTypeName = props.match.params.name || "";
-        this._entityType = this._entityTypeName ?
-            this._typeRepository.GetByName(this._entityTypeName) :
+        this._entityType = this._entityTypeName ? EntityTypeSerialization.ToPOCO(
+            this._typeRepository.GetByName(this._entityTypeName)) :
             this._typeRepository.New();
 
         this._attributes = this._entityType.Attributes;
@@ -33,7 +34,8 @@ export class EditType extends Component {
             namePattern: false,
             nameAvailable: false,
             displayNameRequired: false,
-            displayPluralNameRequired: false
+            displayPluralNameRequired: false,
+            message: ""
         };
 
         this.state = {
@@ -55,6 +57,29 @@ export class EditType extends Component {
         if (event) {
             event.preventDefault();
         }
+
+        this._errors.message = '';
+
+        if (!this.validate()) {
+            return;
+        }
+
+        const entityType = EntityTypeSerialization.FromPOCO(this._entityType);
+
+        const result = this._isNew ? this._typeRepository.Create(entityType) : this._typeRepository.Update(entityType);
+
+        if (result.Success) {
+
+            this.redirectManageTypes();
+
+        } else {
+
+            this._errors.message = result.ErrorMessage;
+
+            this.setState({
+                errors: this._errors
+            });
+        }
     }
 
     redirectManageTypes() {
@@ -72,22 +97,51 @@ export class EditType extends Component {
     onNameChange(event) {
 
         const name = event.target.value;
-        const regex = new RegExp('^[a-zA-Z_]+$');
-
+        
         this._entityType.Name = name;
-        this._errors.nameRequired = !this._entityType.Name;
-        this._errors.namePattern = !this._errors.nameRequired && !regex.test(this._entityType.Name);
-        this._errors.nameAvailable = !this._errors.nameRequired && !this._errors.namePattern && !this.nameIsAvailable(name);
 
-        this.setState({
-            type: this._entityType,
-            errors: this._errors
-        });
+        this.validateName();
     }
 
     onDisplayNameChange(event) {
 
         this._entityType.DisplayName = event.target.value;
+
+        this.validateDisplayName();
+    }
+
+    onDisplayPluralNameChange(event) {
+
+        this._entityType.DisplayPluralName = event.target.value;
+
+        this.validateDisplayPluralName();
+    }
+
+    validate() {
+
+        return this.validateName() & 
+            this.validateDisplayName() &
+            this.validateDisplayPluralName() &
+            this.validateAttributes();
+    }
+
+    validateName() {
+
+        const regex = new RegExp('^[a-zA-Z_]+$');
+
+        this._errors.nameRequired = !this._entityType.Name;
+        this._errors.namePattern = !this._errors.nameRequired && !regex.test(this._entityType.Name);
+        this._errors.nameAvailable = !this._errors.nameRequired && !this._errors.namePattern && !this.nameIsAvailable(this._entityType.Name);
+
+        this.setState({
+            type: this._entityType,
+            errors: this._errors
+        });
+
+        return !this._errors.nameRequired && !this._errors.namePattern && !this._errors.nameAvailable;
+    }
+
+    validateDisplayName() {
 
         this._errors.displayNameRequired = !this._entityType.DisplayName;
 
@@ -95,11 +149,11 @@ export class EditType extends Component {
             type: this._entityType,
             errors: this._errors
         });
+
+        return !this._errors.displayNameRequired;
     }
 
-    onDisplayPluralNameChange(event) {
-
-        this._entityType.DisplayPluralName = event.target.value;
+    validateDisplayPluralName() {
 
         this._errors.displayPluralNameRequired = !this._entityType.DisplayPluralName;
 
@@ -107,76 +161,85 @@ export class EditType extends Component {
             type: this._entityType,
             errors: this._errors
         });
+
+        return !this._errors.displayPluralNameRequired;
+    }
+
+    validateAttributes() {
+
+        document.dispatchEvent(new Event("validateAttributes"));
+
+        if (this._attributes.length === 0) {
+
+            this._errors.message = 'At least one attribute is required';
+
+            this.setState({
+                errors: this._errors
+            });
+        }
+
+        return this._attributes.length > 0
+            && this._attributes.every(attr => !!attr.Name && !!attr.DisplayName);
     }
 
     render() {
+
         return (
             <div className="type-form">
-                <Alert color="danger"
-                    className="mb-2 mt-2"
-                    isOpen={false}>Form is not valid.</Alert>
                 <Card>
                     <CardBody>
-                        <CardTitle>
-                            {this.state.isNew ? 'New Type' : 'Edit Type' }
-                        </CardTitle>
                         <Form onSubmit={(event) => this.save(event)} noValidate>
-                            <FormGroup row>
-                                <Label for="typeName" sm={2}>
+                            <legend>{this.state.isNew ? 'New Type' : 'Edit Type'}</legend>
+                            <FormGroup>
+                                <Label for="typeName">
                                     Name
                                 </Label>
-                                <Col sm={10}>
-                                    <Input type="text"
-                                        name="typeName"
-                                        id="typeName"
-                                        placeholder="Enter Type Name"
-                                        maxLength="20"
-                                        value={this.state.type.Name}
-                                        readOnly={!this.state.isNew}
-                                        onChange={(event) => this.onNameChange(event)}
-                                        invalid={this.state.errors.nameRequired
-                                            || this.state.errors.namePattern
-                                            || this.state.errors.nameAvailable} />
-                                    <FormFeedback invalid="true">
-                                        {
-                                            this.state.errors.nameRequired ? 'This field is required.' :
-                                                this.state.errors.namePattern ? 'Use digits and letters only.' :
-                                                    this.state.errors.nameAvailable ? 'Name is not available.' : ''
-                                        }
-                                    </FormFeedback>
-                                </Col>
+                                <Input type="text"
+                                    name="typeName"
+                                    id="typeName"
+                                    placeholder="Enter Type Name"
+                                    maxLength="20"
+                                    value={this.state.type.Name}
+                                    readOnly={!this.state.isNew}
+                                    onChange={(event) => this.onNameChange(event)}
+                                    invalid={this.state.errors.nameRequired
+                                        || this.state.errors.namePattern
+                                        || this.state.errors.nameAvailable} />
+                                <FormFeedback invalid="true">
+                                    {
+                                        this.state.errors.nameRequired ? 'This field is required.' :
+                                            this.state.errors.namePattern ? 'Use digits and letters only.' :
+                                                this.state.errors.nameAvailable ? 'Name is not available.' : ''
+                                    }
+                                </FormFeedback>
                             </FormGroup>
-                            <FormGroup row>
-                                <Label for="typeDisplayName" sm={2}>
+                            <FormGroup>
+                                <Label for="typeDisplayName">
                                     Display Name
                                 </Label>
-                                <Col sm={10}>
-                                    <Input type="text"
-                                        name="typeDisplayName"
-                                        id="typeDisplayName"
-                                        placeholder="Enter Display Name"
-                                        maxLength="50"
-                                        value={this.state.type.DisplayName}
-                                        onChange={(event) => this.onDisplayNameChange(event)}
-                                        invalid={this.state.errors.displayNameRequired} />
-                                    <FormFeedback invalid="true">This field is required.</FormFeedback>
-                                </Col>
+                                <Input type="text"
+                                    name="typeDisplayName"
+                                    id="typeDisplayName"
+                                    placeholder="Enter Display Name"
+                                    maxLength="50"
+                                    value={this.state.type.DisplayName}
+                                    onChange={(event) => this.onDisplayNameChange(event)}
+                                    invalid={this.state.errors.displayNameRequired} />
+                                <FormFeedback invalid="true">This field is required.</FormFeedback>
                             </FormGroup>
-                            <FormGroup row>
-                                <Label for="typeDisplayPluralName" sm={2}>
+                            <FormGroup>
+                                <Label for="typeDisplayPluralName">
                                     Display Plural Name
                                 </Label>
-                                <Col sm={10}>
-                                    <Input type="text"
-                                        name="typeDisplayPluralName"
-                                        id="typeDisplayPluralName"
-                                        placeholder="Enter Display Plural Name"
-                                        maxLength="50"
-                                        value={this.state.type.DisplayPluralName}
-                                        onChange={(event) => this.onDisplayPluralNameChange(event)}
-                                        invalid={this.state.errors.displayPluralNameRequired} />
-                                    <FormFeedback invalid="true">This field is required.</FormFeedback>
-                                </Col>
+                                <Input type="text"
+                                    name="typeDisplayPluralName"
+                                    id="typeDisplayPluralName"
+                                    placeholder="Enter Display Plural Name"
+                                    maxLength="50"
+                                    value={this.state.type.DisplayPluralName}
+                                    onChange={(event) => this.onDisplayPluralNameChange(event)}
+                                    invalid={this.state.errors.displayPluralNameRequired} />
+                                <FormFeedback invalid="true">This field is required.</FormFeedback>
                             </FormGroup>
 
                             <AttributeList type={this.state.type} isNew={this.state.isNew}></AttributeList>
@@ -196,6 +259,9 @@ export class EditType extends Component {
                         </Form>
                     </CardBody>
                 </Card>
+                <Alert color="danger"
+                    className="mb-2 mt-2"
+                    isOpen={this.state.errors.message !== ""}>{this.state.errors.message}</Alert>
             </div>
         );
     }
