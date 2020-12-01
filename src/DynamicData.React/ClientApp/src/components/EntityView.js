@@ -25,10 +25,15 @@ export class EntityView extends Component {
             <Card>
                 <CardBody>
                     {
-                        this.state.type.Attributes.map(attr =>
-                            <div key={attr.Name}>
-                                {attr.DisplayName}: {this.state.entity.Fields[attr.Name]}
-                            </div>
+                        this.state.type.Attributes
+                            .map(attr => [attr, this.state.entity.Fields[attr.Name]])
+                            .map(tuple =>
+                                <div key={tuple[0].Name}>
+                                    {tuple[0].DisplayName}:&nbsp;
+                                    {
+                                        tuple[1] === null || tuple[1] === void 0 ? '' : tuple[1].toString()
+                                    }
+                                </div>
                         )
                     }
                 </CardBody>

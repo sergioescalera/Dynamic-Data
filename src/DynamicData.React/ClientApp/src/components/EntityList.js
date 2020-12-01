@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import { FaEdit } from 'react-icons/fa';
 import { Alert, Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { EntityRepository } from '../data/EntityRepository';
 import { EntityTypeRepository } from '../data/EntityTypeRepository';
@@ -138,6 +139,10 @@ export class EntityList extends Component {
                                 <EntityView
                                     entity={entity}
                                     entityType={this.state.type}></EntityView>
+                                <a className="edit-entity-link"
+                                    href={'/entity/' + this.state.type.Name + '/' + entity.Id}>
+                                    <FaEdit />
+                                </a>
                                 <Input type="checkbox" onChange={() => this.toggle(entity)} />
                             </div>
                         )

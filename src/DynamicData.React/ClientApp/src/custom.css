@@ -14,3 +14,9 @@
         top: 5px;
         right: 10px;
     }
+
+    .entity-list-item .edit-entity-link {
+        position: absolute;
+        top: 24px;
+        right: 7px;
+    }

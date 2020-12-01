@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { FaEdit, FaTimes } from 'react-icons/fa';
 import { Button, Card, CardBody, CardTitle, Form, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { AttributeTypeCode } from '../core/AttributeTypeCode';
 import { Entity } from '../core/Entity';
 import { EntityRepository } from '../data/EntityRepository';
 import { EntityTypeRepository } from '../data/EntityTypeRepository';
@@ -28,7 +29,7 @@ export class EditEntity extends Component {
         this._entityTypeName = props.match.params.name || "";
         this._entityId = props.match.params.id || "";
         this._type = this._typeRepository.GetByName(this._entityTypeName);
-
+        
         if (this._type === null) {
             return this.redirectHome();
         }
@@ -41,7 +42,7 @@ export class EditEntity extends Component {
 
         this.state = {
             type: this._type,
-            model: Object.create(this._entity.Fields),
+            model: this._entity.Fields,
             showDeleteConfirmationModal: false
         };
 
@@ -107,6 +108,45 @@ export class EditEntity extends Component {
         }
     }
 
+    onValueChange(attr, value) {
+
+        switch (attr.TypeCode) {
+
+            case AttributeTypeCode.Boolean:
+                this._entity.Fields[attr.Name] = value;
+                break;
+            case AttributeTypeCode.Currency:
+            case AttributeTypeCode.Decimal:
+            case AttributeTypeCode.Int:
+                this._entity.Fields[attr.Name] = value === "" ?
+                    null :
+                    parseInt(value);
+                break;
+            case AttributeTypeCode.Date:
+            case AttributeTypeCode.DateTime:
+                this._entity.Fields[attr.Name] = value === "" ?
+                    null :
+                    new Date(value + (attr.TypeCode === AttributeTypeCode.Date ? ' 00:00' : ''));
+                break;
+            case AttributeTypeCode.Time:
+            case AttributeTypeCode.Email:
+            case AttributeTypeCode.Phone:
+            case AttributeTypeCode.String:
+            case AttributeTypeCode.Text:
+            case AttributeTypeCode.Url:
+            case AttributeTypeCode.Enum:
+                this._entity.Fields[attr.Name] = value;
+                break;
+            default:
+                console.warn("Not implemented", attr, value);
+                return;
+        }
+
+        this.setState({
+            model: this._entity.Fields
+        });
+    }
+
     render() {
 
         return (
@@ -129,7 +169,8 @@ export class EditEntity extends Component {
                                 this.state.type.Attributes.map(attr =>
                                     <FieldEditor key={attr.Name}
                                         attribute={attr}
-                                        value={this.state.model[attr.Name]}></FieldEditor>
+                                        value={this.state.model[attr.Name]}
+                                        onChange={(val) => this.onValueChange(attr, val)}></FieldEditor>
                                 )
                             }
                             <div className="text-right">

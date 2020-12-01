@@ -1,6 +1,27 @@
 ﻿import { Entity } from './Entity';
 import { AttributeTypeCode } from './AttributeTypeCode';
 
+export function isDateObj(value) {
+
+    return value instanceof Date;
+}
+
+export function isString(value) {
+
+    return typeof value === "string";
+}
+
+
+export function isBoolean(value) {
+
+    return typeof value === "boolean";
+}
+
+export function isNumber(value) {
+
+    return typeof value === "number";
+}
+
 export class EntitySerialization {
 
     static FromPOCO(type, id, poco) {
@@ -21,40 +42,39 @@ export class EntitySerialization {
         return entity;
     }
 
-    static ParseField(type, value) {
+    static ParseField(attr, value) {
 
-        switch (type.TypeCode) {
+        switch (attr.TypeCode) {
 
             case AttributeTypeCode.Boolean:
-                if (typeof value === "boolean") {
+                if (isBoolean(value)) {
                     return value;
                 }
                 break;
             case AttributeTypeCode.Currency:
             case AttributeTypeCode.Decimal:
             case AttributeTypeCode.Int:
-                if (typeof value === "number") {
+                if (isNumber(value)) {
                     return value;
                 }
                 break;
             case AttributeTypeCode.Date:
             case AttributeTypeCode.DateTime:
-            case AttributeTypeCode.Time:
-                if (typeof value === "object" && value !== null &&
-                    typeof value.getMonth === 'function') {
+                if (isDateObj(value)) {
                     return value;
                 }
-                if (typeof value === "string") {
+                if (isString(value)) {
                     return new Date(value);
                 }
                 break;
+            case AttributeTypeCode.Time:
             case AttributeTypeCode.Email:
             case AttributeTypeCode.Phone:
             case AttributeTypeCode.String:
             case AttributeTypeCode.Text:
             case AttributeTypeCode.Url:
             case AttributeTypeCode.Enum:
-                if (typeof value === "string") {
+                if (isString(value)) {
                     return value;
                 }
                 break;
