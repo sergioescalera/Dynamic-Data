@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Card, CardBody } from 'reactstrap';
+import { FieldView } from './FieldView';
 
 export class EntityView extends Component {
 
@@ -24,18 +25,16 @@ export class EntityView extends Component {
         return (
             <Card>
                 <CardBody>
-                    {
-                        this.state.type.Attributes
-                            .map(attr => [attr, this.state.entity.Fields[attr.Name]])
-                            .map(tuple =>
-                                <div key={tuple[0].Name}>
-                                    {tuple[0].DisplayName}:&nbsp;
-                                    {
-                                        tuple[1] === null || tuple[1] === void 0 ? '' : tuple[1].toString()
-                                    }
-                                </div>
-                        )
-                    }
+                    <dl>
+                        {
+                            this.state.type.Attributes
+                                .map(attr =>
+                                    <FieldView key={attr.Name}
+                                        attribute={attr}
+                                        value={this.state.entity.Fields[attr.Name]}></FieldView>
+                            )
+                        }
+                    </dl>
                 </CardBody>
             </Card>
         );
