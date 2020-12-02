@@ -11,12 +11,17 @@ export class FieldView extends Component {
         this._value = props.value;
 
         this.state = {
+            key: this._attribute.Name,
             displayName: this._attribute.DisplayName,
             value: this.formatValue(this._value)
         };
     }
 
     formatValue(value) {
+
+        if (this._attribute.TypeCode === AttributeTypeCode.Boolean) {
+            return value ? 'Yes' : 'No';
+        }
 
         if (value === null || value === void 0) {
             return "";
@@ -30,18 +35,14 @@ export class FieldView extends Component {
             return `${value.toLocaleDateString()} ${value.toLocaleTimeString()}`;
         }
 
-        if (this._attribute.TypeCode === AttributeTypeCode.Boolean) {
-            return value ? 'Yes' : 'No';
-        }
-
         return value.toString();
     }
 
     render() {
 
         return [
-            <dt>{this.state.displayName}</dt>,
-            <dd>{this.state.value}</dd>
+            <dt key={this.state.key + '-dt'}>{this.state.displayName}</dt>,
+            <dd key={this.state.key + '-dd'}>{this.state.value}</dd>
         ];
     }
 }

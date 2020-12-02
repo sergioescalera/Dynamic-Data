@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Col, FormGroup, Input, Label } from 'reactstrap';
+import { FormGroup, Input, Label } from 'reactstrap';
 import { AttributeTypeCode } from '../core/AttributeTypeCode';
 import { isDateObj, isNumber } from '../core/EntitySerialization';
 import { EnumRepository } from '../data/EnumRepository';
@@ -114,40 +114,44 @@ export class FieldEditor extends Component {
 
     render() {
 
+        if (this.state.renderAsCheckBox) {
+
+            return <FormGroup check>
+                <Label check>
+                    <Input type="checkbox"
+                        name={this.state.attr.Name}
+                        id={this.state.attr.Name}
+                        checked={this.state.value}
+                        onChange={(event) => this.onChange(event)} />
+                    {this.state.attr.DisplayName}
+                </Label> 
+            </FormGroup>;
+        }
+
         return (
-            <FormGroup key={this.state.attr.Name} row>
-                <Label for={this.state.attr.Name} sm={2}>
+            <FormGroup key={this.state.attr.Name}>
+                <Label for={this.state.attr.Name}>
                     {this.state.attr.DisplayName}
                 </Label>
-                <Col sm={10}>
-                    {
-                        this.state.renderAsText ?
-                            <Input type={this.state.attr.HtmlInputType}
-                                name={this.state.attr.Name}
-                                id={this.state.attr.Name}
-                                placeholder={"Enter " + this.state.attr.DisplayName}
-                                value={this.state.value}
-                                onChange={(event) => this.onChange(event)} /> : ''
-                    }
-                    {
-                        this.state.renderAsCheckBox ?
-                            <Input type="checkbox"
-                                name={this.state.attr.Name}
-                                id={this.state.attr.Name}
-                                checked={this.state.value}
-                                onChange={(event) => this.onChange(event)} /> : ''
-                    }
-                    {
-                        this.state.renderAsOptionSet ?
-                            <Input type="select"
-                                name={this.state.attr.Name}
-                                id={this.state.attr.Name}>
-                                {
-                                    this.state.values.map(val => <option value={val} key={val}>{val}</option>)
-                                }
-                            </Input> : ''
-                    }
-                </Col>
+                {
+                    this.state.renderAsText ?
+                        <Input type={this.state.attr.HtmlInputType}
+                            name={this.state.attr.Name}
+                            id={this.state.attr.Name}
+                            placeholder={"Enter " + this.state.attr.DisplayName}
+                            value={this.state.value}
+                            onChange={(event) => this.onChange(event)} /> : ''
+                }
+                {
+                    this.state.renderAsOptionSet ?
+                        <Input type="select"
+                            name={this.state.attr.Name}
+                            id={this.state.attr.Name}>
+                            {
+                                this.state.values.map(val => <option value={val} key={val}>{val}</option>)
+                            }
+                        </Input> : ''
+                }
             </FormGroup >
         );
     }

@@ -29,10 +29,10 @@ export class EntityView extends Component {
                         {
                             this.state.type.Attributes
                                 .map(attr =>
-                                    <FieldView key={attr.Name}
+                                    <FieldView key={this.state.entity.Id + '-' + attr.Name}
                                         attribute={attr}
                                         value={this.state.entity.Fields[attr.Name]}></FieldView>
-                            )
+                                )
                         }
                     </dl>
                 </CardBody>

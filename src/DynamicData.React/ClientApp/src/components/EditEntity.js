@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { FaEdit, FaTimes } from 'react-icons/fa';
-import { Button, Card, CardBody, CardTitle, Form, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Button, Card, CardBody, Form, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { AttributeTypeCode } from '../core/AttributeTypeCode';
 import { Entity } from '../core/Entity';
 import { EntityRepository } from '../data/EntityRepository';
@@ -163,8 +163,8 @@ export class EditEntity extends Component {
                 </Modal>
                 <Card>
                     <CardBody>
-                        <CardTitle>{this.state.type.DisplayName}</CardTitle>
                         <Form onSubmit={(event) => this.save(event)} noValidate>
+                            <legend>{this.state.type.DisplayName}</legend>
                             {
                                 this.state.type.Attributes.map(attr =>
                                     <FieldEditor key={attr.Name}
