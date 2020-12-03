@@ -1,8 +1,10 @@
 ﻿import React, { Component } from "react";
-import { FormFeedback, FormGroup, Input, Label } from 'reactstrap';
+import { FaEdit, FaPlus } from "react-icons/fa";
+import { Button, FormFeedback, FormGroup, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { AttributeTypeCode, ATTRIBUTE_TYPE_CODES } from "../core/AttributeTypeCode";
 import { EnumRepository } from "../data/EnumRepository";
 import { Storage } from "../data/Storage";
+import { EnumEditor } from "./EnumEditor";
 
 export class EditAttribute extends Component {
 
@@ -22,7 +24,7 @@ export class EditAttribute extends Component {
 
         this._storage = new Storage();
         this._enumRepository = new EnumRepository(this._storage);
-        this._enumValues = this._enumRepository.GetAll();
+        this._enums = this._enumRepository.GetAll();
 
         this._attribute = props.attribute;
         this._index = props.index;
@@ -42,7 +44,9 @@ export class EditAttribute extends Component {
             index: this._index,
             errors: this._errors,
             typeOptions: ATTRIBUTE_TYPE_CODES,
-            enumValues: this._enumValues
+            enums: this._enums,
+            isEnumOpen: false,
+            enumName: ''
         };
 
         document.addEventListener("validateAttributes", () => this.validate(), false);
@@ -72,7 +76,20 @@ export class EditAttribute extends Component {
         this._attribute.TypeCode = parseInt(event.target.value);
         this._isEnum = this._attribute.TypeCode === AttributeTypeCode.Enum;
 
+        if (this._isEnum) {
+
+            this._enums = this._enumRepository.GetAll();
+            
+            this._attribute.EnumName = this._attribute.EnumName || (this._enums[0] ? this._enums[0].Name : '') || '';
+        }
+
         this.validateTypeCode();
+
+        this.setState({
+            attribute: this._attribute,
+            isEnum: this._isEnum,
+            enums: this._enums
+        });
     }
 
     onEnumNameChange(event) {
@@ -113,14 +130,36 @@ export class EditAttribute extends Component {
         this._errors.typeCodeRequired = !this._attribute.TypeCode;
 
         this.setState({
-            attribute: this._attribute,
-            isEnum: this._isEnum,
             errors: this._errors
+        });
+    }
+
+    hideEnumEditor(enumName) {
+
+        if (enumName) {
+
+            this._enums = this._enumRepository.GetAll();
+            this._attribute.EnumName = enumName;
+        }
+
+        this.setState({
+            isEnumOpen: false,
+            attribute: this._attribute,
+            enums: this._enums
+        });
+    }
+
+    showEnumEditor(enumName) {
+
+        this.setState({
+            isEnumOpen: true,
+            enumName: enumName || ''
         });
     }
 
     render() {
         return <div className="d-flex flex-row">
+
             <FormGroup className="flex-grow-1 mr-2">
                 <Label for={'attrName_' + this.state.index }>
                     Name
@@ -173,23 +212,51 @@ export class EditAttribute extends Component {
                     this.state.isEnum ?
                         <FormGroup>
                             <Label for={'attrEnum_' + this.state.index}>Enum</Label>
-                            <Input type="select"
-                                id={'attrEnum_' + this.state.index}
-                                value={this.state.attribute.EnumName}
-                                onChange={(event) => this.onEnumNameChange(event)}
-                                invalid={this.state.errors.enumNameRequired}>
-                                <option></option>
-                                {
-                                    this.state.enumValues.map(enumValue =>
-                                        <option key={'attrEnumVal_' + this.state.index + '_' + enumValue}
-                                            value={enumValue}>
-                                            {enumValue}
-                                        </option>
-                                    )
-                                }
-                            </Input>
+                            <InputGroup>
+                                <Input type="select"
+                                    id={'attrEnum_' + this.state.index}
+                                    value={this.state.attribute.EnumName || ''}
+                                    onChange={(event) => this.onEnumNameChange(event)}
+                                    invalid={this.state.errors.enumNameRequired}>
+                                    {
+                                        this.state.enums.length === 0 ?
+                                            <option value=''>Create Enum</option>
+                                            : ''
+                                    }
+                                    {
+                                        this.state.enums.map((e) =>
+                                            <option key={'attrEnumVal_' + this.state.index + '_' + e.Name}
+                                                value={e.Name}>
+                                                {e.DisplayName}
+                                            </option>
+                                        )
+                                    }
+                                </Input>
+                                <InputGroupAddon addonType="append">
+                                    {
+                                        this.state.attribute.EnumName ?
+                                            <Button color="info"
+                                                onClick={() => this.showEnumEditor(this.state.attribute.EnumName)}>
+                                                <FaEdit />
+                                            </Button>
+                                            : ''
+                                    }
+                                    <Button color="secondary"
+                                        onClick={() => this.showEnumEditor()}>
+                                        <FaPlus />
+                                    </Button>
+                                </InputGroupAddon>
+                            </InputGroup>
                             <FormFeedback invalid="true">This field is required.</FormFeedback>
                         </FormGroup>
+                        : ''
+                }
+                {
+                    this.state.isEnumOpen ? 
+                        <EnumEditor
+                            close={(enumName) => this.hideEnumEditor(enumName)}
+                            enumName={this.state.enumName}>
+                        </EnumEditor>
                         : ''
                 }
             </div>

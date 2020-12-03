@@ -146,7 +146,9 @@ export class FieldEditor extends Component {
                     this.state.renderAsOptionSet ?
                         <Input type="select"
                             name={this.state.attr.Name}
-                            id={this.state.attr.Name}>
+                            id={this.state.attr.Name}
+                            value={this.state.value}
+                            onChange={(event) => this.onChange(event)}>
                             {
                                 this.state.values.map(val => <option value={val} key={val}>{val}</option>)
                             }

@@ -18,30 +18,42 @@ export class EnumRepository {
         return this._storage.Enums;
     }
 
-    GetByName(name) {
+    New() {
+
+        return { Name: '', DisplayName: '', Values: [] };
+    }
+
+    GetByName(enumName) {
+
+        if (!enumName) {
+            return null;
+        }
 
         const enums = this.GetAll();
 
-        const filtered = enums.filter((t) => t.Name === name);
+        const filtered = enums.filter((t) => t.Name === enumName);
 
         return filtered.length ? filtered[0] : null;
     }
 
-    Save(name, displayName, values) {
+    Upsert(item) {
+
+        if (!item) {
+            throw new Error(Strings.RequiredArgumentMessageFormat("item"));
+        }
 
         const enums = this.GetAll();
+        
+        const found = enums.find((t) => t.Name === item.Name);
 
-        const filtered = enums.filter((t) => t.Name === name);
-
-        if (filtered.length > 0) {
-            filtered[0].DisplayName = displayName;
-            filtered[0].Name = name;
-            filtered[0].Values = values;
+        if (found) {
+            found.DisplayName = item.DisplayName;
+            found.Values = item.Values;
         } else {
             enums.push({
-                DisplayName: displayName,
-                Name: name,
-                Values: values,
+                DisplayName: item.DisplayName,
+                Name: item.Name,
+                Values: item.Values,
             });
         }
 

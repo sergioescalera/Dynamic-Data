@@ -84,8 +84,6 @@ export class AttributeList extends Component {
             showNoneSelectedAlert: false,
             showDeleteConfirmationModal: false
         });
-
-        console.log(this.state);
     }
 
     cancelDelete() {
