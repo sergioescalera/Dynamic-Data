@@ -33,7 +33,7 @@ export class NavMenu extends Component {
         return (
             <header>
                 <Navbar className="ng-white border-bottom box-shadow mb-3 d-flex flex-row">
-                    <Nav className="w-50">
+                    <Nav className="w-50 d-none d-sm-flex">
                         <NavItem>
                             <NavLink tag={Link} className="text-dark" to="/">
                                 <FaHome />
@@ -60,7 +60,7 @@ export class NavMenu extends Component {
                             </NavLink>
                         </NavItem>
                     </Nav>
-                    <Nav className="w-50 justify-content-end">
+                    <Nav className="w-100 d-sm-none justify-content-between justify-content-sm-end">
                         <NavItem>
                             <NavLink tag={Link} className="text-dark" to="#" onClick={() => this.fireCommand('add')}>
                                 <FaPlus />
@@ -78,6 +78,33 @@ export class NavMenu extends Component {
                         </NavItem>
                         <NavItem>
                             <NavLink tag={Link} className="text-dark" to="#" onClick={() =>this.fireCommand('save')}>
+                                <FaSave />
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} className="text-dark" to="#" onClick={() => this.fireCommand('cancel')}>
+                                <FaTimes />
+                            </NavLink>
+                        </NavItem>
+                    </Nav>
+                    <Nav className="w-50 d-none d-sm-flex justify-content-between justify-content-sm-end">
+                        <NavItem>
+                            <NavLink tag={Link} className="text-dark" to="#" onClick={() => this.fireCommand('add')}>
+                                <FaPlus />
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} className="text-dark" to="#" onClick={() => this.fireCommand('refresh')}>
+                                <FaRedo />
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} className="text-dark" to="#" onClick={() => this.fireCommand('delete')}>
+                                <FaTrash />
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} className="text-dark" to="#" onClick={() => this.fireCommand('save')}>
                                 <FaSave />
                             </NavLink>
                         </NavItem>
