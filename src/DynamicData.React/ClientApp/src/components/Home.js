@@ -48,7 +48,8 @@ export class Home extends Component {
 
         this.setState({
             noData: this._types.length === 0,
-            types: this._types
+            types: this._types,
+            selectedType: this._types[0]
         });
     }
 
@@ -71,7 +72,9 @@ export class Home extends Component {
 
                             <NavItem key={t.Name}>
                                 <NavLink
-                                    className={classnames({ active: this.state.selectedType.Name === t.Name })}
+                                    className={classnames({
+                                        active: this.state.selectedType && this.state.selectedType.Name === t.Name
+                                    })}
                                     href={"/home/" + t.Name}>
                                     {t.DisplayName}
                                 </NavLink>
@@ -80,8 +83,8 @@ export class Home extends Component {
                         )
                     }
                 </Nav>
-                <TabContent activeTab={this.state.selectedType.Name}>
-                    <TabPane tabId={this.state.selectedType.Name}>
+                <TabContent activeTab={this.state.selectedType ? this.state.selectedType.Name : ''}>
+                    <TabPane tabId={this.state.selectedType ? this.state.selectedType.Name : ''}>
                         <EntityList entityType={this.state.selectedType}></EntityList>
                     </TabPane>
                 </TabContent>
