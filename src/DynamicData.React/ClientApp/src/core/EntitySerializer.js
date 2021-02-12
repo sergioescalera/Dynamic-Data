@@ -11,7 +11,6 @@ export function isString(value) {
     return typeof value === "string";
 }
 
-
 export function isBoolean(value) {
 
     return typeof value === "boolean";
@@ -22,27 +21,39 @@ export function isNumber(value) {
     return typeof value === "number";
 }
 
-export class EntitySerialization {
+/** Class that handles entity serialization. */
+export class EntitySerializer {
 
-    static FromPOCO(type, id, poco) {
+    /**
+     * Converts a plain object to an Entity instance 
+     * @param {any} type
+     * @param {any} id
+     * @param {any} obj
+     */
+    FromPlainObject(type, id, obj) {
 
         const entity = new Entity(type, id);
 
-        const keys = Object.keys(poco);
+        const keys = Object.keys(obj);
 
         keys.forEach((key) => {
 
             const attribute = entity.Type.GetAttribute(key);
 
             if (!!attribute) {
-                entity.Fields[key] = EntitySerialization.ParseField(attribute, poco[key]);
+                entity.Fields[key] = this.ParseField(attribute, obj[key]);
             }
         });
 
         return entity;
     }
 
-    static ParseField(attr, value) {
+    /**
+     * Sanitizes attribute value
+     * @param {AttributeType} attr
+     * @param {any} value
+     */
+    ParseField(attr, value) {
 
         switch (attr.TypeCode) {
 

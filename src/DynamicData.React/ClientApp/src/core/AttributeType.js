@@ -1,6 +1,7 @@
 ﻿import { AttributeTypeCode } from './AttributeTypeCode';
 import { Validation } from './Validation';
 
+/** Class representing an attribute type. */
 export class AttributeType {
 
     _name = "";
@@ -8,6 +9,13 @@ export class AttributeType {
     _typeCode = 0;
     _enumName = "";
 
+    /**
+     * Creates an instance of the AttributeType class.
+     * @param {string} name
+     * @param {string} displayName
+     * @param {number} typeCode
+     * @param {string} enumName
+     */
     constructor(name, displayName, typeCode, enumName) {
 
         this.Name = name;
@@ -16,10 +24,16 @@ export class AttributeType {
         this.EnumName = enumName;
     }
 
+    /**
+     * Gets the name of the attribute.
+     * @returns {string} */
     get Name() {
 
         return this._name;
     }
+    /**
+     * Sets the name of the attribute.
+     * @param {string} value */
     set Name(value) {
 
         Validation.EnsureRequired(value, "Name");
@@ -27,10 +41,16 @@ export class AttributeType {
         this._name = value;
     }
 
+    /**
+     * Gets the display name of the attribute.
+     * @returns {string} */
     get DisplayName() {
 
         return this._displayName;
     }
+    /**
+     * Sets the display name of the attribute.
+     * @param {string} value */
     set DisplayName(value) {
 
         Validation.EnsureRequired(value, "DisplayName");
@@ -38,10 +58,16 @@ export class AttributeType {
         this._displayName = value;
     }
 
+    /** 
+     *  Gets the type code of the attribute.
+     *  @returns {number} */
     get TypeCode() {
 
         return this._typeCode;
     }
+    /**
+     * Sets the type code of the attribute.
+     * @param {number} value */
     set TypeCode(value) {
 
         Validation.EnsureRequired(value, "TypeCode");
@@ -49,20 +75,33 @@ export class AttributeType {
         this._typeCode = value;
     }
 
+    /**
+     * Gets the enum name of the attribute.
+     * The type code should be equal to 13.
+     * @returns {string} */
     get EnumName() {
 
         return this._enumName;
     }
+    /**
+     * Sets the enum name of the attribute.
+     * @param {string} value */
     set EnumName(value) {
 
         this._enumName = value;
     }
 
+    /**
+     * Gets the type code name of the attribute.
+     * @returns {number} */
     get TypeCodeName() {
 
         return AttributeTypeCode[this._typeCode];
     }
 
+    /**
+     * Gets the HTML input type of the attribute.
+     * @returns {number} */
     get HtmlInputType() {
 
         if (this._typeCode === AttributeTypeCode.Email) {
@@ -106,6 +145,9 @@ export class AttributeType {
         return "text";
     }
 
+    /**
+     * Gets a value indicating whether the attribute is a system attribute.
+     * @returns {number} */
     get IsSystemAttribute() {
 
         return systemAttributes()

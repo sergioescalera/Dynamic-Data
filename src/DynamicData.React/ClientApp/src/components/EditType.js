@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FaEdit, FaTimes } from 'react-icons/fa';
 import { Alert, Button, Card, CardBody, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap';
-import { EntityTypeSerialization } from '../core/EntityTypeSerialization';
+import { EntityTypeSerializer } from '../core/EntityTypeSerializer';
 import { EntityTypeRepository } from '../data/EntityTypeRepository';
 import { Storage } from '../data/Storage';
 import { AttributeList } from './AttributeList';
@@ -23,7 +23,7 @@ export class EditType extends Component {
         this._typeRepository = new EntityTypeRepository(this._storage);
         
         this._entityTypeName = props.match.params.name || "";
-        this._entityType = this._entityTypeName ? EntityTypeSerialization.ToPOCO(
+        this._entityType = this._entityTypeName ? new EntityTypeSerializer().ToPlainObject(
             this._typeRepository.GetByName(this._entityTypeName)) :
             this._typeRepository.New();
 
@@ -64,7 +64,7 @@ export class EditType extends Component {
             return;
         }
 
-        const entityType = EntityTypeSerialization.FromPOCO(this._entityType);
+        const entityType = new EntityTypeSerializer().FromPlainObject(this._entityType);
 
         const result = this._isNew ? this._typeRepository.Create(entityType) : this._typeRepository.Update(entityType);
 

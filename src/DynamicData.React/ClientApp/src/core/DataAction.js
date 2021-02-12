@@ -5,16 +5,26 @@
     static Duplicate = 2;
 }
 
+/** Class representing a data action result */
 export class DataActionResult {
+
     Success = true;
     Error = null;
 
+    /**
+     * Creates an instance of the DataActionResult class
+     * @param {Error} error
+     */
     constructor(error = null) {
 
         this.Success = !error;
         this.Error = error || DataActionError.None;
     }
 
+    /** 
+     *  Gets the error message
+     *  @returns {string}
+     */
     get ErrorMessage() {
 
         if (Error === DataActionError.NotFound) {

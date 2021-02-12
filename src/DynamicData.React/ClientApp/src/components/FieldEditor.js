@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { FormGroup, Input, Label } from 'reactstrap';
 import { AttributeTypeCode } from '../core/AttributeTypeCode';
-import { isDateObj, isNumber } from '../core/EntitySerialization';
+import { isDateObj, isNumber } from '../core/EntitySerializer';
 import { EnumRepository } from '../data/EnumRepository';
 import { Storage } from '../data/Storage';
 

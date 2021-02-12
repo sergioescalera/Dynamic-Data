@@ -1,4 +1,5 @@
-﻿export class AttributeTypeCode {
+﻿/** Class that defines attribute type codes */
+export class AttributeTypeCode {
     static Boolean = 1;
     static Date = 2;
     static DateTime = 3;

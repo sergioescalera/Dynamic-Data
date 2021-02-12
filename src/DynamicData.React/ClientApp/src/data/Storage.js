@@ -1,5 +1,5 @@
-﻿import { EntitySerialization } from '../core/EntitySerialization';
-import { EntityTypeSerialization } from '../core/EntityTypeSerialization';
+﻿import { EntitySerializer } from '../core/EntitySerializer';
+import { EntityTypeSerializer } from '../core/EntityTypeSerializer';
 import { Strings } from '../core/Resources';
 import { Trace } from '../core/Trace';
 
@@ -11,6 +11,8 @@ export class Storage {
     _entitiesKey = "data_";
     _enumsKey = "enums";
     _typeSettingsKey = "type_settings_";
+
+    _entitySerializer = new EntityTypeSerializer();
 
     // settings
 
@@ -40,7 +42,7 @@ export class Storage {
 
             try {
 
-                results.push(EntityTypeSerialization.FromPOCO(o));
+                results.push(this._entitySerializer.FromPlainObject(o));
 
             } catch (e) {
 
@@ -53,7 +55,7 @@ export class Storage {
 
     set Types(value) {
 
-        this.setObject(this._typesKey, value.map((t) => EntityTypeSerialization.ToPOCO(t)));
+        this.setObject(this._typesKey, value.map((t) => this._entitySerializer.ToPlainObject(t)));
     }
 
     // enumerations
@@ -81,7 +83,7 @@ export class Storage {
         const array = this.getObject(this._entitiesKey + type.Name);
 
         if (Array.isArray(array)) {
-            return array.map((o, id) => EntitySerialization.FromPOCO(type, id, o));
+            return array.map((o, id) => new EntitySerializer().FromPlainObject(type, id, o));
         }
 
         return null;
